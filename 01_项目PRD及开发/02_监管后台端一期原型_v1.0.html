@@ -1569,6 +1569,249 @@
       white-space: nowrap;
     }
 
+    .points-toolbar {
+      min-height: 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line-soft);
+      border-left: 4px solid var(--brand);
+      background: var(--panel);
+    }
+
+    .points-filter,
+    .points-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .points-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      border: 1px solid var(--line-soft);
+      background: var(--panel);
+    }
+
+    .points-kpi {
+      min-height: 118px;
+      padding: 14px;
+      border-right: 1px solid var(--line-soft);
+      display: grid;
+      align-content: space-between;
+      gap: 10px;
+    }
+
+    .points-kpi:last-child {
+      border-right: 0;
+    }
+
+    .points-kpi small {
+      color: var(--muted);
+      font: 700 10px/1 Consolas, monospace;
+      letter-spacing: 1px;
+    }
+
+    .points-kpi strong {
+      color: var(--brand-deep);
+      font-size: 26px;
+      letter-spacing: -0.3px;
+    }
+
+    .points-kpi span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .points-workbench {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .points-column {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .points-panel {
+      border: 1px solid var(--line-soft);
+      background: var(--panel);
+      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .points-panel-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .points-panel-head strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .points-panel-head span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .rule-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .rule-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px 14px;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .rule-item:last-child {
+      border-bottom: 0;
+    }
+
+    .rule-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .rule-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .rule-points {
+      min-width: 72px;
+      text-align: right;
+      font: 700 18px/1.2 Consolas, monospace;
+      color: var(--brand-deep);
+    }
+
+    .rule-points.minus {
+      color: var(--danger);
+    }
+
+    .points-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .points-table th,
+    .points-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line-soft);
+      text-align: left;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .points-table th {
+      color: var(--muted);
+      background: var(--panel-subtle);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .points-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .points-delta {
+      font: 700 13px/1 Consolas, monospace;
+      color: var(--success);
+    }
+
+    .points-delta.minus {
+      color: var(--danger);
+    }
+
+    .effect-board {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .effect-chart {
+      display: grid;
+      gap: 11px;
+    }
+
+    .effect-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 42px;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .effect-row b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .effect-bar {
+      height: 8px;
+      background: var(--panel-subtle);
+      border: 1px solid var(--line-soft);
+      overflow: hidden;
+    }
+
+    .effect-bar span {
+      display: block;
+      height: 100%;
+      background: var(--brand);
+    }
+
+    .effect-notes {
+      display: grid;
+      gap: 10px;
+    }
+
+    .effect-note {
+      padding: 11px 12px;
+      border: 1px solid var(--line-soft);
+      border-left: 4px solid var(--brand);
+      background: #fbfcfe;
+    }
+
+    .effect-note.warn {
+      border-left-color: var(--warning);
+    }
+
+    .effect-note strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .effect-note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
     .drawer-shell {
       padding: 20px 20px 20px 0;
       border-left: 1px solid var(--line-soft);
@@ -1675,6 +1918,14 @@
         grid-template-columns: 1fr;
       }
 
+      .points-kpi-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .points-workbench {
+        grid-template-columns: 1fr;
+      }
+
       .detail-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -1707,6 +1958,9 @@
       .map-toolbar,
       .map-statbar,
       .archive-toolbar,
+      .points-toolbar,
+      .points-kpi-grid,
+      .effect-board,
       .detail-grid,
       .record-grid,
       .object-hero {
@@ -1733,7 +1987,9 @@
       }
 
       .archive-tabs,
-      .archive-search {
+      .archive-search,
+      .points-filter,
+      .points-actions {
         width: 100%;
       }
 
@@ -1800,7 +2056,7 @@
 
       <div class="sidebar-note">
         <strong>当前阶段</strong>
-        第 4 步正在落地对象档案。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，后续四页共用同一套组件气质。
+        第 5 步正在落地积分管理。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，四页共用同一套组件气质。
       </div>
     </aside>
 
@@ -2279,16 +2535,235 @@
             </section>
 
             <section class="page" id="page-points">
-              <article class="placeholder-card">
-                <small>PAGE PLACEHOLDER / POINTS</small>
-                <h2>积分管理待进入第 5 步</h2>
-                <p>后面会补齐指标、规则、账户、流水与治理效果模块，用于体现监管端的激励约束闭环。</p>
-                <div class="placeholder-lines">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+              <section class="points-toolbar">
+                <div class="points-filter">
+                  <div class="filter-label">积分视图</div>
+                  <button class="filter-chip active" type="button">本期</button>
+                  <button class="filter-chip" type="button">锦江区</button>
+                  <button class="filter-chip" type="button">主手机号账户</button>
+                  <button class="filter-chip" type="button">只看异常</button>
                 </div>
-              </article>
+                <div class="points-actions">
+                  <button class="ghost-button" type="button">导出摘要</button>
+                  <button class="brand-button" type="button">刷新积分</button>
+                </div>
+              </section>
+
+              <section class="points-kpi-grid" aria-label="积分指标">
+                <article class="points-kpi">
+                  <small>PARTICIPATION</small>
+                  <strong>63%</strong>
+                  <span>积分参与率，较上期 +4.2%</span>
+                </article>
+                <article class="points-kpi">
+                  <small>ACTIVE ACCOUNTS</small>
+                  <strong>8,426</strong>
+                  <span>近 30 天活跃主号账户</span>
+                </article>
+                <article class="points-kpi">
+                  <small>ISSUED</small>
+                  <strong>126,800</strong>
+                  <span>本期发放积分</span>
+                </article>
+                <article class="points-kpi">
+                  <small>REDEEMED</small>
+                  <strong>84,300</strong>
+                  <span>本期核销积分</span>
+                </article>
+                <article class="points-kpi">
+                  <small>SERVICE REDEEM</small>
+                  <strong>486</strong>
+                  <span>服务核销次数</span>
+                </article>
+                <article class="points-kpi">
+                  <small>ABNORMAL</small>
+                  <strong>17</strong>
+                  <span>异常账户待复核</span>
+                </article>
+              </section>
+
+              <section class="points-workbench">
+                <div class="points-column">
+                  <article class="points-panel">
+                    <div class="points-panel-head">
+                      <div>
+                        <strong>积分规则</strong>
+                        <span>一期仅展示规则名称、触发行为、分值、状态与适用范围。</span>
+                      </div>
+                      <span class="status-tag good">3 条启用</span>
+                    </div>
+                    <div class="rule-list">
+                      <div class="rule-item">
+                        <div>
+                          <strong>文明养犬核验通过</strong>
+                          <p>城管扫码核验通过后发放；适用范围：全区犬主主手机号。</p>
+                        </div>
+                        <div class="rule-points">+20</div>
+                      </div>
+                      <div class="rule-item">
+                        <div>
+                          <strong>免疫按期完成</strong>
+                          <p>免疫记录在有效期内完成同步；适用范围：犬只关联账户。</p>
+                        </div>
+                        <div class="rule-points">+80</div>
+                      </div>
+                      <div class="rule-item">
+                        <div>
+                          <strong>投诉核实成立</strong>
+                          <p>扰民、未牵引等投诉复核成立后扣减；适用范围：重点区域。</p>
+                        </div>
+                        <div class="rule-points minus">-40</div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="points-panel">
+                    <div class="points-panel-head">
+                      <div>
+                        <strong>账户概览</strong>
+                        <span>以主手机号为积分归属对象，展示关联犬只与账户状态。</span>
+                      </div>
+                      <span class="status-tag warn">17 异常</span>
+                    </div>
+                    <table class="points-table">
+                      <thead>
+                        <tr>
+                          <th>主手机号</th>
+                          <th>犬只</th>
+                          <th>余额</th>
+                          <th>最近活跃</th>
+                          <th>状态</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>138****2048</td>
+                          <td>1</td>
+                          <td>2,860</td>
+                          <td>今日 10:24</td>
+                          <td><span class="status-tag good">正常</span></td>
+                        </tr>
+                        <tr>
+                          <td>186****3186</td>
+                          <td>1</td>
+                          <td>1,420</td>
+                          <td>今日 09:42</td>
+                          <td><span class="status-tag warn">待关注</span></td>
+                        </tr>
+                        <tr>
+                          <td>177****2761</td>
+                          <td>2</td>
+                          <td>960</td>
+                          <td>昨晚 21:18</td>
+                          <td><span class="status-tag risk">异常</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </article>
+                </div>
+
+                <div class="points-column">
+                  <article class="points-panel">
+                    <div class="points-panel-head">
+                      <div>
+                        <strong>积分流水</strong>
+                        <span>按时间查看积分变化、来源类型与备注，便于抽样复核。</span>
+                      </div>
+                      <span class="status-tag good">近 24 小时</span>
+                    </div>
+                    <table class="points-table">
+                      <thead>
+                        <tr>
+                          <th>时间</th>
+                          <th>主手机号</th>
+                          <th>关联行为</th>
+                          <th>变化</th>
+                          <th>来源</th>
+                          <th>备注</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>10:24</td>
+                          <td>138****2048</td>
+                          <td>扫码核验通过</td>
+                          <td><span class="points-delta">+20</span></td>
+                          <td>城管核验</td>
+                          <td>春熙路责任区</td>
+                        </tr>
+                        <tr>
+                          <td>10:12</td>
+                          <td>138****2048</td>
+                          <td>宠物服务核销</td>
+                          <td><span class="points-delta minus">-120</span></td>
+                          <td>服务商</td>
+                          <td>东湖服务点</td>
+                        </tr>
+                        <tr>
+                          <td>09:42</td>
+                          <td>186****3186</td>
+                          <td>免疫到期提醒</td>
+                          <td><span class="points-delta">+0</span></td>
+                          <td>系统提醒</td>
+                          <td>待完成免疫</td>
+                        </tr>
+                        <tr>
+                          <td>昨晚 21:18</td>
+                          <td>177****2761</td>
+                          <td>投诉核实成立</td>
+                          <td><span class="points-delta minus">-40</span></td>
+                          <td>事件复核</td>
+                          <td>夜间扰民</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </article>
+
+                  <article class="points-panel">
+                    <div class="points-panel-head">
+                      <div>
+                        <strong>治理效果</strong>
+                        <span>用参与率、核销活跃与正向行为趋势，辅助判断积分机制是否有效。</span>
+                      </div>
+                      <span class="status-tag good">本期观察</span>
+                    </div>
+                    <div class="effect-board">
+                      <div class="effect-chart">
+                        <div class="effect-row">
+                          <b>春熙路</b>
+                          <div class="effect-bar"><span style="width: 78%;"></span></div>
+                          <span>78%</span>
+                        </div>
+                        <div class="effect-row">
+                          <b>东湖</b>
+                          <div class="effect-bar"><span style="width: 64%;"></span></div>
+                          <span>64%</span>
+                        </div>
+                        <div class="effect-row">
+                          <b>合江亭</b>
+                          <div class="effect-bar"><span style="width: 52%;"></span></div>
+                          <span>52%</span>
+                        </div>
+                        <div class="effect-row">
+                          <b>牛王庙</b>
+                          <div class="effect-bar"><span style="width: 43%;"></span></div>
+                          <span>43%</span>
+                        </div>
+                      </div>
+                      <div class="effect-notes">
+                        <div class="effect-note">
+                          <strong>正向行为提升</strong>
+                          <p>扫码核验、免疫完成与服务核销三类行为较上期均有增长。</p>
+                        </div>
+                        <div class="effect-note warn">
+                          <strong>低参与区域提示</strong>
+                          <p>牛王庙片区参与率低于 45%，建议结合地图工作台查看投诉与服务点覆盖。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </section>
             </section>
           </div>
         </main>
@@ -2739,19 +3214,24 @@
       },
       points: {
         title: "积分管理",
-        desc: "后续会补齐积分指标、规则、账户、流水和效果，形成监管激励闭环。",
-        badge: "STEP 05 QUEUED",
-        drawerTitle: "积分页抽屉预留",
-        noteTitle: "后续承接",
-        noteText: "这里会用于查看规则解释、异常账户提示和流水详情摘要，避免主工作区过度拥挤。",
+        desc: "查看积分参与、规则命中、账户状态、流水抽样与治理效果，形成监管激励闭环。",
+        badge: "POINTS READY",
+        drawerTitle: "积分管理说明",
+        noteTitle: "当前承接",
+        noteText: "积分管理页围绕监管端需要的指标、规则、账户、流水和效果展开。右侧抽屉保留规则解释与一期边界说明，避免把本页做成复杂运营后台。",
         body: `
           <div class="drawer-block">
-            <strong>将要放进来的模块</strong>
+            <strong>本页已经落下来的内容</strong>
             <ul>
-              <li>规则命中解释与异常提示</li>
-              <li>账户状态摘要和人工审批入口</li>
-              <li>流水抽样明细与效果回看</li>
+              <li>积分参与率、活跃账户、发放、核销、服务核销和异常账户 6 个指标</li>
+              <li>规则清单采用展示型设计，只展示触发行为、分值、状态和适用范围</li>
+              <li>账户概览以主手机号为归属对象，承接犬只关联和账户状态</li>
+              <li>流水与治理效果用于抽样复核和判断积分机制有效性</li>
             </ul>
+          </div>
+          <div class="drawer-block">
+            <strong>一期边界</strong>
+            <p>本期不开放手动调分、不建设复杂权益商城，也不替代业务经营分析；监管端只看积分机制是否被正确触发、是否存在异常账户，以及是否带来治理行为改善。</p>
           </div>
         `
       }
