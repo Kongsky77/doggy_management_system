@@ -1273,6 +1273,302 @@
       font-size: 22px;
     }
 
+    .archive-toolbar {
+      min-height: 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line-soft);
+      border-left: 4px solid var(--brand);
+      background: var(--panel);
+    }
+
+    .archive-search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    .archive-input {
+      width: min(420px, 100%);
+      padding: 9px 12px;
+      border: 1px solid transparent;
+      border-bottom-color: var(--line-strong);
+      background: var(--panel-subtle);
+      color: var(--ink);
+      outline: none;
+      font-size: 12px;
+    }
+
+    .archive-input:focus {
+      border-color: var(--brand);
+      background: #ffffff;
+    }
+
+    .archive-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--line-soft);
+      background: var(--panel);
+    }
+
+    .archive-tab {
+      min-width: 118px;
+      padding: 10px 14px;
+      border: 0;
+      border-right: 1px solid var(--line-soft);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .archive-tab:last-child {
+      border-right: 0;
+    }
+
+    .archive-tab.active {
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      box-shadow: inset 0 -3px 0 var(--brand);
+    }
+
+    .archive-workbench {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 12px;
+      min-height: 620px;
+    }
+
+    .archive-list-panel,
+    .archive-detail-panel {
+      border: 1px solid var(--line-soft);
+      background: var(--panel);
+      min-width: 0;
+    }
+
+    .archive-list-head,
+    .archive-detail-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .archive-list-head strong,
+    .archive-detail-head strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .archive-list-head span,
+    .archive-detail-head span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .archive-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .archive-list-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px 12px;
+      padding: 13px 14px;
+      border: 0;
+      border-bottom: 1px solid var(--line-soft);
+      background: #ffffff;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .archive-list-item:hover,
+    .archive-list-item.active {
+      background: var(--brand-soft);
+      box-shadow: inset 4px 0 0 var(--brand);
+    }
+
+    .archive-list-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .archive-list-item small,
+    .archive-list-item span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .status-tag {
+      align-self: start;
+      padding: 5px 8px;
+      background: #f4f4f4;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-tag.good {
+      background: rgba(36, 161, 72, 0.1);
+      color: var(--success);
+    }
+
+    .status-tag.warn {
+      background: rgba(178, 134, 0, 0.12);
+      color: var(--warning);
+    }
+
+    .status-tag.risk {
+      background: rgba(218, 30, 40, 0.1);
+      color: var(--danger);
+    }
+
+    .archive-detail-body {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .object-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line-soft);
+      border-left: 4px solid var(--brand);
+      background: #fbfcfe;
+    }
+
+    .object-hero h2 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .object-hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .object-score {
+      min-width: 132px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding-left: 14px;
+      border-left: 1px solid var(--line-soft);
+      text-align: right;
+    }
+
+    .object-score small {
+      color: var(--muted);
+      font: 700 10px/1 Consolas, monospace;
+      letter-spacing: 1px;
+    }
+
+    .object-score strong {
+      color: var(--brand-deep);
+      font-size: 28px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .detail-card,
+    .record-panel {
+      border: 1px solid var(--line-soft);
+      background: #ffffff;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    .detail-card small,
+    .record-panel small {
+      display: block;
+      color: var(--muted);
+      font: 700 10px/1 Consolas, monospace;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .detail-card strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .detail-card p,
+    .record-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .record-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .record-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .record-row {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 12px;
+    }
+
+    .record-row:last-child {
+      border-bottom: 0;
+    }
+
+    .record-row time {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .record-row b {
+      font-size: 12px;
+    }
+
+    .record-row span {
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
     .drawer-shell {
       padding: 20px 20px 20px 0;
       border-left: 1px solid var(--line-soft);
@@ -1374,6 +1670,14 @@
       .map-workbench {
         grid-template-columns: 1fr;
       }
+
+      .archive-workbench {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 1024px) {
@@ -1401,7 +1705,11 @@
       }
 
       .map-toolbar,
-      .map-statbar {
+      .map-statbar,
+      .archive-toolbar,
+      .detail-grid,
+      .record-grid,
+      .object-hero {
         grid-template-columns: 1fr;
       }
 
@@ -1422,6 +1730,22 @@
 
       .map-canvas {
         min-height: 560px;
+      }
+
+      .archive-tabs,
+      .archive-search {
+        width: 100%;
+      }
+
+      .archive-tab {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .object-score {
+        border-left: 0;
+        padding-left: 0;
+        text-align: left;
       }
     }
   </style>
@@ -1476,7 +1800,7 @@
 
       <div class="sidebar-note">
         <strong>当前阶段</strong>
-        第 3 步正在落地图工作台。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，后续四页共用同一套组件气质。
+        第 4 步正在落地对象档案。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，后续四页共用同一套组件气质。
       </div>
     </aside>
 
@@ -1914,16 +2238,44 @@
             </section>
 
             <section class="page" id="page-archive">
-              <article class="placeholder-card">
-                <small>PAGE PLACEHOLDER / ARCHIVE</small>
-                <h2>对象档案待进入第 4 步</h2>
-                <p>后续会在这里做三类 tab、左侧列表和右侧详情区，集中承接犬只档案、城管人员档案和服务机构档案。</p>
-                <div class="placeholder-lines">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+              <section class="archive-toolbar">
+                <div class="archive-search">
+                  <div class="filter-label">对象检索</div>
+                  <input class="archive-input" type="text" value="D-2048" aria-label="对象检索">
+                  <button class="filter-chip active" type="button">锦江区</button>
+                  <button class="filter-chip" type="button">正常</button>
+                  <button class="filter-chip" type="button">待关注</button>
                 </div>
-              </article>
+                <div class="archive-tabs" role="tablist" aria-label="对象类型">
+                  <button class="archive-tab active" type="button" data-archive-tab="dogs">犬只</button>
+                  <button class="archive-tab" type="button" data-archive-tab="officers">城管</button>
+                  <button class="archive-tab" type="button" data-archive-tab="services">服务商 / 合作商</button>
+                </div>
+              </section>
+
+              <section class="archive-workbench">
+                <aside class="archive-list-panel">
+                  <div class="archive-list-head">
+                    <div>
+                      <strong id="archiveListTitle">犬只列表</strong>
+                      <span id="archiveListDesc">默认承接犬只 ID、主手机号和地图点位进入。</span>
+                    </div>
+                    <span class="status-tag good" id="archiveListCount">3 条</span>
+                  </div>
+                  <div class="archive-list" id="archiveList"></div>
+                </aside>
+
+                <article class="archive-detail-panel">
+                  <div class="archive-detail-head">
+                    <div>
+                      <strong id="archiveDetailTitle">豆豆 / D-2048</strong>
+                      <span id="archiveDetailSubtitle">犬只档案，锦江区春熙路街道，最近更新 10:24</span>
+                    </div>
+                    <span class="status-tag good" id="archiveDetailStatus">正常</span>
+                  </div>
+                  <div class="archive-detail-body" id="archiveDetailBody"></div>
+                </article>
+              </section>
             </section>
 
             <section class="page" id="page-points">
@@ -1999,6 +2351,15 @@
     const drawerActionBtn = document.getElementById("drawerActionBtn");
     const drawerShell = document.getElementById("drawerShell");
     const mapMarkers = document.querySelectorAll(".map-marker");
+    const archiveTabs = document.querySelectorAll(".archive-tab");
+    const archiveList = document.getElementById("archiveList");
+    const archiveListTitle = document.getElementById("archiveListTitle");
+    const archiveListDesc = document.getElementById("archiveListDesc");
+    const archiveListCount = document.getElementById("archiveListCount");
+    const archiveDetailTitle = document.getElementById("archiveDetailTitle");
+    const archiveDetailSubtitle = document.getElementById("archiveDetailSubtitle");
+    const archiveDetailStatus = document.getElementById("archiveDetailStatus");
+    const archiveDetailBody = document.getElementById("archiveDetailBody");
 
     const mapPointDetails = {
       "dog-001": {
@@ -2111,6 +2472,202 @@
       }
     };
 
+    const archiveData = {
+      dogs: {
+        title: "犬只列表",
+        desc: "默认承接犬只 ID、主手机号和地图点位进入。",
+        items: [
+          {
+            id: "dog-2048",
+            name: "豆豆 / D-2048",
+            meta: "春熙路街道 · 最近更新 10:24",
+            status: "正常",
+            statusClass: "good",
+            subtitle: "犬只档案，锦江区春熙路街道，最近更新 10:24",
+            scoreLabel: "POINTS",
+            score: "2,860",
+            hero: "狗牌绑定来源：政府统一绑定。主号绑定来源：犬主人端绑定 / 认领。当前设备在线，定位状态稳定。",
+            cards: [
+              ["BASIC", "基础信息", "犬种：柯基<br>状态：正常<br>所属区域：春熙路街道"],
+              ["TAG DEVICE", "狗牌 / 设备", "狗牌：TAG-510248<br>设备在线：是<br>最近定位：今日 10:24"],
+              ["OWNER", "主手机号", "138****2048<br>绑定状态：已认领<br>积分归属：主手机号"],
+              ["POINTS", "积分摘要", "当前积分：2,860<br>近 30 日新增：+320<br>最近核销：宠物服务"],
+              ["LOCATION", "定位状态", "最后点位：IFS 周边<br>定位可信度：高<br>异常：无"],
+              ["ALERTS", "异常记录", "近 30 日异常：0<br>投诉关联：0<br>待复查：无"]
+            ],
+            records: [
+              ["今日 10:24", "定位上报", "正常"],
+              ["昨天 18:32", "扫码核验", "通过"],
+              ["07-05", "积分发放", "+40"],
+              ["07-01", "主号认领", "完成"]
+            ]
+          },
+          {
+            id: "dog-3186",
+            name: "可乐 / D-3186",
+            meta: "东湖街道 · 免疫 7 日内到期",
+            status: "待关注",
+            statusClass: "warn",
+            subtitle: "犬只档案，锦江区东湖街道，免疫即将到期",
+            scoreLabel: "POINTS",
+            score: "1,420",
+            hero: "狗牌绑定来源：政府统一绑定。主号绑定来源：犬主人端绑定 / 认领。当前需关注免疫到期提醒。",
+            cards: [
+              ["BASIC", "基础信息", "犬种：柴犬<br>状态：待关注<br>所属区域：东湖街道"],
+              ["TAG DEVICE", "狗牌 / 设备", "狗牌：TAG-513186<br>设备在线：是<br>最近定位：今日 09:42"],
+              ["OWNER", "主手机号", "186****3186<br>绑定状态：已认领<br>积分归属：主手机号"],
+              ["POINTS", "积分摘要", "当前积分：1,420<br>近 30 日新增：+80<br>最近核销：无"],
+              ["LOCATION", "定位状态", "最后点位：东湖公园<br>定位可信度：中<br>异常：免疫到期提醒"],
+              ["ALERTS", "异常记录", "近 30 日异常：1<br>投诉关联：0<br>待复查：免疫状态"]
+            ],
+            records: [
+              ["今日 09:42", "定位上报", "正常"],
+              ["07-06", "免疫提醒", "待处理"],
+              ["07-03", "扫码核验", "通过"],
+              ["06-28", "积分发放", "+20"]
+            ]
+          },
+          {
+            id: "dog-2761",
+            name: "糯米 / D-2761",
+            meta: "合江亭片区 · 关联夜间投诉",
+            status: "风险",
+            statusClass: "risk",
+            subtitle: "犬只档案，锦江区合江亭片区，关联夜间扰民投诉",
+            scoreLabel: "ALERTS",
+            score: "2",
+            hero: "狗牌绑定来源：政府统一绑定。主号绑定来源：犬主人端绑定 / 认领。当前关联夜间投诉，需查看核验记录。",
+            cards: [
+              ["BASIC", "基础信息", "犬种：边牧<br>状态：风险<br>所属区域：合江亭片区"],
+              ["TAG DEVICE", "狗牌 / 设备", "狗牌：TAG-512761<br>设备在线：是<br>最近定位：昨晚 21:18"],
+              ["OWNER", "主手机号", "177****2761<br>绑定状态：已认领<br>积分归属：主手机号"],
+              ["POINTS", "积分摘要", "当前积分：860<br>近 30 日变化：-40<br>最近扣减：投诉核验"],
+              ["LOCATION", "定位状态", "最后点位：合江亭商圈<br>定位可信度：高<br>异常：夜间高频"],
+              ["ALERTS", "异常记录", "近 30 日异常：2<br>投诉关联：1<br>待复查：扰民线索"]
+            ],
+            records: [
+              ["昨晚 21:18", "投诉关联", "处理中"],
+              ["07-04", "现场核验", "需复查"],
+              ["07-02", "积分扣减", "-40"],
+              ["06-29", "定位上报", "正常"]
+            ]
+          }
+        ]
+      },
+      officers: {
+        title: "城管列表",
+        desc: "展示城管编号、所属辖区和近期任务量摘要。",
+        items: [
+          {
+            id: "officer-01",
+            name: "李明 / CG-018",
+            meta: "春熙路街道 · 今日任务 6 单",
+            status: "在岗",
+            statusClass: "good",
+            subtitle: "城管档案，锦江区一中队，负责春熙路街道",
+            scoreLabel: "TASKS",
+            score: "42",
+            hero: "城管档案只展示任务负责范围、近期核验记录和在管区域摘要，不承接复杂绩效考核。",
+            cards: [
+              ["BASIC", "基础信息", "姓名：李明<br>编号：CG-018<br>队伍：锦江区一中队"],
+              ["AREA", "所属辖区", "春熙路街道<br>负责重点区域：商圈 / 公园"],
+              ["TASK RANGE", "任务负责范围", "犬只核验<br>投诉复查<br>重点区域巡查"],
+              ["RECENT", "近期任务", "近 7 日任务：42<br>已完成：37<br>待处理：5"],
+              ["VERIFY", "核验记录", "扫码核验：28<br>异常复查：6<br>通过率：91%"],
+              ["SUMMARY", "在管区域摘要", "热点对象：12<br>高风险事件：2<br>服务点：5"]
+            ],
+            records: [
+              ["今日 10:10", "无证线索核查", "待处理"],
+              ["今日 09:30", "犬只扫码核验", "通过"],
+              ["昨天 17:20", "投诉复查", "完成"],
+              ["07-05", "重点区域巡查", "完成"]
+            ]
+          },
+          {
+            id: "officer-02",
+            name: "周倩 / CG-026",
+            meta: "东湖街道 · 今日任务 4 单",
+            status: "在岗",
+            statusClass: "good",
+            subtitle: "城管档案，锦江区二中队，负责东湖街道",
+            scoreLabel: "TASKS",
+            score: "31",
+            hero: "该人员近期任务集中在公园场景和免疫到期回访协同，适合从档案查看近期处理情况。",
+            cards: [
+              ["BASIC", "基础信息", "姓名：周倩<br>编号：CG-026<br>队伍：锦江区二中队"],
+              ["AREA", "所属辖区", "东湖街道<br>负责重点区域：东湖公园"],
+              ["TASK RANGE", "任务负责范围", "公园巡查<br>犬只核验<br>宣传提醒"],
+              ["RECENT", "近期任务", "近 7 日任务：31<br>已完成：29<br>待处理：2"],
+              ["VERIFY", "核验记录", "扫码核验：19<br>异常复查：3<br>通过率：94%"],
+              ["SUMMARY", "在管区域摘要", "热点对象：8<br>高风险事件：1<br>服务点：4"]
+            ],
+            records: [
+              ["今日 11:05", "公园巡查", "进行中"],
+              ["今日 09:48", "免疫提醒协同", "待回访"],
+              ["昨天 16:10", "扫码核验", "通过"],
+              ["07-05", "宣传提醒", "完成"]
+            ]
+          }
+        ]
+      },
+      services: {
+        title: "服务商列表",
+        desc: "展示服务商类型、合作状态和最近核销时间。",
+        items: [
+          {
+            id: "service-01",
+            name: "东湖宠物服务点",
+            meta: "积分核销服务点 · 最近核销 今日 10:12",
+            status: "合作中",
+            statusClass: "good",
+            subtitle: "服务商档案，东湖街道，积分核销服务点",
+            scoreLabel: "REDEEM",
+            score: "486",
+            hero: "服务商档案只展示基础信息、位置、合作状态和积分核销摘要，不做经营分析大盘。",
+            cards: [
+              ["BASIC", "基础信息", "名称：东湖宠物服务点<br>类型：积分核销<br>合作状态：合作中"],
+              ["LOCATION", "位置", "东湖街道 A-12<br>服务覆盖：东湖公园周边"],
+              ["POINTS", "积分核销", "本期核销：486<br>今日核销：18<br>最近核销：10:12"],
+              ["COVERAGE", "服务覆盖", "覆盖犬只：1,240<br>活跃账户：386<br>低参与提醒：无"],
+              ["STATUS", "合作状态", "协议有效<br>最近巡检：07-05<br>异常：无"],
+              ["LINK", "关联入口", "查看核销流水<br>查看积分效果<br>查看服务商点位"]
+            ],
+            records: [
+              ["今日 10:12", "积分核销", "18 次"],
+              ["昨天 18:30", "服务点巡检", "正常"],
+              ["07-05", "核销对账", "完成"],
+              ["07-01", "合作状态检查", "有效"]
+            ]
+          },
+          {
+            id: "service-02",
+            name: "春熙路宠物合作店",
+            meta: "合作商户 · 最近核销 昨日 18:20",
+            status: "观察",
+            statusClass: "warn",
+            subtitle: "服务商档案，春熙路街道，合作商户",
+            scoreLabel: "REDEEM",
+            score: "132",
+            hero: "该服务商本周核销活跃度下降，需要在积分管理页继续观察区域参与率变化。",
+            cards: [
+              ["BASIC", "基础信息", "名称：春熙路宠物合作店<br>类型：合作商户<br>合作状态：观察"],
+              ["LOCATION", "位置", "春熙路商圈 B-08<br>服务覆盖：商圈周边"],
+              ["POINTS", "积分核销", "本期核销：132<br>今日核销：2<br>最近核销：昨日 18:20"],
+              ["COVERAGE", "服务覆盖", "覆盖犬只：680<br>活跃账户：126<br>低参与提醒：有"],
+              ["STATUS", "合作状态", "协议有效<br>最近巡检：07-02<br>异常：活跃下降"],
+              ["LINK", "关联入口", "查看核销流水<br>查看积分效果<br>查看服务商点位"]
+            ],
+            records: [
+              ["昨日 18:20", "积分核销", "2 次"],
+              ["07-06", "活跃下降提醒", "观察"],
+              ["07-02", "服务点巡检", "正常"],
+              ["07-01", "核销对账", "完成"]
+            ]
+          }
+        ]
+      }
+    };
+
     const pageMeta = {
       dashboard: {
         title: "治理驾驶舱",
@@ -2159,19 +2716,24 @@
       },
       archive: {
         title: "对象档案",
-        desc: "后续会围绕犬只、城管人员、服务机构三类档案，搭建左列表右详情的工作模式。",
-        badge: "STEP 04 QUEUED",
-        drawerTitle: "档案页抽屉预留",
-        noteTitle: "后续承接",
-        noteText: "这里会承接档案补充信息、标签说明、历史记录摘要等轻量信息，不抢主详情区的位置。",
+        desc: "承接驾驶舱、地图和全局搜索进入的对象查询，默认查看犬只档案。",
+        badge: "ARCHIVE WORKBENCH",
+        drawerTitle: "对象档案说明",
+        noteTitle: "当前承接",
+        noteText: "对象档案主工作区采用左列表右详情结构，覆盖犬只、城管、服务商三类主体。右侧抽屉只保留辅助说明，不替代详情区。",
         body: `
           <div class="drawer-block">
-            <strong>将要放进来的模块</strong>
+            <strong>本页已经落下来的内容</strong>
             <ul>
-              <li>档案标签和状态说明</li>
-              <li>关键风险提醒与最新动态</li>
-              <li>跨页查看时的简版对象摘要</li>
+              <li>犬只 / 城管 / 服务商三类 tab</li>
+              <li>左侧对象列表与右侧详情联动</li>
+              <li>犬只详情展示狗牌绑定来源与主号绑定来源</li>
+              <li>服务商档案展示积分核销摘要</li>
             </ul>
+          </div>
+          <div class="drawer-block">
+            <strong>一期边界</strong>
+            <p>本页不新增独立犬主管理、城管管理或服务商经营后台，只在对象档案中承接查询和详情查看。</p>
           </div>
         `
       },
@@ -2220,6 +2782,85 @@
       });
     }
 
+    function renderArchiveDetail(item) {
+      archiveDetailTitle.textContent = item.name;
+      archiveDetailSubtitle.textContent = item.subtitle;
+      archiveDetailStatus.textContent = item.status;
+      archiveDetailStatus.className = `status-tag ${item.statusClass}`;
+
+      const cards = item.cards.map(([eyebrow, title, text]) => `
+        <section class="detail-card">
+          <small>${eyebrow}</small>
+          <strong>${title}</strong>
+          <p>${text}</p>
+        </section>
+      `).join("");
+
+      const records = item.records.map(([time, action, status]) => `
+        <div class="record-row">
+          <time>${time}</time>
+          <b>${action}</b>
+          <span>${status}</span>
+        </div>
+      `).join("");
+
+      archiveDetailBody.innerHTML = `
+        <section class="object-hero">
+          <div>
+            <h2>${item.name}</h2>
+            <p>${item.hero}</p>
+          </div>
+          <div class="object-score">
+            <small>${item.scoreLabel}</small>
+            <strong>${item.score}</strong>
+          </div>
+        </section>
+
+        <section class="detail-grid">${cards}</section>
+
+        <section class="record-grid">
+          <div class="record-panel">
+            <small>RECENT RECORDS</small>
+            <div class="record-list">${records}</div>
+          </div>
+          <div class="record-panel">
+            <small>RELATION</small>
+            <p>当前详情可从驾驶舱指标、地图点位或全局搜索进入。后续第 6 步会继续补齐跨页跳转和模拟数据联动。</p>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderArchive(tabKey, itemId) {
+      const group = archiveData[tabKey];
+      if (!group) return;
+
+      archiveTabs.forEach((tab) => {
+        tab.classList.toggle("active", tab.dataset.archiveTab === tabKey);
+      });
+
+      archiveListTitle.textContent = group.title;
+      archiveListDesc.textContent = group.desc;
+      archiveListCount.textContent = `${group.items.length} 条`;
+
+      const selected = group.items.find((item) => item.id === itemId) || group.items[0];
+      archiveList.innerHTML = group.items.map((item) => `
+        <button class="archive-list-item ${item.id === selected.id ? "active" : ""}" type="button" data-archive-tab="${tabKey}" data-archive-id="${item.id}">
+          <div>
+            <strong>${item.name}</strong>
+            <small>${item.meta}</small>
+          </div>
+          <span class="status-tag ${item.statusClass}">${item.status}</span>
+        </button>
+      `).join("");
+
+      renderArchiveDetail(selected);
+
+      archiveList.querySelectorAll(".archive-list-item").forEach((button) => {
+        button.addEventListener("click", () => renderArchive(button.dataset.archiveTab, button.dataset.archiveId));
+      });
+    }
+
     function activatePage(key) {
       navButtons.forEach((button) => {
         button.classList.toggle("active", button.dataset.page === key);
@@ -2235,6 +2876,9 @@
       if (key === "map") {
         syncMapPoint("dog-001");
       }
+      if (key === "archive") {
+        renderArchive("dogs");
+      }
       drawerShell.style.display = "";
     }
 
@@ -2244,6 +2888,10 @@
 
     mapMarkers.forEach((marker) => {
       marker.addEventListener("click", () => syncMapPoint(marker.dataset.point));
+    });
+
+    archiveTabs.forEach((tab) => {
+      tab.addEventListener("click", () => renderArchive(tab.dataset.archiveTab));
     });
 
     closeDrawerBtn.addEventListener("click", () => {
@@ -2261,6 +2909,9 @@
       const activeButton = document.querySelector(".nav button.active");
       if (activeButton.dataset.page === "map") {
         syncMapPoint("dog-001");
+      } else if (activeButton.dataset.page === "archive") {
+        syncDrawer("archive");
+        renderArchive("dogs");
       } else {
         syncDrawer(activeButton.dataset.page);
       }
