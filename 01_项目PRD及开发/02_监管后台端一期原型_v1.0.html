@@ -928,6 +928,351 @@
     .placeholder-lines span:nth-child(2) { width: 72%; }
     .placeholder-lines span:nth-child(3) { width: 60%; }
 
+    .map-toolbar {
+      min-height: 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line-soft);
+      border-left: 4px solid var(--brand);
+      background: var(--panel);
+    }
+
+    .map-toolbar-main,
+    .map-toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .map-workbench {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 12px;
+      min-height: 620px;
+    }
+
+    .layer-panel,
+    .map-canvas-panel,
+    .map-statbar {
+      border: 1px solid var(--line-soft);
+      background: var(--panel);
+    }
+
+    .layer-panel {
+      padding: 14px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .layer-section {
+      display: grid;
+      gap: 8px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .layer-section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .layer-section h3 {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .layer-section p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .layer-toggle {
+      display: grid;
+      grid-template-columns: 18px 1fr auto;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f4f4f4;
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .layer-toggle:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-toggle input {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--brand);
+    }
+
+    .layer-toggle b {
+      font-weight: 600;
+    }
+
+    .layer-toggle span {
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .layer-legend {
+      display: grid;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .legend-key {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+    }
+
+    .legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.1);
+    }
+
+    .legend-dot.event {
+      background: var(--danger);
+      box-shadow: 0 0 0 4px rgba(218, 30, 40, 0.1);
+    }
+
+    .legend-dot.service {
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(36, 161, 72, 0.1);
+    }
+
+    .legend-area {
+      width: 18px;
+      height: 10px;
+      border: 1px solid var(--brand);
+      background: rgba(15, 98, 254, 0.08);
+    }
+
+    .map-canvas-panel {
+      min-width: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .map-canvas-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .map-canvas-head strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .map-canvas-head span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .map-tools {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line-soft);
+      background: #ffffff;
+      color: var(--brand-deep);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .map-canvas {
+      position: relative;
+      min-height: 506px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(237, 245, 255, 0.9), rgba(255, 255, 255, 0.96)),
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(15, 98, 254, 0.08) 39px, rgba(15, 98, 254, 0.08) 40px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(15, 98, 254, 0.08) 39px, rgba(15, 98, 254, 0.08) 40px);
+    }
+
+    .map-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(15, 98, 254, 0.16);
+      pointer-events: none;
+    }
+
+    .district-shape,
+    .restricted-area,
+    .service-radius,
+    .map-road {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .district-shape {
+      left: 9%;
+      top: 12%;
+      width: 62%;
+      height: 62%;
+      border: 2px solid rgba(15, 98, 254, 0.24);
+      background: rgba(15, 98, 254, 0.045);
+      clip-path: polygon(9% 24%, 36% 7%, 70% 12%, 92% 35%, 81% 70%, 52% 92%, 20% 82%, 4% 52%);
+    }
+
+    .restricted-area {
+      right: 10%;
+      top: 18%;
+      width: 210px;
+      height: 150px;
+      border: 1px dashed rgba(218, 30, 40, 0.38);
+      background: rgba(218, 30, 40, 0.055);
+      transform: rotate(-8deg);
+    }
+
+    .service-radius {
+      right: 16%;
+      bottom: 18%;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(36, 161, 72, 0.22);
+      background: rgba(36, 161, 72, 0.035);
+    }
+
+    .map-road {
+      left: 16%;
+      top: 48%;
+      width: 64%;
+      height: 2px;
+      border-top: 2px dashed rgba(82, 82, 82, 0.24);
+      transform: rotate(-11deg);
+    }
+
+    .map-road.secondary {
+      left: 25%;
+      top: 30%;
+      width: 52%;
+      transform: rotate(22deg);
+    }
+
+    .map-marker {
+      position: absolute;
+      min-width: 128px;
+      padding: 8px 10px 8px 28px;
+      border: 1px solid rgba(15, 98, 254, 0.16);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .map-marker:hover,
+    .map-marker.active {
+      transform: translateY(-2px);
+      border-color: var(--brand);
+      box-shadow: 0 10px 24px rgba(15, 98, 254, 0.12);
+    }
+
+    .map-marker::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 13px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.12);
+    }
+
+    .map-marker.event::before {
+      background: var(--danger);
+      box-shadow: 0 0 0 4px rgba(218, 30, 40, 0.12);
+    }
+
+    .map-marker.service::before {
+      background: var(--success);
+      box-shadow: 0 0 0 4px rgba(36, 161, 72, 0.12);
+    }
+
+    .map-marker.area::before {
+      border-radius: 2px;
+      background: var(--brand-deep);
+    }
+
+    .map-marker strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .map-marker span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .map-statbar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    .map-statbar article {
+      padding: 12px 14px;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .map-statbar article:last-child {
+      border-right: 0;
+    }
+
+    .map-statbar small {
+      display: block;
+      color: var(--muted);
+      font: 700 10px/1 Consolas, monospace;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .map-statbar strong {
+      color: var(--brand-deep);
+      font-size: 22px;
+    }
+
     .drawer-shell {
       padding: 20px 20px 20px 0;
       border-left: 1px solid var(--line-soft);
@@ -1025,6 +1370,10 @@
       .metric-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+
+      .map-workbench {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 1024px) {
@@ -1051,6 +1400,11 @@
         grid-template-columns: 1fr;
       }
 
+      .map-toolbar,
+      .map-statbar {
+        grid-template-columns: 1fr;
+      }
+
       .topbar {
         gap: 12px;
       }
@@ -1064,6 +1418,10 @@
       .topbar-actions,
       .map-summary {
         flex-wrap: wrap;
+      }
+
+      .map-canvas {
+        min-height: 560px;
       }
     }
   </style>
@@ -1118,7 +1476,7 @@
 
       <div class="sidebar-note">
         <strong>当前阶段</strong>
-        第 2 步已进入治理驾驶舱视觉校准。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，后续四页共用同一套组件气质。
+        第 3 步正在落地图工作台。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，后续四页共用同一套组件气质。
       </div>
     </aside>
 
@@ -1408,16 +1766,151 @@
             </section>
 
             <section class="page" id="page-map">
-              <article class="placeholder-card">
-                <small>PAGE PLACEHOLDER / MAP</small>
-                <h2>地图工作台待进入第 3 步</h2>
-                <p>这一页会承接图层面板、地图占位、点位模拟和详情抽屉。当前先保留统一壳子与跳转关系，避免和驾驶舱内容混在一起。</p>
-                <div class="placeholder-lines">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+              <section class="map-toolbar">
+                <div class="map-toolbar-main">
+                  <div class="filter-label">地图筛选</div>
+                  <button class="filter-chip active" type="button">犬只</button>
+                  <button class="filter-chip active" type="button">事件</button>
+                  <button class="filter-chip" type="button">城管辖区</button>
+                  <button class="filter-chip" type="button">服务商</button>
+                  <button class="filter-chip" type="button">高风险</button>
+                  <button class="filter-chip" type="button">近 24 小时</button>
                 </div>
-              </article>
+                <div class="map-toolbar-actions">
+                  <button class="ghost-button" type="button">重置筛选</button>
+                  <button class="brand-button" type="button">刷新点位</button>
+                </div>
+              </section>
+
+              <section class="map-workbench">
+                <aside class="layer-panel">
+                  <div class="layer-section">
+                    <h3>图层面板</h3>
+                    <p>一期只表达对象分布、事件空间位置和轻量闭环信息，不展示城管实时定位和轨迹回放。</p>
+                  </div>
+
+                  <div class="layer-section">
+                    <label class="layer-toggle">
+                      <input type="checkbox" checked>
+                      <b>犬只点位</b>
+                      <span>12,846</span>
+                    </label>
+                    <label class="layer-toggle">
+                      <input type="checkbox" checked>
+                      <b>事件点位</b>
+                      <span>28</span>
+                    </label>
+                    <label class="layer-toggle">
+                      <input type="checkbox" checked>
+                      <b>城管任务区域</b>
+                      <span>6</span>
+                    </label>
+                    <label class="layer-toggle">
+                      <input type="checkbox" checked>
+                      <b>服务商点位</b>
+                      <span>42</span>
+                    </label>
+                    <label class="layer-toggle">
+                      <input type="checkbox" checked>
+                      <b>重点 / 禁遛区域</b>
+                      <span>5</span>
+                    </label>
+                  </div>
+
+                  <div class="layer-section">
+                    <h3>图例</h3>
+                    <div class="layer-legend">
+                      <div class="legend-item">
+                        <span class="legend-key"><i class="legend-dot"></i>犬只点位</span>
+                        <span>正常 / 待关注</span>
+                      </div>
+                      <div class="legend-item">
+                        <span class="legend-key"><i class="legend-dot event"></i>事件点位</span>
+                        <span>高 / 中 / 低</span>
+                      </div>
+                      <div class="legend-item">
+                        <span class="legend-key"><i class="legend-dot service"></i>服务商</span>
+                        <span>合作中</span>
+                      </div>
+                      <div class="legend-item">
+                        <span class="legend-key"><i class="legend-area"></i>任务辖区</span>
+                        <span>轮廓区块</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="layer-section">
+                    <h3>当前范围</h3>
+                    <p>成都市 / 锦江区，默认展示近 24 小时新增事件与重点对象点位。</p>
+                  </div>
+                </aside>
+
+                <article class="map-canvas-panel">
+                  <div class="map-canvas-head">
+                    <div>
+                      <strong>锦江区犬只治理空间态势</strong>
+                      <span>点击点位后，右侧全局抽屉展示对象摘要与轻量闭环状态。</span>
+                    </div>
+                    <div class="map-tools">
+                      <button class="icon-button" type="button" title="放大">+</button>
+                      <button class="icon-button" type="button" title="缩小">-</button>
+                      <button class="icon-button" type="button" title="回到默认范围">⌂</button>
+                    </div>
+                  </div>
+
+                  <div class="map-canvas">
+                    <div class="district-shape"></div>
+                    <div class="restricted-area"></div>
+                    <div class="service-radius"></div>
+                    <div class="map-road"></div>
+                    <div class="map-road secondary"></div>
+
+                    <button class="map-marker dog active" type="button" data-point="dog-001" style="left: 18%; top: 24%;">
+                      <strong>豆豆 / D-2048</strong>
+                      <span>正常，最近定位 10:24</span>
+                    </button>
+                    <button class="map-marker event" type="button" data-point="event-001" style="left: 52%; top: 22%;">
+                      <strong>无证养犬线索</strong>
+                      <span>高风险，牛王庙街道</span>
+                    </button>
+                    <button class="map-marker dog" type="button" data-point="dog-002" style="left: 34%; top: 58%;">
+                      <strong>可乐 / D-3186</strong>
+                      <span>待关注，免疫将到期</span>
+                    </button>
+                    <button class="map-marker service" type="button" data-point="service-001" style="left: 68%; top: 62%;">
+                      <strong>东湖宠物服务点</strong>
+                      <span>合作中，今日核销 18 次</span>
+                    </button>
+                    <button class="map-marker event" type="button" data-point="event-002" style="left: 74%; top: 32%;">
+                      <strong>夜间扰民投诉</strong>
+                      <span>处理中，关联犬只 1 只</span>
+                    </button>
+                    <button class="map-marker area" type="button" data-point="area-001" style="left: 23%; top: 42%;">
+                      <strong>春熙路责任区</strong>
+                      <span>城管任务区域，今日 6 单</span>
+                    </button>
+                  </div>
+
+                  <div class="map-statbar">
+                    <article>
+                      <small>DOG POINTS</small>
+                      <strong>486</strong>
+                    </article>
+                    <article>
+                      <small>EVENTS</small>
+                      <strong>28</strong>
+                    </article>
+                    <article>
+                      <small>HIGH RISK</small>
+                      <strong>9</strong>
+                    </article>
+                    <article>
+                      <small>SERVICE SITES</small>
+                      <strong>42</strong>
+                    </article>
+                  </div>
+                </article>
+              </section>
             </section>
 
             <section class="page" id="page-archive">
@@ -1505,6 +1998,118 @@
     const drawerResetBtn = document.getElementById("drawerResetBtn");
     const drawerActionBtn = document.getElementById("drawerActionBtn");
     const drawerShell = document.getElementById("drawerShell");
+    const mapMarkers = document.querySelectorAll(".map-marker");
+
+    const mapPointDetails = {
+      "dog-001": {
+        badge: "DOG POINT",
+        title: "豆豆 / D-2048",
+        noteTitle: "犬只点位",
+        noteText: "当前点位为犬只对象，展示犬只状态、主手机号摘要和最近定位时间，可继续跳转对象档案。",
+        body: `
+          <div class="drawer-block">
+            <strong>基础摘要</strong>
+            <p>状态：正常<br>主手机号：138****2048<br>最近定位：今日 10:24<br>所属区域：春熙路街道</p>
+          </div>
+          <div class="drawer-block">
+            <strong>关联动作</strong>
+            <ul>
+              <li>查看犬只档案</li>
+              <li>查看最近核验记录</li>
+              <li>定位到周边事件</li>
+            </ul>
+          </div>
+        `
+      },
+      "dog-002": {
+        badge: "DOG POINT",
+        title: "可乐 / D-3186",
+        noteTitle: "犬只点位",
+        noteText: "当前犬只免疫即将到期，适合从地图快速进入档案继续判断，不在地图内展开复杂处理流程。",
+        body: `
+          <div class="drawer-block">
+            <strong>基础摘要</strong>
+            <p>状态：待关注<br>主手机号：186****3186<br>最近定位：今日 09:42<br>提醒：免疫 7 日内到期</p>
+          </div>
+          <div class="drawer-block">
+            <strong>关联动作</strong>
+            <ul>
+              <li>查看犬只档案</li>
+              <li>查看免疫状态</li>
+              <li>查看积分账户摘要</li>
+            </ul>
+          </div>
+        `
+      },
+      "event-001": {
+        badge: "EVENT POINT",
+        title: "无证养犬线索",
+        noteTitle: "事件点位",
+        noteText: "一期地图只展示事件摘要、处理状态、负责辖区和关联犬只，不做完整事件中心。",
+        body: `
+          <div class="drawer-block">
+            <strong>事件摘要</strong>
+            <p>风险等级：高<br>发生时间：今日 08:36<br>关联犬只：待核验<br>处理状态：待分派核查</p>
+          </div>
+          <div class="drawer-block">
+            <strong>负责信息</strong>
+            <p>负责辖区：牛王庙街道<br>建议动作：街道联合核查<br>快捷入口：查看地图周边点位 / 查看犬只档案</p>
+          </div>
+        `
+      },
+      "event-002": {
+        badge: "EVENT POINT",
+        title: "夜间扰民投诉",
+        noteTitle: "事件点位",
+        noteText: "该事件已进入处理中状态，地图页主要帮助监管人员确认空间位置和关联对象。",
+        body: `
+          <div class="drawer-block">
+            <strong>事件摘要</strong>
+            <p>风险等级：中<br>发生时间：昨晚 21:18<br>关联犬只：D-2761<br>处理状态：处理中</p>
+          </div>
+          <div class="drawer-block">
+            <strong>处理信息</strong>
+            <p>处理人：锦江区二中队<br>负责辖区：合江亭片区<br>下一步：查看犬只档案并补充核验记录</p>
+          </div>
+        `
+      },
+      "service-001": {
+        badge: "SERVICE SITE",
+        title: "东湖宠物服务点",
+        noteTitle: "服务商点位",
+        noteText: "服务商点位用于查看合作状态、核销活跃度和服务覆盖摘要，经营分析不在一期范围内。",
+        body: `
+          <div class="drawer-block">
+            <strong>服务商摘要</strong>
+            <p>类型：积分核销服务点<br>合作状态：合作中<br>最近核销：今日 10:12<br>今日核销：18 次</p>
+          </div>
+          <div class="drawer-block">
+            <strong>关联动作</strong>
+            <ul>
+              <li>查看服务商档案</li>
+              <li>查看核销流水摘要</li>
+              <li>查看服务覆盖区域</li>
+            </ul>
+          </div>
+        `
+      },
+      "area-001": {
+        badge: "DUTY AREA",
+        title: "春熙路责任区",
+        noteTitle: "城管任务区域",
+        noteText: "城管区域只表达负责辖区和任务覆盖，不展示人员实时定位和轨迹回放。",
+        body: `
+          <div class="drawer-block">
+            <strong>辖区摘要</strong>
+            <p>负责队伍：锦江区一中队<br>今日任务：6 单<br>待处理：2 单<br>重点对象：12 个</p>
+          </div>
+          <div class="drawer-block">
+            <strong>区域提示</strong>
+            <p>当前区域游客高峰明显，建议继续关注商圈扰民投诉和无牵引遛犬线索。</p>
+          </div>
+        `
+      }
+    };
 
     const pageMeta = {
       dashboard: {
@@ -1532,18 +2137,22 @@
       },
       map: {
         title: "地图工作台",
-        desc: "下一步会把空间分布、图层切换、点位联动和详情抽屉集中做进这一页。",
-        badge: "STEP 03 QUEUED",
-        drawerTitle: "地图页抽屉预留",
-        noteTitle: "后续承接",
-        noteText: "这里会切换成点位详情、事件轨迹、联动处置按钮等地图页专属内容。",
+        desc: "查看犬只、事件、辖区和服务商的空间分布，并承接一期轻量事件闭环查看。",
+        badge: "MAP WORKBENCH",
+        drawerTitle: "豆豆 / D-2048",
+        noteTitle: "犬只点位",
+        noteText: "当前点位为犬只对象，展示犬只状态、主手机号摘要和最近定位时间，可继续跳转对象档案。",
         body: `
           <div class="drawer-block">
-            <strong>将要放进来的模块</strong>
+            <strong>基础摘要</strong>
+            <p>状态：正常<br>主手机号：138****2048<br>最近定位：今日 10:24<br>所属区域：春熙路街道</p>
+          </div>
+          <div class="drawer-block">
+            <strong>关联动作</strong>
             <ul>
-              <li>图层开关与重点对象筛选</li>
-              <li>点位详情、风险标签、处置记录</li>
-              <li>跨页跳入时的对象快捷摘要</li>
+              <li>查看犬只档案</li>
+              <li>查看最近核验记录</li>
+              <li>定位到周边事件</li>
             </ul>
           </div>
         `
@@ -1595,6 +2204,22 @@
       drawerBody.innerHTML = meta.body;
     }
 
+    function syncMapPoint(pointKey) {
+      const point = mapPointDetails[pointKey];
+      if (!point) return;
+
+      drawerBadge.textContent = point.badge;
+      drawerTitle.textContent = point.title;
+      drawerNoteTitle.textContent = point.noteTitle;
+      drawerNoteText.textContent = point.noteText;
+      drawerBody.innerHTML = point.body;
+      drawerShell.style.display = "";
+
+      mapMarkers.forEach((marker) => {
+        marker.classList.toggle("active", marker.dataset.point === pointKey);
+      });
+    }
+
     function activatePage(key) {
       navButtons.forEach((button) => {
         button.classList.toggle("active", button.dataset.page === key);
@@ -1607,11 +2232,18 @@
       topbarTitle.textContent = pageMeta[key].title;
       topbarDesc.textContent = pageMeta[key].desc;
       syncDrawer(key);
+      if (key === "map") {
+        syncMapPoint("dog-001");
+      }
       drawerShell.style.display = "";
     }
 
     navButtons.forEach((button) => {
       button.addEventListener("click", () => activatePage(button.dataset.page));
+    });
+
+    mapMarkers.forEach((marker) => {
+      marker.addEventListener("click", () => syncMapPoint(marker.dataset.point));
     });
 
     closeDrawerBtn.addEventListener("click", () => {
@@ -1627,7 +2259,11 @@
 
     drawerResetBtn.addEventListener("click", () => {
       const activeButton = document.querySelector(".nav button.active");
-      syncDrawer(activeButton.dataset.page);
+      if (activeButton.dataset.page === "map") {
+        syncMapPoint("dog-001");
+      } else {
+        syncDrawer(activeButton.dataset.page);
+      }
       drawerShell.style.display = "";
     });
 
