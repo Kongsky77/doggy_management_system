@@ -6,27 +6,28 @@
   <title>监管后台端一期原型</title>
   <style>
     :root {
-      --bg: #f4f4f4;
-      --bg-strong: #edf5ff;
-      --panel: #ffffff;
+      --bg: #fff7ed;
+      --bg-strong: #fff1df;
+      --panel: #fffdf8;
       --panel-strong: #ffffff;
-      --panel-subtle: #f4f4f4;
-      --line: #c6c6c6;
-      --line-soft: #e0e0e0;
-      --line-strong: #8d8d8d;
-      --ink: #161616;
-      --muted: #525252;
-      --muted-soft: #6f6f6f;
-      --brand: #0f62fe;
-      --brand-deep: #002d9c;
-      --brand-soft: #edf5ff;
-      --brand-wash: #f2f7ff;
-      --accent: #4589ff;
+      --panel-subtle: #fff8ef;
+      --line: #eadcc9;
+      --line-soft: #f0e3d2;
+      --line-strong: #d7b98e;
+      --ink: #2d251f;
+      --muted: #6f6258;
+      --muted-soft: #8a7766;
+      --brand: #f28c00;
+      --brand-deep: #b75f00;
+      --brand-soft: #fff2dc;
+      --brand-wash: #fff8ec;
+      --accent: #ffb347;
       --success: #24a148;
       --warning: #b28600;
       --danger: #da1e28;
-      --shadow: none;
-      --radius: 4px;
+      --shadow: 0 14px 36px rgba(118, 80, 37, 0.08);
+      --shadow-soft: 0 8px 22px rgba(118, 80, 37, 0.06);
+      --radius: 16px;
     }
 
     * {
@@ -38,7 +39,9 @@
       min-height: 100%;
       font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
       color: var(--ink);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(242, 140, 0, 0.16), transparent 28%),
+        linear-gradient(180deg, #fffaf3 0%, var(--bg) 44%, #f8efe4 100%);
     }
 
     body {
@@ -63,9 +66,9 @@
       background: rgba(255, 255, 255, 0.96);
       color: var(--ink);
       border: 1px solid var(--line-soft);
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+      box-shadow: var(--shadow);
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 22px;
     }
 
     .sidebar::before,
@@ -84,13 +87,13 @@
     .brand-mark {
       width: 42px;
       height: 42px;
-      border-radius: 6px;
+      border-radius: 14px;
       display: grid;
       place-items: center;
       font: 700 20px/1 Consolas, monospace;
       color: #fff;
-      background: var(--brand);
-      box-shadow: none;
+      background: linear-gradient(135deg, #ff9d00, var(--brand));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.32);
     }
 
     .brand small {
@@ -132,7 +135,7 @@
       border: 0;
       background: transparent;
       color: var(--ink);
-      border-radius: 6px;
+      border-radius: 14px;
       padding: 12px 12px 12px 0;
       display: grid;
       grid-template-columns: 4px 34px 1fr auto;
@@ -147,7 +150,7 @@
     .nav button:hover,
     .nav button.active {
       background: var(--brand-soft);
-      box-shadow: 0 8px 20px rgba(15, 98, 254, 0.08);
+      box-shadow: 0 8px 20px rgba(242, 140, 0, 0.1);
       transform: translateX(2px);
     }
 
@@ -165,10 +168,10 @@
     .nav-icon {
       width: 34px;
       height: 34px;
-      border-radius: 6px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      background: #f4f4f4;
+      background: var(--brand-wash);
       color: var(--brand-deep);
       font: 700 13px/1 Consolas, monospace;
     }
@@ -196,9 +199,9 @@
       right: 22px;
       bottom: 24px;
       padding: 14px;
-      border-radius: 6px;
-      background: #f8faff;
-      border: 1px solid #d0e2ff;
+      border-radius: 16px;
+      background: #fff8ec;
+      border: 1px solid #f5d8ad;
       color: var(--muted);
       line-height: 1.7;
       font-size: 12px;
@@ -227,8 +230,8 @@
       gap: 16px;
       min-height: 64px;
       padding: 9px 24px;
-      background: #ffffff;
-      backdrop-filter: none;
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line-soft);
     }
 
@@ -256,9 +259,8 @@
     .search-box {
       width: min(460px, 100%);
       padding: 11px 14px;
-      border-radius: 0;
-      border: 1px solid transparent;
-      border-bottom-color: var(--line-strong);
+      border-radius: 14px;
+      border: 1px solid var(--line);
       background: var(--panel-subtle);
       color: var(--ink);
       box-shadow: var(--shadow);
@@ -281,7 +283,7 @@
       background: #ffffff;
       color: var(--ink);
       padding: 9px 12px;
-      border-radius: 0;
+      border-radius: 14px;
       min-width: 118px;
       text-align: center;
       font-size: 13px;
@@ -293,7 +295,7 @@
       align-items: center;
       gap: 12px;
       padding: 8px 10px;
-      border-radius: 0;
+      border-radius: 14px;
       background: #ffffff;
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
@@ -302,7 +304,7 @@
     .admin-avatar {
       width: 38px;
       height: 38px;
-      border-radius: 2px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
       background: var(--brand);
@@ -368,7 +370,7 @@
       grid-template-columns: 1.3fr 1fr auto;
       align-items: center;
       gap: 10px;
-      border-left: 4px solid var(--brand);
+      border-left: 0;
     }
 
     .filter-group,
@@ -381,8 +383,8 @@
 
     .filter-label {
       padding: 7px 9px;
-      border-radius: 0;
-      background: #f4f4f4;
+      border-radius: 999px;
+      background: var(--brand-wash);
       color: var(--muted);
       font-size: 11px;
       font-weight: 600;
@@ -392,7 +394,7 @@
     .filter-chip,
     .ghost-button,
     .brand-button {
-      border-radius: 0;
+      border-radius: 999px;
       padding: 9px 12px;
       border: 1px solid var(--line-soft);
       background: #ffffff;
@@ -406,20 +408,20 @@
 
     .filter-chip {
       padding: 7px 10px;
-      color: #5f6f84;
-      background: #fbfcfe;
-      border-color: #dce5f2;
+      color: var(--muted);
+      background: #fffaf3;
+      border-color: var(--line-soft);
     }
 
     .filter-chip:hover,
     .ghost-button:hover {
       border-color: var(--line-strong);
-      background: #f4f4f4;
+      background: var(--brand-wash);
     }
 
     .filter-chip.active {
-      background: #edf5ff;
-      border-color: #a6c8ff;
+      background: var(--brand-soft);
+      border-color: rgba(242, 140, 0, 0.28);
       color: var(--brand-deep);
       font-weight: 600;
     }
@@ -438,7 +440,7 @@
     .metric-grid {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 0;
+      gap: 12px;
     }
 
     .metric-card {
@@ -448,8 +450,7 @@
       grid-template-rows: auto auto 1fr;
       position: relative;
       overflow: hidden;
-      border-right: 0;
-      border-radius: 0;
+      border-radius: var(--radius);
     }
 
     .metric-card:last-child {
@@ -463,7 +464,7 @@
       right: 0;
       top: 0;
       height: 3px;
-      background: #8d8d8d;
+      background: var(--accent);
     }
 
     .metric-card:nth-child(1)::before,
@@ -490,8 +491,9 @@
     .metric-card strong {
       margin-top: 10px;
       font-size: 30px;
-      color: var(--brand-deep);
+      color: var(--ink);
       letter-spacing: 0;
+      font-weight: 700;
     }
 
     .metric-card span {
@@ -522,7 +524,7 @@
     .hero-risk {
       min-height: 360px;
       padding: 14px 16px;
-      border-radius: 0;
+      border-radius: var(--radius);
     }
 
     .panel-head {
@@ -545,13 +547,13 @@
 
     .map-stage {
       height: calc(100% - 42px);
-      border-radius: 0;
+      border-radius: 18px;
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(237, 245, 255, 0.86), rgba(244, 244, 244, 0.96)),
-        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(15, 98, 254, 0.08) 39px, rgba(15, 98, 254, 0.08) 40px),
-        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(15, 98, 254, 0.08) 39px, rgba(15, 98, 254, 0.08) 40px);
+        linear-gradient(135deg, rgba(255, 246, 232, 0.9), rgba(255, 253, 248, 0.96)),
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(242, 140, 0, 0.06) 39px, rgba(242, 140, 0, 0.06) 40px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(242, 140, 0, 0.06) 39px, rgba(242, 140, 0, 0.06) 40px);
       border: 1px solid var(--line-soft);
     }
 
@@ -559,7 +561,7 @@
       content: "";
       position: absolute;
       inset: 16px;
-      border: 1px solid rgba(15, 98, 254, 0.16);
+      border: 1px solid rgba(242, 140, 0, 0.14);
       pointer-events: none;
     }
 
@@ -576,8 +578,8 @@
       width: 68%;
       height: 58%;
       border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
-      border: 2px solid rgba(15, 98, 254, 0.24);
-      background: rgba(15, 98, 254, 0.035);
+      border: 2px solid rgba(242, 140, 0, 0.22);
+      background: rgba(242, 140, 0, 0.04);
     }
 
     .map-ring {
@@ -586,15 +588,17 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      border: 1px dashed rgba(15, 98, 254, 0.22);
-      box-shadow: none;
+      border: 1px dashed rgba(242, 140, 0, 0.22);
+      box-shadow:
+        0 0 0 18px rgba(242, 140, 0, 0.04),
+        0 0 0 40px rgba(242, 140, 0, 0.02);
     }
 
     .map-route {
       inset: 24% auto auto 16%;
       width: 56%;
       height: 40%;
-      border-top: 2px dashed rgba(15, 98, 254, 0.2);
+      border-top: 2px dashed rgba(242, 140, 0, 0.22);
       transform: rotate(-7deg);
     }
 
@@ -605,7 +609,9 @@
       min-width: 124px;
       padding: 7px 9px 7px 24px;
       background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(15, 98, 254, 0.12);
+      border: 1px solid rgba(242, 140, 0, 0.14);
+      border-radius: 14px;
+      box-shadow: var(--shadow-soft);
     }
 
     .map-point::before {
@@ -617,7 +623,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--brand);
-      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.12);
+      box-shadow: 0 0 0 4px rgba(242, 140, 0, 0.14);
     }
 
     .map-point.risk::before {
@@ -640,16 +646,15 @@
       right: 16px;
       bottom: 16px;
       display: flex;
-      gap: 0;
+      gap: 10px;
     }
 
     .map-summary b {
       flex: 1;
       padding: 11px 12px;
-      border-radius: 0;
+      border-radius: 12px;
       background: rgba(255,255,255,0.92);
       border: 1px solid var(--line-soft);
-      border-right: 0;
       font-size: 12px;
       color: var(--brand-deep);
     }
@@ -660,23 +665,22 @@
 
     .risk-list {
       display: grid;
-      gap: 0;
-      border-top: 1px solid var(--line-soft);
+      gap: 10px;
+      border-top: 0;
     }
 
     .risk-card {
-      padding: 13px 0 13px 12px;
-      border-radius: 0;
+      padding: 13px 14px;
+      border-radius: 14px;
       background: var(--panel);
-      border: 0;
-      border-bottom: 1px solid var(--line-soft);
-      border-left: 3px solid #8d8d8d;
+      border: 1px solid var(--line-soft);
+      border-left: 4px solid var(--accent);
       display: grid;
       gap: 8px;
     }
 
     .risk-card.high {
-      background: #fff7f7;
+      background: #fff7f4;
       border-left-color: var(--danger);
     }
 
@@ -691,7 +695,7 @@
       display: inline-flex;
       align-items: center;
       padding: 6px 10px;
-      border-radius: 0;
+      border-radius: 999px;
       font-size: 11px;
       font-weight: 700;
       color: var(--brand-deep);
@@ -723,7 +727,7 @@
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 12px;
-      border-radius: 0;
+      border-radius: var(--radius);
     }
 
     .chart {
@@ -735,8 +739,9 @@
       padding: 18px 12px 0;
       border-left: 1px solid var(--line-soft);
       border-bottom: 1px solid var(--line-soft);
+      border-radius: 16px;
       background:
-        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(224, 224, 224, 0.8) 39px, rgba(224, 224, 224, 0.8) 40px);
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(240, 227, 210, 0.75) 39px, rgba(240, 227, 210, 0.75) 40px);
     }
 
     .chart-bar {
@@ -749,9 +754,9 @@
 
     .chart-bar i {
       width: 100%;
-      border-radius: 0;
-      background: var(--brand);
-      box-shadow: none;
+      border-radius: 10px 10px 4px 4px;
+      background: linear-gradient(180deg, #ffb347, var(--brand));
+      box-shadow: inset 0 -8px 16px rgba(255,255,255,0.16);
     }
 
     .chart-bar b {
@@ -783,7 +788,7 @@
     .rank-no {
       width: 36px;
       height: 32px;
-      border-radius: 0;
+      border-radius: 10px;
       display: grid;
       place-items: center;
       background: var(--brand-wash);
@@ -844,23 +849,23 @@
 
     .progress {
       height: 10px;
-      border-radius: 0;
+      border-radius: 999px;
       overflow: hidden;
-      background: #e8eef7;
+      background: #f3e2c8;
     }
 
     .progress > i {
       display: block;
       height: 100%;
-      border-radius: 0;
-      background: var(--brand);
+      border-radius: inherit;
+      background: linear-gradient(90deg, #ffb347, var(--brand));
     }
 
     .effect-kpi {
-      border-radius: 0;
+      border-radius: 16px;
       padding: 16px;
       background: var(--brand-soft);
-      border: 1px solid rgba(15, 98, 254, 0.22);
+      border: 1px solid rgba(242, 140, 0, 0.2);
       border-left: 4px solid var(--brand);
       display: grid;
       align-content: start;
@@ -891,7 +896,7 @@
       display: grid;
       gap: 12px;
       align-content: start;
-      border-radius: 0;
+      border-radius: var(--radius);
     }
 
     .placeholder-card small {
@@ -920,8 +925,8 @@
     .placeholder-lines span {
       display: block;
       height: 8px;
-      border-radius: 0;
-      background: linear-gradient(90deg, #dde8f7, #f4f7fb);
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffe1b3, #fff8ec);
     }
 
     .placeholder-lines span:nth-child(1) { width: 88%; }
@@ -938,6 +943,10 @@
       border: 1px solid var(--line-soft);
       border-left: 4px solid var(--brand);
       background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
     }
 
     .map-toolbar-main,
@@ -960,6 +969,8 @@
     .map-statbar {
       border: 1px solid var(--line-soft);
       background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
     }
 
     .layer-panel {
@@ -999,7 +1010,7 @@
       align-items: center;
       gap: 8px;
       padding: 8px 0;
-      border-bottom: 1px solid #f4f4f4;
+      border-bottom: 1px solid var(--line-soft);
       color: var(--ink);
       font-size: 12px;
     }
@@ -1050,7 +1061,7 @@
       height: 9px;
       border-radius: 50%;
       background: var(--brand);
-      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.1);
+      box-shadow: 0 0 0 4px rgba(242, 140, 0, 0.12);
     }
 
     .legend-dot.event {
@@ -1067,7 +1078,7 @@
       width: 18px;
       height: 10px;
       border: 1px solid var(--brand);
-      background: rgba(15, 98, 254, 0.08);
+      background: rgba(242, 140, 0, 0.1);
     }
 
     .map-canvas-panel {
@@ -1110,6 +1121,7 @@
       color: var(--brand-deep);
       cursor: pointer;
       font-weight: 700;
+      border-radius: 10px;
     }
 
     .map-canvas {
@@ -1117,16 +1129,17 @@
       min-height: 506px;
       overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(237, 245, 255, 0.9), rgba(255, 255, 255, 0.96)),
-        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(15, 98, 254, 0.08) 39px, rgba(15, 98, 254, 0.08) 40px),
-        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(15, 98, 254, 0.08) 39px, rgba(15, 98, 254, 0.08) 40px);
+        linear-gradient(135deg, rgba(255, 246, 232, 0.9), rgba(255, 255, 255, 0.96)),
+        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(242, 140, 0, 0.06) 39px, rgba(242, 140, 0, 0.06) 40px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(242, 140, 0, 0.06) 39px, rgba(242, 140, 0, 0.06) 40px);
+      border-radius: 0 0 16px 16px;
     }
 
     .map-canvas::before {
       content: "";
       position: absolute;
       inset: 18px;
-      border: 1px solid rgba(15, 98, 254, 0.16);
+      border: 1px solid rgba(242, 140, 0, 0.14);
       pointer-events: none;
     }
 
@@ -1143,8 +1156,8 @@
       top: 12%;
       width: 62%;
       height: 62%;
-      border: 2px solid rgba(15, 98, 254, 0.24);
-      background: rgba(15, 98, 254, 0.045);
+      border: 2px solid rgba(242, 140, 0, 0.22);
+      background: rgba(242, 140, 0, 0.045);
       clip-path: polygon(9% 24%, 36% 7%, 70% 12%, 92% 35%, 81% 70%, 52% 92%, 20% 82%, 4% 52%);
     }
 
@@ -1188,11 +1201,12 @@
       position: absolute;
       min-width: 128px;
       padding: 8px 10px 8px 28px;
-      border: 1px solid rgba(15, 98, 254, 0.16);
+      border: 1px solid rgba(242, 140, 0, 0.16);
       background: rgba(255, 255, 255, 0.88);
       color: var(--ink);
       text-align: left;
       cursor: pointer;
+      border-radius: 14px;
       transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
     }
 
@@ -1200,7 +1214,7 @@
     .map-marker.active {
       transform: translateY(-2px);
       border-color: var(--brand);
-      box-shadow: 0 10px 24px rgba(15, 98, 254, 0.12);
+      box-shadow: 0 10px 24px rgba(242, 140, 0, 0.12);
     }
 
     .map-marker::before {
@@ -1212,7 +1226,7 @@
       height: 9px;
       border-radius: 50%;
       background: var(--brand);
-      box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.12);
+      box-shadow: 0 0 0 4px rgba(242, 140, 0, 0.12);
     }
 
     .map-marker.event::before {
@@ -1226,7 +1240,7 @@
     }
 
     .map-marker.area::before {
-      border-radius: 2px;
+      border-radius: 6px;
       background: var(--brand-deep);
     }
 
@@ -1297,7 +1311,8 @@
       width: min(420px, 100%);
       padding: 9px 12px;
       border: 1px solid transparent;
-      border-bottom-color: var(--line-strong);
+      border-color: var(--line);
+      border-radius: 14px;
       background: var(--panel-subtle);
       color: var(--ink);
       outline: none;
@@ -1315,6 +1330,8 @@
       gap: 0;
       border: 1px solid var(--line-soft);
       background: var(--panel);
+      border-radius: 14px;
+      overflow: hidden;
     }
 
     .archive-tab {
@@ -1351,6 +1368,9 @@
       border: 1px solid var(--line-soft);
       background: var(--panel);
       min-width: 0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
     }
 
     .archive-list-head,
@@ -1419,11 +1439,12 @@
     .status-tag {
       align-self: start;
       padding: 5px 8px;
-      background: #f4f4f4;
+      background: var(--brand-wash);
       color: var(--muted);
       font-size: 11px;
       font-weight: 600;
       white-space: nowrap;
+      border-radius: 999px;
     }
 
     .status-tag.good {
@@ -1454,7 +1475,8 @@
       padding: 16px;
       border: 1px solid var(--line-soft);
       border-left: 4px solid var(--brand);
-      background: #fbfcfe;
+      background: var(--brand-wash);
+      border-radius: var(--radius);
     }
 
     .object-hero h2 {
@@ -1503,6 +1525,7 @@
       background: #ffffff;
       padding: 12px;
       min-width: 0;
+      border-radius: 14px;
     }
 
     .detail-card small,
@@ -1579,6 +1602,8 @@
       border: 1px solid var(--line-soft);
       border-left: 4px solid var(--brand);
       background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
     }
 
     .points-filter,
@@ -1594,6 +1619,9 @@
       grid-template-columns: repeat(6, minmax(0, 1fr));
       border: 1px solid var(--line-soft);
       background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
     }
 
     .points-kpi {
@@ -1645,6 +1673,8 @@
       background: var(--panel);
       min-width: 0;
       overflow-x: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
     }
 
     .points-panel-head {
@@ -1726,7 +1756,7 @@
 
     .points-table th {
       color: var(--muted);
-      background: var(--panel-subtle);
+      background: var(--brand-wash);
       font-size: 11px;
       font-weight: 700;
     }
@@ -1775,12 +1805,14 @@
       background: var(--panel-subtle);
       border: 1px solid var(--line-soft);
       overflow: hidden;
+      border-radius: 999px;
     }
 
     .effect-bar span {
       display: block;
       height: 100%;
-      background: var(--brand);
+      background: linear-gradient(90deg, #ffb347, var(--brand));
+      border-radius: inherit;
     }
 
     .effect-notes {
@@ -1792,7 +1824,8 @@
       padding: 11px 12px;
       border: 1px solid var(--line-soft);
       border-left: 4px solid var(--brand);
-      background: #fbfcfe;
+      background: var(--brand-wash);
+      border-radius: 14px;
     }
 
     .effect-note.warn {
@@ -1815,7 +1848,7 @@
     .drawer-shell {
       padding: 20px 20px 20px 0;
       border-left: 1px solid var(--line-soft);
-      background: #f4f4f4;
+      background: rgba(255, 247, 237, 0.62);
     }
 
     .drawer-panel {
@@ -1824,7 +1857,7 @@
       display: grid;
       grid-template-rows: auto auto 1fr auto;
       gap: 16px;
-      border-radius: 0;
+      border-radius: var(--radius);
     }
 
     .drawer-head {
@@ -1845,7 +1878,7 @@
       align-items: center;
       gap: 8px;
       padding: 7px 10px;
-      border-radius: 0;
+      border-radius: 999px;
       background: var(--brand-soft);
       color: var(--brand-deep);
       font-size: 12px;
@@ -1855,7 +1888,7 @@
     .drawer-note,
     .drawer-block {
       padding: 12px;
-      border-radius: 0;
+      border-radius: 14px;
       background: var(--panel);
       border: 1px solid var(--line-soft);
     }
@@ -2056,7 +2089,7 @@
 
       <div class="sidebar-note">
         <strong>当前阶段</strong>
-        第 5 步正在落地积分管理。当前采用 IBM / Carbon 转译后的蓝灰治理后台规范，四页共用同一套组件气质。
+        第 5 步正在落地积分管理。当前采用 CDHT 橙色主视觉与 Airtable 式温和结构化后台规范，四页共用同一套组件气质。
       </div>
     </aside>
 
@@ -2065,7 +2098,7 @@
         <div class="topbar-title">
           <small>GOVERNANCE CONSOLE</small>
           <strong id="topbarTitle">治理驾驶舱</strong>
-          <span id="topbarDesc">基于 Carbon 蓝灰工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。</span>
+          <span id="topbarDesc">基于 CDHT 橙色主视觉与现代结构化工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。</span>
         </div>
 
         <input class="search-box" type="text" placeholder="搜索犬只 ID / 主人手机号 / 城管编号 / 服务机构名称">
@@ -2787,7 +2820,7 @@
               <div class="drawer-block">
                 <strong>这次已经落下来的内容</strong>
                 <ul>
-                  <li>统一后台骨架切换为 Carbon 蓝灰治理风格</li>
+                  <li>统一后台骨架切换为 CDHT 橙色主视觉与温和结构化治理风格</li>
                   <li>治理驾驶舱筛选条与 6 张指标卡</li>
                   <li>65% 地图主视觉 + 35% 风险提醒</li>
                   <li>趋势、排行、治理成效三组信息区</li>
@@ -3146,7 +3179,7 @@
     const pageMeta = {
       dashboard: {
         title: "治理驾驶舱",
-        desc: "基于 Carbon 蓝灰工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。",
+        desc: "基于 CDHT 橙色主视觉与现代结构化工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。",
         badge: "DASHBOARD READY",
         drawerTitle: "全局抽屉组件",
         noteTitle: "当前承接",
@@ -3155,7 +3188,7 @@
           <div class="drawer-block">
             <strong>这次已经落下来的内容</strong>
             <ul>
-              <li>统一后台骨架切换为 Carbon 蓝灰治理风格</li>
+              <li>统一后台骨架切换为 CDHT 橙色主视觉与温和结构化治理风格</li>
               <li>治理驾驶舱筛选条与 6 张指标卡</li>
               <li>65% 地图主视觉 + 35% 风险提醒</li>
               <li>趋势、排行、治理成效三组信息区</li>
