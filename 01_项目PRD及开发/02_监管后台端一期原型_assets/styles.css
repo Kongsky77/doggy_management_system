@@ -437,6 +437,10 @@
       box-shadow: none;
     }
 
+    body.page-map-active .filter-strip {
+      display: none;
+    }
+
     .filter-group,
     .filter-actions {
       display: flex;
@@ -1287,35 +1291,6 @@
       color: #2a241f;
     }
 
-    .map-page__header {
-      min-height: 64px;
-      display: grid;
-      grid-template-columns: minmax(260px, 1fr) auto;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .map-page__header p {
-      margin: 0 0 4px;
-      color: var(--brand-deep);
-      font: 700 10px/1 Consolas, monospace;
-      letter-spacing: 1.4px;
-    }
-
-    .map-page__header h1 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.2;
-    }
-
-    .map-page__header span {
-      display: block;
-      margin-top: 4px;
-      color: #8d8175;
-      font-size: 13px;
-    }
-
-    .map-header-tools,
     .map-filter-bar,
     .map-layer-bar,
     .map-layer-chips {
@@ -1325,15 +1300,6 @@
       min-width: 0;
     }
 
-    .map-header-tools label {
-      display: grid;
-      gap: 3px;
-      color: #8d8175;
-      font-size: 11px;
-    }
-
-    .map-header-tools select,
-    .map-header-tools input,
     .map-filter-item select {
       height: 44px;
       border: 1px solid var(--map-border);
@@ -1343,16 +1309,6 @@
       outline: none;
       box-shadow: 0 6px 18px rgba(245, 140, 0, 0.04);
       font-size: 13px;
-    }
-
-    .map-header-tools select {
-      min-width: 180px;
-      padding: 0 12px;
-    }
-
-    .map-header-tools input {
-      width: 340px;
-      padding: 0 14px;
     }
 
     .icon-button {
@@ -2666,7 +2622,6 @@
       .topbar-main,
       .filter-strip,
       .hero-layout,
-      .map-page__header,
       .section-grid,
       .trend-grid,
       .summary-grid,
@@ -2701,7 +2656,6 @@
       .filter-group,
       .filter-actions,
       .topbar-actions,
-      .map-header-tools,
       .map-filter-bar,
       .map-layer-bar,
       .map-layer-chips,
@@ -2709,8 +2663,6 @@
         flex-wrap: wrap;
       }
 
-      .map-header-tools input,
-      .map-header-tools select,
       .map-filter-item,
       .map-filter-item select {
         width: 100%;

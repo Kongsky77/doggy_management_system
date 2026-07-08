@@ -560,6 +560,8 @@
     }
 
     function activatePage(key) {
+      document.body.classList.toggle("page-map-active", key === "map");
+
       navButtons.forEach((button) => {
         button.classList.toggle("active", button.dataset.page === key);
       });
