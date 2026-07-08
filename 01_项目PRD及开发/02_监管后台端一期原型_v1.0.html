@@ -377,150 +377,196 @@
             </section>
 
             <section class="page" id="page-map">
-              <section class="map-toolbar">
-                <div class="map-toolbar-main">
-                  <div class="filter-label">地图筛选</div>
-                  <button class="filter-chip active" type="button">犬只</button>
-                  <button class="filter-chip active" type="button">事件</button>
-                  <button class="filter-chip" type="button">城管辖区</button>
-                  <button class="filter-chip" type="button">服务商</button>
-                  <button class="filter-chip" type="button">高风险</button>
-                  <button class="filter-chip" type="button">近 24 小时</button>
-                </div>
-                <div class="map-toolbar-actions">
-                  <button class="ghost-button" type="button">重置筛选</button>
-                  <button class="brand-button" type="button">刷新点位</button>
-                </div>
-              </section>
+              <section class="map-page">
+                <header class="map-page__header">
+                  <div>
+                    <p>SPACE GOVERNANCE</p>
+                    <h1>地图工作台</h1>
+                    <span>顶部连续筛选、地图聚合点位、右侧详情承接与底部统计收口。</span>
+                  </div>
+                  <div class="map-header-tools">
+                    <label>
+                      <span>行政区</span>
+                      <select aria-label="行政区">
+                        <option>成都市 / 锦江区</option>
+                        <option>成都市 / 武侯区</option>
+                        <option>成都市 / 青羊区</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>时间范围</span>
+                      <select aria-label="时间范围">
+                        <option>近 24 小时</option>
+                        <option>近 7 日</option>
+                        <option>近 30 日</option>
+                      </select>
+                    </label>
+                    <input type="search" aria-label="地图搜索" placeholder="搜索犬只、设备、事件编号...">
+                    <button class="icon-button" type="button" title="通知">!</button>
+                    <button class="icon-button" type="button" title="帮助">?</button>
+                  </div>
+                </header>
 
-              <section class="map-workbench">
-                <aside class="layer-panel">
-                  <div class="layer-section">
-                    <h3>图层面板</h3>
-                    <p>一期只表达对象分布、事件空间位置和轻量闭环信息，不展示城管实时定位和轨迹回放。</p>
+                <section class="map-page__grid">
+                  <div class="map-page__left">
+                    <section class="map-filter-bar" aria-label="地图筛选">
+                      <div class="map-filter-item">
+                        <span>对象类型</span>
+                        <select>
+                          <option>全部对象</option>
+                          <option>犬只</option>
+                          <option>事件</option>
+                          <option>服务商</option>
+                        </select>
+                      </div>
+                      <div class="map-filter-item">
+                        <span>风险等级</span>
+                        <select>
+                          <option>全部风险</option>
+                          <option>高风险</option>
+                          <option>中风险</option>
+                          <option>低风险</option>
+                        </select>
+                      </div>
+                      <div class="map-filter-item">
+                        <span>状态</span>
+                        <select>
+                          <option>全部状态</option>
+                          <option>正常</option>
+                          <option>异常</option>
+                          <option>待关注</option>
+                        </select>
+                      </div>
+                      <div class="map-filter-item">
+                        <span>区域范围</span>
+                        <select>
+                          <option>锦江区全域</option>
+                          <option>春熙路街道</option>
+                          <option>东湖街道</option>
+                        </select>
+                      </div>
+                      <button class="ghost-button" type="button">更多筛选</button>
+                      <button class="ghost-button" type="button">重置</button>
+                    </section>
+
+                    <section class="map-layer-bar" aria-label="地图图层">
+                      <strong>图层</strong>
+                      <div class="map-layer-chips">
+                        <label><input type="checkbox" checked><span class="layer-dot dog"></span>犬只点位</label>
+                        <label><input type="checkbox" checked><span class="layer-dot event"></span>事件点位</label>
+                        <label><input type="checkbox" checked><span class="layer-dot area"></span>城管辖区</label>
+                        <label><input type="checkbox" checked><span class="layer-dot service"></span>服务商点位</label>
+                        <label><input type="checkbox" checked><span class="layer-dot key"></span>重点区域</label>
+                        <label><input type="checkbox" checked><span class="layer-dot restricted"></span>禁遛区域</label>
+                      </div>
+                      <button class="ghost-button" type="button">图层设置</button>
+                    </section>
+
+                    <article class="map-canvas-panel">
+                      <div class="map-canvas">
+                        <div class="district-shape"></div>
+                        <div class="restricted-area"></div>
+                        <div class="service-radius"></div>
+                        <div class="map-road"></div>
+                        <div class="map-road secondary"></div>
+                        <div class="map-road third"></div>
+
+                        <div class="map-cluster primary" style="left: 45%; top: 33%;">
+                          <strong>3245</strong>
+                          <span>中心城区</span>
+                        </div>
+                        <div class="map-cluster warning" style="left: 58%; top: 18%;">
+                          <strong>2136</strong>
+                          <span>城北片区</span>
+                        </div>
+                        <div class="map-cluster info" style="left: 61%; top: 62%;">
+                          <strong>1987</strong>
+                          <span>城南片区</span>
+                        </div>
+                        <div class="map-cluster success" style="left: 24%; top: 58%;">
+                          <strong>1546</strong>
+                          <span>城西片区</span>
+                        </div>
+
+                        <button class="map-marker dog active" type="button" data-point="dog-001" style="left: 18%; top: 24%;" aria-label="豆豆 D-2048"></button>
+                        <button class="map-marker event" type="button" data-point="event-001" style="left: 52%; top: 22%;" aria-label="无证养犬线索"></button>
+                        <button class="map-marker dog" type="button" data-point="dog-002" style="left: 34%; top: 58%;" aria-label="可乐 D-3186"></button>
+                        <button class="map-marker service" type="button" data-point="service-001" style="left: 68%; top: 62%;" aria-label="东湖宠物服务点"></button>
+                        <button class="map-marker event" type="button" data-point="event-002" style="left: 74%; top: 32%;" aria-label="夜间扰民投诉"></button>
+                        <button class="map-marker area" type="button" data-point="area-001" style="left: 23%; top: 42%;" aria-label="春熙路责任区"></button>
+                        <i class="map-dot dog" style="left: 42%; top: 51%;"></i>
+                        <i class="map-dot event" style="left: 57%; top: 47%;"></i>
+                        <i class="map-dot service" style="left: 71%; top: 48%;"></i>
+                        <i class="map-dot dog" style="left: 31%; top: 38%;"></i>
+                        <i class="map-dot event" style="left: 64%; top: 39%;"></i>
+                        <i class="map-dot dog" style="left: 48%; top: 69%;"></i>
+
+                        <div class="map-legend-card">
+                          <strong>图例</strong>
+                          <span><i class="legend-dot"></i>犬只点位</span>
+                          <span><i class="legend-dot event"></i>事件点位</span>
+                          <span><i class="legend-dot service"></i>服务商</span>
+                          <span><i class="legend-area"></i>任务辖区</span>
+                        </div>
+
+                        <div class="map-float-controls">
+                          <button type="button">图层</button>
+                          <button type="button">+</button>
+                          <button type="button">-</button>
+                          <button type="button">⌖</button>
+                          <button type="button">□</button>
+                        </div>
+                        <div class="map-scale">500 m</div>
+                      </div>
+                    </article>
+
+                    <section class="map-bottom-stats" aria-label="地图统计">
+                      <article><i class="stat-icon dog">犬</i><span>犬只总数</span><strong>12,846</strong><small>较昨日 +128</small></article>
+                      <article><i class="stat-icon info">牌</i><span>在线设备率</span><strong>94.2%</strong><small>较昨日 +1.8%</small></article>
+                      <article><i class="stat-icon event">异</i><span>异常事件</span><strong>28</strong><small>较昨日 -6</small></article>
+                      <article><i class="stat-icon danger">高</i><span>高风险事件</span><strong>9</strong><small>待核查 3</small></article>
+                      <article><i class="stat-icon warning">待</i><span>待处理事件</span><strong>17</strong><small>超时 3 起</small></article>
+                      <article><i class="stat-icon service">商</i><span>服务商点位</span><strong>42</strong><small>今日核销 486</small></article>
+                      <article><i class="stat-icon area">区</i><span>重点区域数</span><strong>6</strong><small>禁遛 2 个</small></article>
+                      <article><i class="stat-icon task">巡</i><span>巡查任务数</span><strong>68</strong><small>已完成 51</small></article>
+                    </section>
                   </div>
 
-                  <div class="layer-section">
-                    <label class="layer-toggle">
-                      <input type="checkbox" checked>
-                      <b>犬只点位</b>
-                      <span>12,846</span>
-                    </label>
-                    <label class="layer-toggle">
-                      <input type="checkbox" checked>
-                      <b>事件点位</b>
-                      <span>28</span>
-                    </label>
-                    <label class="layer-toggle">
-                      <input type="checkbox" checked>
-                      <b>城管任务区域</b>
-                      <span>6</span>
-                    </label>
-                    <label class="layer-toggle">
-                      <input type="checkbox" checked>
-                      <b>服务商点位</b>
-                      <span>42</span>
-                    </label>
-                    <label class="layer-toggle">
-                      <input type="checkbox" checked>
-                      <b>重点 / 禁遛区域</b>
-                      <span>5</span>
-                    </label>
-                  </div>
-
-                  <div class="layer-section">
-                    <h3>图例</h3>
-                    <div class="layer-legend">
-                      <div class="legend-item">
-                        <span class="legend-key"><i class="legend-dot"></i>犬只点位</span>
-                        <span>正常 / 待关注</span>
+                  <aside class="map-detail-card" aria-label="点位详情">
+                    <div class="map-detail-head">
+                      <div>
+                        <span id="mapDetailBadge">DOG POINT</span>
+                        <strong id="mapDetailTitle">豆豆 / D-2048</strong>
                       </div>
-                      <div class="legend-item">
-                        <span class="legend-key"><i class="legend-dot event"></i>事件点位</span>
-                        <span>高 / 中 / 低</span>
+                      <button class="icon-button" type="button" title="关闭详情">×</button>
+                    </div>
+                    <section class="map-detail-summary">
+                      <span id="mapDetailType">犬只点位</span>
+                      <h2 id="mapDetailSummaryTitle">对象状态正常</h2>
+                      <p id="mapDetailNote">当前点位为犬只对象，展示犬只状态、主手机号摘要和最近定位时间，可继续跳转对象档案。</p>
+                    </section>
+                    <div class="map-detail-body" id="mapDetailBody">
+                      <div class="map-detail-block">
+                        <strong>基础摘要</strong>
+                        <p>状态：正常<br>主手机号：138****2048<br>最近定位：今日 10:24<br>所属区域：春熙路街道</p>
                       </div>
-                      <div class="legend-item">
-                        <span class="legend-key"><i class="legend-dot service"></i>服务商</span>
-                        <span>合作中</span>
-                      </div>
-                      <div class="legend-item">
-                        <span class="legend-key"><i class="legend-area"></i>任务辖区</span>
-                        <span>轮廓区块</span>
+                      <div class="map-detail-block">
+                        <strong>关联动作</strong>
+                        <ul>
+                          <li>查看犬只档案</li>
+                          <li>查看最近核验记录</li>
+                          <li>定位到周边事件</li>
+                        </ul>
                       </div>
                     </div>
-                  </div>
-
-                  <div class="layer-section">
-                    <h3>当前范围</h3>
-                    <p>成都市 / 锦江区，默认展示近 24 小时新增事件与重点对象点位。</p>
-                  </div>
-                </aside>
-
-                <article class="map-canvas-panel">
-                  <div class="map-canvas-head">
-                    <div>
-                      <strong>锦江区犬只治理空间态势</strong>
-                      <span>点击点位后，右侧全局抽屉展示对象摘要与轻量闭环状态。</span>
+                    <div class="map-detail-actions">
+                      <button class="brand-button" type="button">标记已处理</button>
+                      <button class="ghost-button" type="button">转派任务</button>
+                      <button class="ghost-button" type="button">查看关联事件（3）</button>
+                      <button class="ghost-button" type="button">查看处理记录</button>
                     </div>
-                    <div class="map-tools">
-                      <button class="icon-button" type="button" title="放大">+</button>
-                      <button class="icon-button" type="button" title="缩小">-</button>
-                      <button class="icon-button" type="button" title="回到默认范围">⌂</button>
-                    </div>
-                  </div>
-
-                  <div class="map-canvas">
-                    <div class="district-shape"></div>
-                    <div class="restricted-area"></div>
-                    <div class="service-radius"></div>
-                    <div class="map-road"></div>
-                    <div class="map-road secondary"></div>
-
-                    <button class="map-marker dog active" type="button" data-point="dog-001" style="left: 18%; top: 24%;">
-                      <strong>豆豆 / D-2048</strong>
-                      <span>正常，最近定位 10:24</span>
-                    </button>
-                    <button class="map-marker event" type="button" data-point="event-001" style="left: 52%; top: 22%;">
-                      <strong>无证养犬线索</strong>
-                      <span>高风险，牛王庙街道</span>
-                    </button>
-                    <button class="map-marker dog" type="button" data-point="dog-002" style="left: 34%; top: 58%;">
-                      <strong>可乐 / D-3186</strong>
-                      <span>待关注，免疫将到期</span>
-                    </button>
-                    <button class="map-marker service" type="button" data-point="service-001" style="left: 68%; top: 62%;">
-                      <strong>东湖宠物服务点</strong>
-                      <span>合作中，今日核销 18 次</span>
-                    </button>
-                    <button class="map-marker event" type="button" data-point="event-002" style="left: 74%; top: 32%;">
-                      <strong>夜间扰民投诉</strong>
-                      <span>处理中，关联犬只 1 只</span>
-                    </button>
-                    <button class="map-marker area" type="button" data-point="area-001" style="left: 23%; top: 42%;">
-                      <strong>春熙路责任区</strong>
-                      <span>城管任务区域，今日 6 单</span>
-                    </button>
-                  </div>
-
-                  <div class="map-statbar">
-                    <article>
-                      <small>DOG POINTS</small>
-                      <strong>486</strong>
-                    </article>
-                    <article>
-                      <small>EVENTS</small>
-                      <strong>28</strong>
-                    </article>
-                    <article>
-                      <small>HIGH RISK</small>
-                      <strong>9</strong>
-                    </article>
-                    <article>
-                      <small>SERVICE SITES</small>
-                      <strong>42</strong>
-                    </article>
-                  </div>
-                </article>
+                  </aside>
+                </section>
               </section>
             </section>
 

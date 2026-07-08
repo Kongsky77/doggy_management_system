@@ -15,6 +15,12 @@
     const drawerOpenBtn = document.getElementById("drawerOpenBtn");
     const topbarMenu = document.querySelector(".topbar-menu");
     const mapMarkers = document.querySelectorAll(".map-marker");
+    const mapDetailBadge = document.getElementById("mapDetailBadge");
+    const mapDetailTitle = document.getElementById("mapDetailTitle");
+    const mapDetailType = document.getElementById("mapDetailType");
+    const mapDetailSummaryTitle = document.getElementById("mapDetailSummaryTitle");
+    const mapDetailNote = document.getElementById("mapDetailNote");
+    const mapDetailBody = document.getElementById("mapDetailBody");
     const archiveTabs = document.querySelectorAll(".archive-tab");
     const archiveList = document.getElementById("archiveList");
     const archiveListTitle = document.getElementById("archiveListTitle");
@@ -339,7 +345,7 @@
         badge: "DASHBOARD READY",
         drawerTitle: "全局抽屉组件",
         noteTitle: "当前承接",
-        noteText: "当前在治理驾驶舱里，右侧抽屉承接筛选说明和监管关注点。后续切换到地图工作台时，会替换成点位详情与处置动作。",
+        noteText: "当前在治理驾驶舱里，右侧抽屉承接筛选说明和监管关注点。地图工作台已改为页面内右侧详情卡承接点位与轻量闭环。",
         body: `
           <div class="drawer-block">
             <strong>这次已经落下来的内容</strong>
@@ -358,22 +364,22 @@
       },
       map: {
         title: "地图工作台",
-        desc: "查看犬只、事件、辖区和服务商的空间分布，并承接一期轻量事件闭环查看。",
+        desc: "顶部连续过滤、中部大地图、右侧详情承接与底部统计收口，聚焦空间监管和轻量事件闭环。",
         badge: "MAP WORKBENCH",
-        drawerTitle: "豆豆 / D-2048",
-        noteTitle: "犬只点位",
-        noteText: "当前点位为犬只对象，展示犬只状态、主手机号摘要和最近定位时间，可继续跳转对象档案。",
+        drawerTitle: "地图工作台说明",
+        noteTitle: "页面内承接",
+        noteText: "地图页现在以右侧详情卡承接点位信息，抽屉只保留为全局说明入口。",
         body: `
           <div class="drawer-block">
-            <strong>基础摘要</strong>
-            <p>状态：正常<br>主手机号：138****2048<br>最近定位：今日 10:24<br>所属区域：春熙路街道</p>
+            <strong>本页结构</strong>
+            <p>地图工作台采用顶部连续筛选、图层 chip、大地图、右侧详情卡与底部 8 项统计条。点位点击不会打开全局抽屉，而是在页面内刷新详情。</p>
           </div>
           <div class="drawer-block">
-            <strong>关联动作</strong>
+            <strong>一期边界</strong>
             <ul>
-              <li>查看犬只档案</li>
-              <li>查看最近核验记录</li>
-              <li>定位到周边事件</li>
+              <li>展示犬只、事件、辖区、服务商和重点区域</li>
+              <li>支持事件摘要、当前状态和负责辖区查看</li>
+              <li>不展示城管实时定位，不做轨迹回放</li>
             </ul>
           </div>
         `
@@ -451,12 +457,21 @@
       const point = mapPointDetails[pointKey];
       if (!point) return;
 
-      drawerBadge.textContent = point.badge;
-      drawerTitle.textContent = point.title;
-      drawerNoteTitle.textContent = point.noteTitle;
-      drawerNoteText.textContent = point.noteText;
-      drawerBody.innerHTML = point.body;
+      if (mapDetailBadge && mapDetailTitle && mapDetailBody) {
+        mapDetailBadge.textContent = point.badge;
+        mapDetailTitle.textContent = point.title;
+        mapDetailType.textContent = point.noteTitle;
+        mapDetailSummaryTitle.textContent = point.title;
+        mapDetailNote.textContent = point.noteText;
+        mapDetailBody.innerHTML = point.body.replaceAll("drawer-block", "map-detail-block");
+      }
+
       if (shouldOpen) {
+        drawerBadge.textContent = point.badge;
+        drawerTitle.textContent = point.title;
+        drawerNoteTitle.textContent = point.noteTitle;
+        drawerNoteText.textContent = point.noteText;
+        drawerBody.innerHTML = point.body;
         openDrawer();
       }
 
@@ -575,7 +590,7 @@
     });
 
     mapMarkers.forEach((marker) => {
-      marker.addEventListener("click", () => syncMapPoint(marker.dataset.point, true));
+      marker.addEventListener("click", () => syncMapPoint(marker.dataset.point));
     });
 
     archiveTabs.forEach((tab) => {
