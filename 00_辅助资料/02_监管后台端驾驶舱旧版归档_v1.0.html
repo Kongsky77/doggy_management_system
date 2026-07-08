@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>监管后台端驾驶舱旧版归档 v1.0</title>
+</head>
+<body>
+  <main>
+    <h1>监管后台端驾驶舱旧版归档</h1>
+    <p>说明：本文件归档从正式原型中拆出的旧版驾驶舱 DOM 结构，仅用于参考对照，不再作为当前一期有效原型。</p>
+
+    <section class="page" id="page-dashboard-legacy">
+      <section class="filter-strip">
+        <div class="filter-group">
+          <div class="filter-label">全局筛选</div>
+          <button class="filter-chip active" type="button">近 7 天</button>
+          <button class="filter-chip" type="button">锦江区</button>
+          <button class="filter-chip" type="button">犬只全量</button>
+        </div>
+        <div class="filter-group">
+          <button class="filter-chip" type="button">风险优先</button>
+          <button class="filter-chip" type="button">治理成效</button>
+          <button class="filter-chip" type="button">巡查密度</button>
+        </div>
+        <div class="filter-actions">
+          <button class="ghost-button" type="button">筛选说明</button>
+          <button class="brand-button" type="button">刷新态势</button>
+        </div>
+      </section>
+
+      <section class="metric-grid">
+        <article class="metric-card">
+          <small>在册犬只总数</small>
+          <strong>12,846</strong>
+          <span>较昨日 +128 ↑</span>
+        </article>
+        <article class="metric-card">
+          <small>电子狗牌在线率</small>
+          <strong>94.2%</strong>
+          <span>较昨日 +1.8% ↑</span>
+        </article>
+        <article class="metric-card">
+          <small>今日异常事件</small>
+          <strong>28</strong>
+          <span class="metric-foot">较昨日 -6 ↓</span>
+        </article>
+        <article class="metric-card">
+          <small>待处理任务</small>
+          <strong>17</strong>
+          <span class="metric-foot warning">超时 3 起</span>
+        </article>
+        <article class="metric-card">
+          <small>积分参与率</small>
+          <strong>63%</strong>
+          <span>较上周 +6% ↑</span>
+        </article>
+        <article class="metric-card">
+          <small>服务核销次数</small>
+          <strong>486</strong>
+          <span>本周 +42 ↑</span>
+        </article>
+      </section>
+
+      <section class="hero-layout">
+        <article class="hero-map">
+          <div class="panel-head">
+            <strong>区域治理态势</strong>
+            <span>空间态势 / 高风险 / 未闭环</span>
+          </div>
+          <div class="map-stage">
+            <div class="map-river"></div>
+            <div class="map-ring"></div>
+            <div class="map-route"></div>
+
+            <div class="map-point" style="left: 14%; top: 18%;">
+              <strong>春熙路街道</strong>
+              <span>巡查密度高，违规回落</span>
+            </div>
+            <div class="map-point risk" style="left: 56%; top: 24%;">
+              <strong>合江亭片区</strong>
+              <span>犬只扰民事件 8 起</span>
+            </div>
+            <div class="map-point" style="left: 30%; top: 56%;">
+              <strong>东湖公园周边</strong>
+              <span>遛犬热点，需周末加巡</span>
+            </div>
+            <div class="map-point risk" style="left: 68%; top: 60%;">
+              <strong>牛王庙商圈</strong>
+              <span>免疫异常账户集中</span>
+            </div>
+
+            <div class="map-summary">
+              <b>热点区域 4 个</b>
+              <b>高风险告警 9 条</b>
+              <b>重点巡查路线 3 条</b>
+            </div>
+          </div>
+        </article>
+
+        <article class="hero-risk">
+          <div class="panel-head">
+            <strong>风险提醒</strong>
+            <span>时间 / 犬只及狗牌号 / 区域</span>
+          </div>
+          <div class="risk-list">
+            <section class="risk-card high">
+              <div class="risk-row">
+                <strong><span class="risk-status danger">高风险行为：</span>禁遛区域逗留多次</strong>
+                <span class="risk-tag danger">高风险</span>
+              </div>
+              <p class="risk-meta"><span>10:23:45</span><span>豆豆 / 京A123456</span><span>中心公园</span></p>
+            </section>
+            <section class="risk-card">
+              <div class="risk-row">
+                <strong><span class="risk-status">处理中：</span>电子狗牌离线</strong>
+                <span class="risk-tag">处理中</span>
+              </div>
+              <p class="risk-meta"><span>10:18:32</span><span>旺财 / 京B654321</span><span>朝阳公园</span></p>
+            </section>
+            <section class="risk-card">
+              <div class="risk-row">
+                <strong><span class="risk-status">处理中：</span>未牵绳预警</strong>
+                <span class="risk-tag">处理中</span>
+              </div>
+              <p class="risk-meta"><span>10:15:21</span><span>小黑 / 京C987654</span><span>青年湖公园</span></p>
+            </section>
+            <section class="risk-card">
+              <div class="risk-row">
+                <strong><span class="risk-status">待处理：</span>积分核验异常</strong>
+                <span class="risk-tag pending">待处理</span>
+              </div>
+              <p class="risk-meta"><span>10:12:08</span><span>大黄 / 京D882016</span><span>东湖服务点</span></p>
+            </section>
+            <section class="risk-card">
+              <div class="risk-row">
+                <strong><span class="risk-status">待处理：</span>电子狗牌设备电量低</strong>
+                <span class="risk-tag pending">待处理</span>
+              </div>
+              <p class="risk-meta"><span>10:10:11</span><span>乐乐 / 京D456789</span><span>春熙路商圈</span></p>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-grid">
+        <article class="section-panel">
+          <div class="panel-head">
+            <strong>近 7 日事件趋势</strong>
+            <span>趋势区每行 280px</span>
+          </div>
+          <div class="chart">
+            <div class="chart-bar"><i style="height: 42%;"></i><b>周一</b></div>
+            <div class="chart-bar"><i style="height: 58%;"></i><b>周二</b></div>
+            <div class="chart-bar"><i style="height: 48%;"></i><b>周三</b></div>
+            <div class="chart-bar"><i style="height: 74%;"></i><b>周四</b></div>
+            <div class="chart-bar"><i style="height: 68%;"></i><b>周五</b></div>
+            <div class="chart-bar"><i style="height: 81%;"></i><b>周六</b></div>
+            <div class="chart-bar"><i style="height: 63%;"></i><b>周日</b></div>
+          </div>
+        </article>
+
+        <article class="section-panel">
+          <div class="panel-head">
+            <strong>街道风险排行</strong>
+            <span>按综合风险指数排序</span>
+          </div>
+          <div class="rank-list">
+            <div class="rank-item">
+              <div class="rank-no">01</div>
+              <div>
+                <strong>牛王庙街道</strong>
+                <span>无证养犬、夜间投诉、免疫滞后叠加</span>
+              </div>
+              <div class="rank-score">89</div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-no">02</div>
+              <div>
+                <strong>合江亭街道</strong>
+                <span>商圈扰民事件高频，周末压力明显</span>
+              </div>
+              <div class="rank-score">81</div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-no">03</div>
+              <div>
+                <strong>东湖街道</strong>
+                <span>公园场景集中，需加强节假日宣传巡查</span>
+              </div>
+              <div class="rank-score">74</div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-no">04</div>
+              <div>
+                <strong>春熙路街道</strong>
+                <span>总体稳定，但游客高峰期需重点关注</span>
+              </div>
+              <div class="rank-score">62</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-grid">
+        <article class="section-panel">
+          <div class="panel-head">
+            <strong>治理成效卡</strong>
+            <span>看结果，也看过程推进</span>
+          </div>
+          <div class="effect-grid">
+            <div class="effect-track">
+              <div class="effect-item">
+                <strong>重点区域闭环率 91%</strong>
+                <span>高风险街道从发现到办结的平均闭环效率持续改善。</span>
+                <div class="progress"><i style="width: 91%;"></i></div>
+              </div>
+              <div class="effect-item">
+                <strong>投诉 48 小时办结率 84%</strong>
+                <span>夜间投诉上升，但跨部门协同处理速度保持稳定。</span>
+                <div class="progress"><i style="width: 84%;"></i></div>
+              </div>
+              <div class="effect-item">
+                <strong>重点对象复查完成率 76%</strong>
+                <span>还需加强对连续异常账户和反复投诉地址的回头看。</span>
+                <div class="progress"><i style="width: 76%;"></i></div>
+              </div>
+            </div>
+            <div class="effect-kpi">
+              <small>GOVERNANCE IMPACT</small>
+              <strong>+18%</strong>
+              <span>与上月相比，重点片区治理达标率提升 18%，说明现有巡查与服务联动机制开始见效。</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="section-panel">
+          <div class="panel-head">
+            <strong>本周治理动作</strong>
+            <span>把成效拆回到执行动作</span>
+          </div>
+          <div class="rank-list">
+            <div class="rank-item">
+              <div class="rank-no">巡</div>
+              <div>
+                <strong>重点街道增派 3 条巡查线</strong>
+                <span>覆盖牛王庙、合江亭、东湖公园周边</span>
+              </div>
+              <div class="rank-score">已发</div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-no">联</div>
+              <div>
+                <strong>服务机构回访清单下发</strong>
+                <span>要求 48 小时内补齐免疫到期回访记录</span>
+              </div>
+              <div class="rank-score">进行中</div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-no">查</div>
+              <div>
+                <strong>异常积分账户专项复核</strong>
+                <span>已抽查 17 户，锁定 4 条待确认规则</span>
+              </div>
+              <div class="rank-score">复核中</div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-no">宣</div>
+              <div>
+                <strong>公园文明养犬提醒加强</strong>
+                <span>周末重点时段通过电子屏和巡查同步提示</span>
+              </div>
+              <div class="rank-score">本周</div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
