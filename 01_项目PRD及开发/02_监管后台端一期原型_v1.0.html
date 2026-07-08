@@ -491,10 +491,10 @@
     }
 
     .metric-card {
-      height: 120px;
-      padding: 14px 16px 13px;
+      height: 86px;
+      padding: 12px 14px 10px;
       display: grid;
-      grid-template-rows: auto auto 1fr;
+      grid-template-rows: auto 1fr auto;
       position: relative;
       overflow: hidden;
       border-radius: var(--radius);
@@ -531,22 +531,23 @@
 
     .metric-card small {
       color: var(--muted);
-      font: 700 10px/1 Consolas, monospace;
-      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0;
     }
 
     .metric-card strong {
-      margin-top: 10px;
-      font-size: 30px;
+      align-self: center;
+      font-size: 27px;
       color: var(--ink);
-      letter-spacing: 0;
+      letter-spacing: -0.4px;
       font-weight: 700;
     }
 
     .metric-card span {
       align-self: end;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .metric-foot {
@@ -2300,34 +2301,34 @@
 
               <section class="metric-grid">
                 <article class="metric-card">
-                  <small>REGISTERED DOGS</small>
+                  <small>在册犬只总数</small>
                   <strong>12,846</strong>
-                  <span>在册犬只，点击进入对象档案</span>
+                  <span>较昨日 +128 ↑</span>
                 </article>
                 <article class="metric-card">
-                  <small>DEVICE ONLINE</small>
+                  <small>电子狗牌在线率</small>
                   <strong>94.2%</strong>
-                  <span>狗牌 / 设备在线率</span>
+                  <span>较昨日 +1.8% ↑</span>
                 </article>
                 <article class="metric-card">
-                  <small>NEW ANOMALIES</small>
+                  <small>今日异常事件</small>
                   <strong>28</strong>
-                  <span class="metric-foot">今日新增异常，进入地图</span>
+                  <span class="metric-foot">较昨日 -6 ↓</span>
                 </article>
                 <article class="metric-card">
-                  <small>PENDING EVENTS</small>
+                  <small>待处理任务</small>
                   <strong>17</strong>
-                  <span class="metric-foot warning">待处理事件，3 起超时</span>
+                  <span class="metric-foot warning">超时 3 起</span>
                 </article>
                 <article class="metric-card">
-                  <small>POINTS PARTICIPATION</small>
+                  <small>积分参与率</small>
                   <strong>63%</strong>
-                  <span>积分参与率，本周 +6%</span>
+                  <span>较上周 +6% ↑</span>
                 </article>
                 <article class="metric-card">
-                  <small>SERVICE REDEMPTION</small>
+                  <small>服务核销次数</small>
                   <strong>486</strong>
-                  <span>服务核销次数，联动积分管理</span>
+                  <span>本周 +42 ↑</span>
                 </article>
               </section>
 
