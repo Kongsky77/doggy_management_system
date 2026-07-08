@@ -268,14 +268,19 @@
       top: 0;
       z-index: 20;
       display: grid;
+      gap: 10px;
+      padding: 12px 24px 10px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .topbar-main {
+      display: grid;
       grid-template-columns: auto minmax(160px, 1fr) minmax(320px, 420px) auto;
       align-items: center;
       gap: 16px;
-      min-height: 72px;
-      padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line-soft);
+      min-height: 52px;
     }
 
     .topbar-menu {
@@ -392,7 +397,7 @@
 
     .main-content {
       min-width: 0;
-      padding: 24px;
+      padding: 14px 24px 24px;
       overflow: auto;
     }
 
@@ -427,12 +432,16 @@
     }
 
     .filter-strip {
-      min-height: 72px;
-      padding: 14px 18px;
+      min-height: 0;
+      padding: 0;
       display: grid;
       grid-template-columns: 1.2fr 1fr auto;
       align-items: center;
       gap: 12px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     .filter-group,
@@ -2394,7 +2403,7 @@
         margin-top: 16px;
       }
 
-      .topbar,
+      .topbar-main,
       .filter-strip,
       .hero-layout,
       .section-grid,
@@ -2524,50 +2533,52 @@
 
     <section class="workspace">
       <header class="topbar">
-        <button class="topbar-menu" type="button" aria-label="折叠菜单" aria-pressed="false">☰</button>
-        <div class="topbar-title">
-          <small>GOVERNANCE CONSOLE</small>
-          <strong id="topbarTitle">治理驾驶舱</strong>
-          <span id="topbarDesc">基于 CDHT 橙色主视觉与现代结构化工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。</span>
-        </div>
+        <div class="topbar-main">
+          <button class="topbar-menu" type="button" aria-label="折叠菜单" aria-pressed="false">☰</button>
+          <div class="topbar-title">
+            <small>GOVERNANCE CONSOLE</small>
+            <strong id="topbarTitle">治理驾驶舱</strong>
+            <span id="topbarDesc">基于 CDHT 橙色主视觉与现代结构化工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。</span>
+          </div>
 
-        <input class="search-box" type="text" placeholder="搜索犬只 ID / 主人手机号 / 城管编号 / 服务机构名称">
+          <input class="search-box" type="text" placeholder="搜索犬只 ID / 主人手机号 / 城管编号 / 服务机构名称">
 
-        <div class="topbar-actions">
-          <div class="pill">成都市 / 锦江区</div>
-          <div class="admin">
-            <div class="admin-avatar">监</div>
-            <div>
-              <strong>监管管理员</strong>
-              <small>系统演示账号</small>
+          <div class="topbar-actions">
+            <div class="pill">成都市 / 锦江区</div>
+            <div class="admin">
+              <div class="admin-avatar">监</div>
+              <div>
+                <strong>监管管理员</strong>
+                <small>系统演示账号</small>
+              </div>
             </div>
           </div>
         </div>
+
+        <section class="filter-strip">
+          <div class="filter-group">
+            <div class="filter-label">全局筛选</div>
+            <button class="filter-chip active" type="button">近 7 日</button>
+            <button class="filter-chip" type="button">锦江区</button>
+            <button class="filter-chip" type="button">全部犬只</button>
+            <button class="filter-chip" type="button">风险优先</button>
+          </div>
+          <div class="filter-group">
+            <button class="filter-chip active" type="button">治理成效</button>
+            <button class="filter-chip" type="button">任务闭环</button>
+            <button class="filter-chip" type="button">积分参与</button>
+          </div>
+          <div class="filter-actions">
+            <button class="ghost-button" type="button" id="drawerSwitchBtn">筛选说明</button>
+            <button class="brand-button" type="button">刷新态势</button>
+          </div>
+        </section>
       </header>
 
       <div class="content-shell">
         <main class="main-content">
           <div class="main-stage">
             <section class="page active" id="page-dashboard">
-              <section class="filter-strip">
-                <div class="filter-group">
-                  <div class="filter-label">全局筛选</div>
-                  <button class="filter-chip active" type="button">近 7 日</button>
-                  <button class="filter-chip" type="button">锦江区</button>
-                  <button class="filter-chip" type="button">全部犬只</button>
-                  <button class="filter-chip" type="button">风险优先</button>
-                </div>
-                <div class="filter-group">
-                  <button class="filter-chip active" type="button">治理成效</button>
-                  <button class="filter-chip" type="button">任务闭环</button>
-                  <button class="filter-chip" type="button">积分参与</button>
-                </div>
-                <div class="filter-actions">
-                  <button class="ghost-button" type="button" id="drawerSwitchBtn">筛选说明</button>
-                  <button class="brand-button" type="button">刷新态势</button>
-                </div>
-              </section>
-
               <section class="metric-grid">
                 <article class="metric-card">
                   <div class="metric-icon orange">犬</div>
