@@ -712,18 +712,18 @@
 
     .risk-list {
       display: grid;
-      gap: 10px;
+      gap: 8px;
       border-top: 0;
     }
 
     .risk-card {
-      padding: 13px 14px;
-      border-radius: 14px;
+      padding: 11px 12px;
+      border-radius: 12px;
       background: var(--panel);
       border: 1px solid var(--line-soft);
       border-left: 4px solid var(--accent);
       display: grid;
-      gap: 8px;
+      gap: 6px;
     }
 
     .risk-card.high {
@@ -738,15 +738,32 @@
       align-items: center;
     }
 
+    .risk-row strong {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .risk-status {
+      color: var(--brand-deep);
+      font-weight: 650;
+    }
+
+    .risk-status.danger {
+      color: var(--danger);
+    }
+
     .risk-tag {
       display: inline-flex;
       align-items: center;
-      padding: 6px 10px;
+      padding: 5px 9px;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 650;
       color: var(--brand-deep);
       background: var(--brand-soft);
+      white-space: nowrap;
     }
 
     .risk-tag.danger {
@@ -754,12 +771,28 @@
       background: rgba(218, 30, 40, 0.1);
     }
 
-    .risk-card p,
-    .risk-card span {
+    .risk-tag.pending {
+      color: #3366a8;
+      background: rgba(51, 102, 168, 0.1);
+    }
+
+    .risk-card p {
       margin: 0;
       color: var(--muted);
       font-size: 12px;
-      line-height: 1.7;
+      line-height: 1.55;
+    }
+
+    .risk-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      color: var(--muted-soft);
+    }
+
+    .risk-meta span {
+      color: var(--muted-soft);
+      font-size: 12px;
     }
 
     .section-grid {
@@ -2337,36 +2370,43 @@
                 <article class="hero-risk">
                   <div class="panel-head">
                     <strong>风险提醒</strong>
-                    <span>规则预警 / 轻量分析</span>
+                    <span>时间 / 犬只及狗牌号 / 区域</span>
                   </div>
                   <div class="risk-list">
                     <section class="risk-card high">
                       <div class="risk-row">
-                        <strong>无证养犬集中预警</strong>
+                        <strong><span class="risk-status danger">高风险行为：</span>禁遛区域逗留多次</strong>
                         <span class="risk-tag danger">高风险</span>
                       </div>
-                      <p>牛王庙街道连续 3 天新增无证线索，涉及 12 户，建议联动街道办集中核查。</p>
+                      <p class="risk-meta"><span>10:23:45</span><span>豆豆 / 京A123456</span><span>中心公园</span></p>
                     </section>
                     <section class="risk-card">
                       <div class="risk-row">
-                        <strong>免疫到期回访滞后</strong>
+                        <strong><span class="risk-status">处理中：</span>电子狗牌离线</strong>
                         <span class="risk-tag">处理中</span>
                       </div>
-                      <p>2 家服务机构的回访完成率低于 80%，对整体免疫达标率有下拉风险。</p>
+                      <p class="risk-meta"><span>10:18:32</span><span>旺财 / 京B654321</span><span>朝阳公园</span></p>
                     </section>
                     <section class="risk-card">
                       <div class="risk-row">
-                        <strong>积分波动异常</strong>
-                        <span class="risk-tag">待复核</span>
+                        <strong><span class="risk-status">处理中：</span>未牵绳预警</strong>
+                        <span class="risk-tag">处理中</span>
                       </div>
-                      <p>17 个账户近 24 小时出现集中加减分，需核对规则命中和人工审批记录。</p>
+                      <p class="risk-meta"><span>10:15:21</span><span>小黑 / 京C987654</span><span>青年湖公园</span></p>
                     </section>
                     <section class="risk-card">
                       <div class="risk-row">
-                        <strong>夜间投诉回升</strong>
-                        <span class="risk-tag">观察中</span>
+                        <strong><span class="risk-status">待处理：</span>积分核验异常</strong>
+                        <span class="risk-tag pending">待处理</span>
                       </div>
-                      <p>夜间 20:00-23:00 投诉量较上周增长 22%，主要集中在公园与沿街商圈。</p>
+                      <p class="risk-meta"><span>10:12:08</span><span>大黄 / 京D882016</span><span>东湖服务点</span></p>
+                    </section>
+                    <section class="risk-card">
+                      <div class="risk-row">
+                        <strong><span class="risk-status">待处理：</span>电子狗牌设备电量低</strong>
+                        <span class="risk-tag pending">待处理</span>
+                      </div>
+                      <p class="risk-meta"><span>10:10:11</span><span>乐乐 / 京D456789</span><span>春熙路商圈</span></p>
                     </section>
                   </div>
                 </article>
