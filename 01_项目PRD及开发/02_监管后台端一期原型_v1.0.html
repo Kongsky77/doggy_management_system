@@ -12,19 +12,15 @@
       <div class="brand">
         <div class="brand-mark">02</div>
         <div>
-          <small>REGULATORY HUB</small>
           <strong>监管后台端</strong>
-          <span>一期原型 / 四页工作台 / 统一后台框架</span>
         </div>
       </div>
 
-      <p class="nav-label">WORKSPACE</p>
       <nav class="nav">
         <button class="active" data-page="dashboard" type="button">
           <div class="nav-icon">⌂</div>
           <div>
             <strong>治理驾驶舱</strong>
-            <small>态势总览 / 风险提醒 / 治理成效</small>
           </div>
           <span class="nav-arrow">›</span>
         </button>
@@ -32,7 +28,6 @@
           <div class="nav-icon">⌖</div>
           <div>
             <strong>地图工作台</strong>
-            <small>空间监管 / 事件分布 / 点位联动</small>
           </div>
           <span class="nav-arrow">›</span>
         </button>
@@ -40,7 +35,6 @@
           <div class="nav-icon">▣</div>
           <div>
             <strong>对象档案</strong>
-            <small>犬只 / 城管人员 / 服务机构</small>
           </div>
           <span class="nav-arrow">›</span>
         </button>
@@ -48,16 +42,10 @@
           <div class="nav-icon">◇</div>
           <div>
             <strong>积分管理</strong>
-            <small>规则 / 账户 / 流水 / 效果</small>
           </div>
           <span class="nav-arrow">›</span>
         </button>
       </nav>
-
-      <div class="sidebar-note">
-        <strong>当前阶段</strong>
-        第 5 步正在落地积分管理。当前采用 CDHT 橙色主视觉与 Airtable 式温和结构化后台规范，四页共用同一套组件气质。
-      </div>
     </aside>
 
     <section class="workspace">
@@ -65,9 +53,12 @@
         <div class="topbar-main">
           <button class="topbar-menu" type="button" aria-label="折叠菜单" aria-pressed="false">☰</button>
           <div class="topbar-title">
-            <small>GOVERNANCE CONSOLE</small>
             <strong id="topbarTitle">治理驾驶舱</strong>
-            <span id="topbarDesc">基于 CDHT 橙色主视觉与现代结构化工作台风格，先看全局指标，再定位风险区域，最后判断治理成效。</span>
+          </div>
+
+          <div class="topbar-range-tabs" aria-label="时间范围">
+            <button class="active" type="button">近7日</button>
+            <button type="button">近30日</button>
           </div>
 
           <input class="search-box" type="text" placeholder="搜索犬只 ID / 主人手机号 / 城管编号 / 服务机构名称">
@@ -78,30 +69,10 @@
               <div class="admin-avatar">监</div>
               <div>
                 <strong>监管管理员</strong>
-                <small>系统演示账号</small>
               </div>
             </div>
           </div>
         </div>
-
-        <section class="filter-strip">
-          <div class="filter-group">
-            <div class="filter-label">全局筛选</div>
-            <button class="filter-chip active" type="button">近 7 日</button>
-            <button class="filter-chip" type="button">锦江区</button>
-            <button class="filter-chip" type="button">全部犬只</button>
-            <button class="filter-chip" type="button">风险优先</button>
-          </div>
-          <div class="filter-group">
-            <button class="filter-chip active" type="button">治理成效</button>
-            <button class="filter-chip" type="button">任务闭环</button>
-            <button class="filter-chip" type="button">积分参与</button>
-          </div>
-          <div class="filter-actions">
-            <button class="ghost-button" type="button" id="drawerSwitchBtn">筛选说明</button>
-            <button class="brand-button" type="button">刷新态势</button>
-          </div>
-        </section>
       </header>
 
       <div class="content-shell">

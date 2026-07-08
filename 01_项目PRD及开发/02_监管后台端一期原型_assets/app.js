@@ -1,14 +1,13 @@
     const navButtons = document.querySelectorAll(".nav button");
     const pages = document.querySelectorAll(".page");
     const topbarTitle = document.getElementById("topbarTitle");
-    const topbarDesc = document.getElementById("topbarDesc");
+    const topbarRangeButtons = document.querySelectorAll(".topbar-range-tabs button");
     const drawerBadge = document.getElementById("drawerBadge");
     const drawerTitle = document.getElementById("drawerTitle");
     const drawerNoteTitle = document.getElementById("drawerNoteTitle");
     const drawerNoteText = document.getElementById("drawerNoteText");
     const drawerBody = document.getElementById("drawerBody");
     const closeDrawerBtn = document.getElementById("closeDrawerBtn");
-    const drawerSwitchBtn = document.getElementById("drawerSwitchBtn");
     const drawerResetBtn = document.getElementById("drawerResetBtn");
     const drawerActionBtn = document.getElementById("drawerActionBtn");
     const drawerShell = document.getElementById("drawerShell");
@@ -560,8 +559,6 @@
     }
 
     function activatePage(key) {
-      document.body.classList.toggle("page-map-active", key === "map");
-
       navButtons.forEach((button) => {
         button.classList.toggle("active", button.dataset.page === key);
       });
@@ -571,7 +568,6 @@
       });
 
       topbarTitle.textContent = pageMeta[key].title;
-      topbarDesc.textContent = pageMeta[key].desc;
       syncDrawer(key);
       if (key === "map") {
         syncMapPoint("dog-001");
@@ -589,6 +585,12 @@
       document.body.classList.toggle("sidebar-compact");
       const compact = document.body.classList.contains("sidebar-compact");
       topbarMenu.setAttribute("aria-pressed", String(compact));
+    });
+
+    topbarRangeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        topbarRangeButtons.forEach((item) => item.classList.toggle("active", item === button));
+      });
     });
 
     mapMarkers.forEach((marker) => {
@@ -612,13 +614,6 @@
       } else {
         syncDrawer(activePage);
       }
-      openDrawer();
-    });
-
-    drawerSwitchBtn.addEventListener("click", () => {
-      syncDrawer("dashboard");
-      drawerNoteTitle.textContent = "筛选说明";
-      drawerNoteText.textContent = "时间、区域、对象范围和关注主题都先放在驾驶舱顶部，右侧抽屉只负责解释这些筛选条件意味着什么，以及当前看板的计算口径。";
       openDrawer();
     });
 
