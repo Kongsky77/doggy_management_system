@@ -6,28 +6,29 @@
   <title>监管后台端一期原型</title>
   <style>
     :root {
-      --bg: #fff7ed;
-      --bg-strong: #fff1df;
-      --panel: #fffdf8;
+      --bg: #f7f9fc;
+      --bg-strong: #eef3f9;
+      --panel: #ffffff;
       --panel-strong: #ffffff;
-      --panel-subtle: #fff8ef;
-      --line: #eadcc9;
-      --line-soft: #f0e3d2;
-      --line-strong: #d7b98e;
-      --ink: #2d251f;
-      --muted: #6f6258;
-      --muted-soft: #8a7766;
-      --brand: #f28c00;
-      --brand-deep: #b75f00;
-      --brand-soft: #fff2dc;
-      --brand-wash: #fff8ec;
-      --accent: #ffb347;
-      --success: #24a148;
-      --warning: #b28600;
-      --danger: #da1e28;
-      --shadow: 0 14px 36px rgba(118, 80, 37, 0.08);
-      --shadow-soft: 0 8px 22px rgba(118, 80, 37, 0.06);
-      --radius: 16px;
+      --panel-subtle: #f9fbfe;
+      --line: #dde5ef;
+      --line-soft: #ebf0f6;
+      --line-strong: #cad5e3;
+      --ink: #252a32;
+      --muted: #6b7280;
+      --muted-soft: #8a93a3;
+      --brand: #ff8f1f;
+      --brand-deep: #df7403;
+      --brand-soft: #fff1e1;
+      --brand-wash: #fff8ef;
+      --accent: #ffb65c;
+      --success: #34c759;
+      --warning: #ffb020;
+      --danger: #ff5a4f;
+      --info: #3b82f6;
+      --shadow: 0 18px 44px rgba(36, 61, 89, 0.08);
+      --shadow-soft: 0 8px 24px rgba(36, 61, 89, 0.06);
+      --radius: 20px;
     }
 
     * {
@@ -40,8 +41,9 @@
       font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(242, 140, 0, 0.16), transparent 28%),
-        linear-gradient(180deg, #fffaf3 0%, var(--bg) 44%, #f8efe4 100%);
+        radial-gradient(circle at top left, rgba(255, 143, 31, 0.14), transparent 22%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 24%),
+        linear-gradient(180deg, #fbfcff 0%, var(--bg) 42%, #f4f7fb 100%);
     }
 
     body {
@@ -53,11 +55,11 @@
     }
 
     .app-shell {
-      min-height: calc(100vh - 32px);
-      margin: 12px;
+      min-height: 100vh;
+      margin: 0;
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 12px;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
       transition: grid-template-columns 0.22s ease;
     }
 
@@ -68,13 +70,13 @@
 
     .sidebar {
       position: relative;
-      padding: 16px 10px;
+      padding: 18px 14px;
       background: rgba(255, 255, 255, 0.96);
       color: var(--ink);
-      border: 1px solid var(--line-soft);
-      box-shadow: var(--shadow);
+      border-right: 1px solid var(--line-soft);
+      box-shadow: none;
       overflow: hidden;
-      border-radius: 22px;
+      border-radius: 0;
     }
 
     .sidebar::before,
@@ -86,9 +88,10 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-      padding: 0 6px;
+      gap: 12px;
+      margin-bottom: 22px;
+      padding: 0 8px 12px;
+      border-bottom: 1px solid var(--line-soft);
     }
 
     body.drawer-open .brand,
@@ -110,15 +113,15 @@
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 11px;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
       display: grid;
       place-items: center;
       font: 700 16px/1 Consolas, monospace;
       color: #fff;
-      background: linear-gradient(135deg, #ff9d00, var(--brand));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.32);
+      background: linear-gradient(135deg, #ffae45, var(--brand));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.32), 0 8px 16px rgba(255, 143, 31, 0.2);
     }
 
     .brand small {
@@ -126,21 +129,24 @@
       font: 700 10px/1.1 Consolas, monospace;
       letter-spacing: 1.2px;
       color: var(--brand);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .brand strong {
       display: block;
-      font-size: 16px;
+      font-size: 17px;
       letter-spacing: 0;
     }
 
     .brand span {
-      display: none;
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .nav-label {
-      margin: 0 8px 8px;
+      margin: 0 10px 10px;
       font: 700 10px/1 Consolas, monospace;
       letter-spacing: 1.2px;
       color: var(--muted-soft);
@@ -148,7 +154,7 @@
 
     .nav {
       display: grid;
-      gap: 3px;
+      gap: 6px;
     }
 
     .nav button {
@@ -156,12 +162,12 @@
       border: 0;
       background: transparent;
       color: var(--ink);
-      border-radius: 12px;
-      padding: 9px 10px 9px 0;
+      border-radius: 14px;
+      padding: 10px 12px 10px 0;
       display: grid;
       grid-template-columns: 3px 28px 1fr;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       text-align: left;
       cursor: pointer;
       transition: background 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
@@ -177,8 +183,8 @@
 
     .nav button:hover,
     .nav button.active {
-      background: var(--brand-soft);
-      box-shadow: none;
+      background: linear-gradient(180deg, #fff8f0 0%, #fff3e4 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 143, 31, 0.12);
       transform: translateX(1px);
     }
 
@@ -200,8 +206,8 @@
       border-radius: 9px;
       display: grid;
       place-items: center;
-      background: transparent;
-      border: 1px solid transparent;
+      background: #fff7ee;
+      border: 1px solid rgba(255, 143, 31, 0.12);
       color: var(--brand-deep);
       font: 700 13px/1 "Microsoft YaHei UI", sans-serif;
     }
@@ -220,7 +226,10 @@
     }
 
     .nav button small {
-      display: none;
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
     }
 
     .nav-arrow {
@@ -232,10 +241,10 @@
       left: 22px;
       right: 22px;
       bottom: 24px;
-      padding: 14px;
-      border-radius: 16px;
-      background: #fff8ec;
-      border: 1px solid #f5d8ad;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fffaf2 0%, #fff5e7 100%);
+      border: 1px solid #f8dfb5;
       color: var(--muted);
       line-height: 1.7;
       font-size: 12px;
@@ -259,21 +268,21 @@
       top: 0;
       z-index: 20;
       display: grid;
-      grid-template-columns: auto minmax(130px, 1fr) minmax(260px, 420px) auto;
+      grid-template-columns: auto minmax(160px, 1fr) minmax(320px, 420px) auto;
       align-items: center;
-      gap: 12px;
-      min-height: 52px;
-      padding: 7px 18px;
-      background: rgba(255, 253, 248, 0.92);
+      gap: 16px;
+      min-height: 72px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.84);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line-soft);
     }
 
     .topbar-menu {
-      width: 34px;
-      height: 34px;
+      width: 40px;
+      height: 40px;
       border: 1px solid var(--line-soft);
-      border-radius: 10px;
+      border-radius: 12px;
       background: #ffffff;
       color: var(--muted);
       cursor: pointer;
@@ -282,25 +291,32 @@
     }
 
     .topbar-title small {
-      display: none;
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted-soft);
+      font: 700 10px/1 Consolas, monospace;
+      letter-spacing: 1.2px;
     }
 
     .topbar-title strong {
       display: block;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: 0;
     }
 
     .topbar-title span {
-      display: none;
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .search-box {
       width: 100%;
-      height: 36px;
-      padding: 8px 12px;
-      border-radius: 11px;
+      height: 40px;
+      padding: 9px 14px;
+      border-radius: 13px;
       border: 1px solid var(--line);
       background: var(--panel-subtle);
       color: var(--ink);
@@ -317,15 +333,15 @@
     .topbar-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .pill {
       border: 1px solid var(--line);
       background: #ffffff;
       color: var(--ink);
-      padding: 8px 10px;
-      border-radius: 11px;
+      padding: 9px 12px;
+      border-radius: 13px;
       min-width: 106px;
       text-align: center;
       font-size: 12px;
@@ -336,17 +352,17 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 8px;
-      border-radius: 11px;
+      padding: 7px 10px;
+      border-radius: 13px;
       background: #ffffff;
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
 
     .admin-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
       background: var(--brand);
@@ -376,21 +392,21 @@
 
     .main-content {
       min-width: 0;
-      padding: 20px 24px;
+      padding: 24px;
       overflow: auto;
     }
 
     .main-stage {
       width: 100%;
-      max-width: 1580px;
+      max-width: 1640px;
       margin: 0 auto;
       display: grid;
-      gap: 12px;
+      gap: 16px;
     }
 
     .page {
       display: none;
-      gap: 12px;
+      gap: 16px;
     }
 
     .page.active {
@@ -411,25 +427,24 @@
     }
 
     .filter-strip {
-      min-height: 64px;
-      padding: 10px 14px;
+      min-height: 72px;
+      padding: 14px 18px;
       display: grid;
-      grid-template-columns: 1.3fr 1fr auto;
+      grid-template-columns: 1.2fr 1fr auto;
       align-items: center;
-      gap: 10px;
-      border-left: 0;
+      gap: 12px;
     }
 
     .filter-group,
     .filter-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       min-width: 0;
     }
 
     .filter-label {
-      padding: 7px 9px;
+      padding: 8px 10px;
       border-radius: 999px;
       background: var(--brand-wash);
       color: var(--muted);
@@ -442,7 +457,7 @@
     .ghost-button,
     .brand-button {
       border-radius: 999px;
-      padding: 9px 12px;
+      padding: 10px 14px;
       border: 1px solid var(--line-soft);
       background: #ffffff;
       color: var(--ink);
@@ -454,9 +469,9 @@
     }
 
     .filter-chip {
-      padding: 7px 10px;
+      padding: 8px 12px;
       color: var(--muted);
-      background: #fffaf3;
+      background: #f9fbff;
       border-color: var(--line-soft);
     }
 
@@ -487,46 +502,61 @@
     .metric-grid {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 12px;
+      gap: 16px;
     }
 
     .metric-card {
-      height: 86px;
-      padding: 12px 14px 10px;
+      min-height: 112px;
+      padding: 16px 16px 14px;
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
       position: relative;
       overflow: hidden;
       border-radius: var(--radius);
     }
 
-    .metric-card:last-child {
-      border-right: 1px solid var(--line-soft);
-    }
-
     .metric-card::before {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 3px;
+      inset: 0 auto 0 0;
+      width: 4px;
+      height: 100%;
       background: var(--accent);
     }
 
-    .metric-card:nth-child(1)::before,
-    .metric-card:nth-child(2)::before {
-      background: var(--danger);
+    .metric-card:nth-child(1)::before { background: var(--brand); }
+    .metric-card:nth-child(2)::before { background: var(--warning); }
+    .metric-card:nth-child(3)::before { background: var(--danger); }
+    .metric-card:nth-child(4)::before { background: var(--info); }
+    .metric-card:nth-child(5)::before { background: var(--success); }
+    .metric-card:nth-child(6)::before { background: #8b5cf6; }
+
+    .metric-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      align-self: start;
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
     }
 
-    .metric-card:nth-child(3)::before,
-    .metric-card:nth-child(4)::before {
-      background: var(--brand);
-    }
+    .metric-icon.orange { background: linear-gradient(135deg, #ffbb66, var(--brand)); }
+    .metric-icon.yellow { background: linear-gradient(135deg, #ffd56f, var(--warning)); }
+    .metric-icon.red { background: linear-gradient(135deg, #ff998f, var(--danger)); }
+    .metric-icon.blue { background: linear-gradient(135deg, #68a8ff, var(--info)); }
+    .metric-icon.green { background: linear-gradient(135deg, #69db8b, var(--success)); }
+    .metric-icon.purple { background: linear-gradient(135deg, #b38dff, #8b5cf6); }
 
-    .metric-card:nth-child(5)::before,
-    .metric-card:nth-child(6)::before {
-      background: var(--success);
+    .metric-copy {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+      align-content: start;
     }
 
     .metric-card small {
@@ -538,10 +568,11 @@
 
     .metric-card strong {
       align-self: center;
-      font-size: 27px;
+      font-size: 22px;
       color: var(--ink);
       letter-spacing: -0.4px;
       font-weight: 700;
+      line-height: 1;
     }
 
     .metric-card span {
@@ -563,15 +594,15 @@
 
     .hero-layout {
       display: grid;
-      grid-template-columns: 65fr 35fr;
-      gap: 12px;
-      min-height: 360px;
+      grid-template-columns: minmax(0, 1036px) minmax(0, 588px);
+      gap: 16px;
+      min-height: 404px;
     }
 
     .hero-map,
     .hero-risk {
-      min-height: 360px;
-      padding: 14px 16px;
+      min-height: 404px;
+      padding: 18px 20px;
       border-radius: var(--radius);
     }
 
@@ -580,12 +611,12 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      margin-bottom: 12px;
-      min-height: 30px;
+      margin-bottom: 16px;
+      min-height: 34px;
     }
 
     .panel-head strong {
-      font-size: 15px;
+      font-size: 16px;
     }
 
     .panel-head span {
@@ -594,14 +625,15 @@
     }
 
     .map-stage {
-      height: calc(100% - 42px);
+      height: calc(100% - 52px);
       border-radius: 18px;
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(255, 246, 232, 0.9), rgba(255, 253, 248, 0.96)),
-        repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(242, 140, 0, 0.06) 39px, rgba(242, 140, 0, 0.06) 40px),
-        repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(242, 140, 0, 0.06) 39px, rgba(242, 140, 0, 0.06) 40px);
+        radial-gradient(circle at 30% 20%, rgba(255, 143, 31, 0.14), transparent 16%),
+        linear-gradient(180deg, rgba(250, 252, 255, 0.98), rgba(246, 249, 253, 0.96)),
+        repeating-linear-gradient(0deg, transparent 0, transparent 47px, rgba(167, 185, 210, 0.12) 47px, rgba(167, 185, 210, 0.12) 48px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 47px, rgba(167, 185, 210, 0.12) 47px, rgba(167, 185, 210, 0.12) 48px);
       border: 1px solid var(--line-soft);
     }
 
@@ -609,7 +641,7 @@
       content: "";
       position: absolute;
       inset: 16px;
-      border: 1px solid rgba(242, 140, 0, 0.14);
+      border: 1px solid rgba(196, 209, 226, 0.42);
       pointer-events: none;
     }
 
@@ -626,8 +658,8 @@
       width: 68%;
       height: 58%;
       border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
-      border: 2px solid rgba(242, 140, 0, 0.22);
-      background: rgba(242, 140, 0, 0.04);
+      border: 2px solid rgba(113, 171, 255, 0.28);
+      background: rgba(113, 171, 255, 0.06);
     }
 
     .map-ring {
@@ -636,17 +668,17 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      border: 1px dashed rgba(242, 140, 0, 0.22);
+      border: 1px dashed rgba(255, 143, 31, 0.24);
       box-shadow:
-        0 0 0 18px rgba(242, 140, 0, 0.04),
-        0 0 0 40px rgba(242, 140, 0, 0.02);
+        0 0 0 18px rgba(255, 143, 31, 0.05),
+        0 0 0 40px rgba(255, 143, 31, 0.03);
     }
 
     .map-route {
       inset: 24% auto auto 16%;
       width: 56%;
       height: 40%;
-      border-top: 2px dashed rgba(242, 140, 0, 0.22);
+      border-top: 2px dashed rgba(159, 177, 203, 0.52);
       transform: rotate(-7deg);
     }
 
@@ -654,10 +686,10 @@
       position: absolute;
       display: grid;
       gap: 3px;
-      min-width: 124px;
-      padding: 7px 9px 7px 24px;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(242, 140, 0, 0.14);
+      min-width: 126px;
+      padding: 9px 10px 9px 24px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(217, 226, 239, 0.9);
       border-radius: 14px;
       box-shadow: var(--shadow-soft);
     }
@@ -671,7 +703,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--brand);
-      box-shadow: 0 0 0 4px rgba(242, 140, 0, 0.14);
+      box-shadow: 0 0 0 4px rgba(255, 143, 31, 0.14);
     }
 
     .map-point.risk::before {
@@ -701,25 +733,53 @@
       flex: 1;
       padding: 11px 12px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.94);
       border: 1px solid var(--line-soft);
       font-size: 12px;
       color: var(--brand-deep);
     }
 
-    .map-summary b:last-child {
-      border-right: 1px solid var(--line-soft);
+    .map-legend {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      display: grid;
+      gap: 10px;
+      width: 170px;
+      z-index: 1;
+    }
+
+    .legend-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .legend-line b {
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .legend-dot-mini {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
     }
 
     .risk-list {
       display: grid;
-      gap: 8px;
+      gap: 10px;
       border-top: 0;
     }
 
     .risk-card {
-      padding: 11px 12px;
-      border-radius: 12px;
+      padding: 13px 14px;
+      border-radius: 14px;
       background: var(--panel);
       border: 1px solid var(--line-soft);
       border-left: 4px solid var(--accent);
@@ -796,19 +856,221 @@
       font-size: 12px;
     }
 
-    .section-grid {
+    .trend-grid,
+    .summary-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .section-panel,
+    .trend-card,
+    .summary-card {
+      min-height: 204px;
+      padding: 18px 20px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      border-radius: var(--radius);
+    }
+
+    .trend-card,
+    .summary-card {
+      border: 1px solid var(--line-soft);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .trend-top,
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       gap: 12px;
     }
 
-    .section-panel {
-      min-height: 280px;
-      padding: 14px 16px;
+    .trend-title {
       display: grid;
-      grid-template-rows: auto 1fr;
+      gap: 6px;
+    }
+
+    .trend-title strong,
+    .summary-top strong {
+      font-size: 16px;
+    }
+
+    .trend-metric {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .trend-metric b {
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .trend-metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .trend-tabs {
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: #f7f9fc;
+      border: 1px solid var(--line-soft);
+    }
+
+    .trend-tab {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .trend-tab.active {
+      color: var(--brand-deep);
+      background: var(--brand-soft);
+    }
+
+    .sparkline {
+      position: relative;
+      height: 98px;
+      border-radius: 16px;
+      border: 1px solid var(--line-soft);
+      background:
+        linear-gradient(180deg, rgba(255, 143, 31, 0.08), rgba(255, 143, 31, 0) 65%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 23px, rgba(223, 229, 238, 0.8) 23px, rgba(223, 229, 238, 0.8) 24px);
+      overflow: hidden;
+    }
+
+    .sparkline svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .sparkline-axis {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .donut-layout {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .donut {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 24px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--line-soft);
+    }
+
+    .donut.dogs {
+      background: conic-gradient(var(--success) 0 69.5%, #f7b955 69.5% 86.7%, #7ca5c2 86.7% 96.6%, #d8e1ec 96.6% 100%);
+    }
+
+    .donut.devices {
+      background: conic-gradient(#57cc8a 0 92.6%, #ffb556 92.6% 99.2%, #ff835c 99.2% 100%);
+    }
+
+    .status-legend {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-line b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .risk-levels {
+      display: grid;
       gap: 12px;
-      border-radius: var(--radius);
+      align-content: start;
+    }
+
+    .risk-level {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line-soft);
+      font-size: 12px;
+    }
+
+    .risk-level.high { background: rgba(255, 90, 79, 0.06); }
+    .risk-level.mid { background: rgba(255, 176, 32, 0.08); }
+    .risk-level.low { background: rgba(52, 199, 89, 0.08); }
+
+    .risk-level b {
+      font-size: 20px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      align-content: start;
+    }
+
+    .quick-action {
+      display: grid;
+      justify-items: center;
+      gap: 10px;
+      padding: 14px 10px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fffaf4 0%, #fff4e7 100%);
+      border: 1px solid #f7e1be;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .quick-action i {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-style: normal;
+      font-size: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #ffb35c, var(--brand));
+      box-shadow: 0 10px 20px rgba(255, 143, 31, 0.18);
     }
 
     .chart {
@@ -2064,6 +2326,8 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
+      .trend-grid,
+      .summary-grid,
       .map-workbench {
         grid-template-columns: 1fr;
       }
@@ -2134,8 +2398,12 @@
       .filter-strip,
       .hero-layout,
       .section-grid,
+      .trend-grid,
+      .summary-grid,
       .effect-grid,
-      .metric-grid {
+      .metric-grid,
+      .quick-actions,
+      .donut-layout {
         grid-template-columns: 1fr;
       }
 
@@ -2280,7 +2548,7 @@
       <div class="content-shell">
         <main class="main-content">
           <div class="main-stage">
-            <section class="page active" id="page-dashboard">
+            <section class="page" id="page-dashboard-legacy" hidden>
               <section class="filter-strip">
                 <div class="filter-group">
                   <div class="filter-label">全局筛选</div>
@@ -2542,6 +2810,294 @@
                       </div>
                       <div class="rank-score">本周</div>
                     </div>
+                  </div>
+                </article>
+              </section>
+            </section>
+
+            <section class="page active" id="page-dashboard">
+              <section class="filter-strip">
+                <div class="filter-group">
+                  <div class="filter-label">全局筛选</div>
+                  <button class="filter-chip active" type="button">近 7 日</button>
+                  <button class="filter-chip" type="button">锦江区</button>
+                  <button class="filter-chip" type="button">全部犬只</button>
+                  <button class="filter-chip" type="button">风险优先</button>
+                </div>
+                <div class="filter-group">
+                  <button class="filter-chip active" type="button">治理成效</button>
+                  <button class="filter-chip" type="button">任务闭环</button>
+                  <button class="filter-chip" type="button">积分参与</button>
+                </div>
+                <div class="filter-actions">
+                  <button class="ghost-button" type="button" id="drawerSwitchBtn">筛选说明</button>
+                  <button class="brand-button" type="button">刷新态势</button>
+                </div>
+              </section>
+
+              <section class="metric-grid">
+                <article class="metric-card">
+                  <div class="metric-icon orange">犬</div>
+                  <div class="metric-copy">
+                    <small>在册犬只总数</small>
+                    <strong>12,846</strong>
+                    <span>较昨日 +128</span>
+                  </div>
+                </article>
+                <article class="metric-card">
+                  <div class="metric-icon yellow">牌</div>
+                  <div class="metric-copy">
+                    <small>电子狗牌在线率</small>
+                    <strong>94.2%</strong>
+                    <span>较昨日 +1.8%</span>
+                  </div>
+                </article>
+                <article class="metric-card">
+                  <div class="metric-icon red">异</div>
+                  <div class="metric-copy">
+                    <small>今日异常事件</small>
+                    <strong>28 件</strong>
+                    <span class="metric-foot">较昨日 -6</span>
+                  </div>
+                </article>
+                <article class="metric-card">
+                  <div class="metric-icon blue">任</div>
+                  <div class="metric-copy">
+                    <small>待处理任务</small>
+                    <strong>17 件</strong>
+                    <span class="metric-foot warning">超时 3 起</span>
+                  </div>
+                </article>
+                <article class="metric-card">
+                  <div class="metric-icon green">分</div>
+                  <div class="metric-copy">
+                    <small>积分参与率</small>
+                    <strong>63%</strong>
+                    <span>较上周 +6%</span>
+                  </div>
+                </article>
+                <article class="metric-card">
+                  <div class="metric-icon purple">扫</div>
+                  <div class="metric-copy">
+                    <small>今日扫码核验</small>
+                    <strong>486 次</strong>
+                    <span>本周 +42</span>
+                  </div>
+                </article>
+              </section>
+
+              <section class="hero-layout">
+                <article class="hero-map">
+                  <div class="panel-head">
+                    <strong>区域犬只分布</strong>
+                    <span>全部区域 / 近 7 日热力</span>
+                  </div>
+                  <div class="map-stage">
+                    <div class="map-legend">
+                      <div class="legend-line"><span><i class="legend-dot-mini" style="background:#ff8f1f;"></i>中心城区</span><b>3,245</b></div>
+                      <div class="legend-line"><span><i class="legend-dot-mini" style="background:#f7b955;"></i>城北片区</span><b>2,136</b></div>
+                      <div class="legend-line"><span><i class="legend-dot-mini" style="background:#57cc8a;"></i>城南片区</span><b>1,987</b></div>
+                      <div class="legend-line"><span><i class="legend-dot-mini" style="background:#68a8ff;"></i>城东片区</span><b>1,542</b></div>
+                      <div class="legend-line"><span><i class="legend-dot-mini" style="background:#ff9f71;"></i>城西片区</span><b>1,546</b></div>
+                    </div>
+                    <div class="map-river"></div>
+                    <div class="map-ring"></div>
+                    <div class="map-route"></div>
+
+                    <div class="map-point" style="left: 34%; top: 14%;">
+                      <strong>2136</strong>
+                      <span>城北片区</span>
+                    </div>
+                    <div class="map-point" style="left: 66%; top: 30%;">
+                      <strong>1542</strong>
+                      <span>城东片区</span>
+                    </div>
+                    <div class="map-point" style="left: 18%; top: 56%;">
+                      <strong>1546</strong>
+                      <span>城西片区</span>
+                    </div>
+                    <div class="map-point risk" style="left: 48%; top: 60%;">
+                      <strong>1987</strong>
+                      <span>城南片区</span>
+                    </div>
+                    <div class="map-point risk" style="left: 43%; top: 34%; min-width: 152px; padding-top: 12px; padding-bottom: 12px;">
+                      <strong style="font-size: 28px;">3245</strong>
+                      <span>中心城区</span>
+                    </div>
+
+                    <div class="map-summary">
+                      <b>热力区域 4 个</b>
+                      <b>高风险告警 9 条</b>
+                      <b>重点巡查路线 3 条</b>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="hero-risk">
+                  <div class="panel-head">
+                    <strong>实时事件</strong>
+                    <span>查看更多</span>
+                  </div>
+                  <div class="risk-list">
+                    <section class="risk-card high">
+                      <div class="risk-row">
+                        <strong><span class="risk-status danger">高风险区域逗留</span></strong>
+                        <span class="risk-tag danger">待处理</span>
+                      </div>
+                      <p class="risk-meta"><span>10:23:45</span><span>豆豆 / 京A123456</span><span>中心公园</span></p>
+                    </section>
+                    <section class="risk-card">
+                      <div class="risk-row">
+                        <strong><span class="risk-status">电子狗牌离线</span></strong>
+                        <span class="risk-tag">处理中</span>
+                      </div>
+                      <p class="risk-meta"><span>10:18:32</span><span>旺财 / 京B654321</span><span>朝阳公园</span></p>
+                    </section>
+                    <section class="risk-card">
+                      <div class="risk-row">
+                        <strong><span class="risk-status">未牵绳预警</span></strong>
+                        <span class="risk-tag">处理中</span>
+                      </div>
+                      <p class="risk-meta"><span>10:15:21</span><span>小黑 / 京C987654</span><span>青年湖公园</span></p>
+                    </section>
+                    <section class="risk-card">
+                      <div class="risk-row">
+                        <strong><span class="risk-status">设备电量低</span></strong>
+                        <span class="risk-tag pending">待处理</span>
+                      </div>
+                      <p class="risk-meta"><span>10:10:11</span><span>乐乐 / 京D456789</span><span>春熙路商圈</span></p>
+                    </section>
+                    <section class="risk-card">
+                      <div class="risk-row">
+                        <strong><span class="risk-status">投诉事件</span></strong>
+                        <span class="risk-tag pending">待处理</span>
+                      </div>
+                      <p class="risk-meta"><span>10:05:33</span><span>大黄 / 京E321654</span><span>蓝宝广场</span></p>
+                    </section>
+                  </div>
+                </article>
+              </section>
+
+              <section class="trend-grid">
+                <article class="trend-card">
+                  <div class="trend-top">
+                    <div class="trend-title">
+                      <strong>异常事件趋势</strong>
+                      <div class="trend-metric"><b>128 件</b><span>较上周 -15%</span></div>
+                    </div>
+                    <div class="trend-tabs"><span class="trend-tab active">近7日</span><span class="trend-tab">近30日</span></div>
+                  </div>
+                  <div class="sparkline">
+                    <svg viewBox="0 0 300 98" preserveAspectRatio="none">
+                      <polyline fill="rgba(255,143,31,0.10)" stroke="none" points="0,78 40,78 80,56 120,60 160,34 200,48 240,50 280,68 300,70 300,98 0,98"></polyline>
+                      <polyline fill="none" stroke="#ff8f1f" stroke-width="3" points="0,78 40,78 80,56 120,60 160,34 200,48 240,50 280,68 300,70"></polyline>
+                    </svg>
+                  </div>
+                  <div class="sparkline-axis"><span>05-06</span><span>05-07</span><span>05-08</span><span>05-09</span><span>05-10</span><span>05-11</span><span>05-12</span></div>
+                </article>
+
+                <article class="trend-card">
+                  <div class="trend-top">
+                    <div class="trend-title">
+                      <strong>设备在线率趋势</strong>
+                      <div class="trend-metric"><b>92.6%</b><span>较上周 +3.2%</span></div>
+                    </div>
+                    <div class="trend-tabs"><span class="trend-tab active">近7日</span><span class="trend-tab">近30日</span></div>
+                  </div>
+                  <div class="sparkline">
+                    <svg viewBox="0 0 300 98" preserveAspectRatio="none">
+                      <polyline fill="rgba(255,143,31,0.10)" stroke="none" points="0,42 40,40 80,34 120,42 160,30 200,38 240,42 280,32 300,30 300,98 0,98"></polyline>
+                      <polyline fill="none" stroke="#ff8f1f" stroke-width="3" points="0,42 40,40 80,34 120,42 160,30 200,38 240,42 280,32 300,30"></polyline>
+                    </svg>
+                  </div>
+                  <div class="sparkline-axis"><span>05-06</span><span>05-07</span><span>05-08</span><span>05-09</span><span>05-10</span><span>05-11</span><span>05-12</span></div>
+                </article>
+
+                <article class="trend-card">
+                  <div class="trend-top">
+                    <div class="trend-title">
+                      <strong>任务处理趋势</strong>
+                      <div class="trend-metric"><b>256 件</b><span>较上周 +12%</span></div>
+                    </div>
+                    <div class="trend-tabs"><span class="trend-tab active">近7日</span><span class="trend-tab">近30日</span></div>
+                  </div>
+                  <div class="sparkline">
+                    <svg viewBox="0 0 300 98" preserveAspectRatio="none">
+                      <polyline fill="rgba(255,143,31,0.10)" stroke="none" points="0,54 40,68 80,50 120,46 160,38 200,30 240,62 280,44 300,34 300,98 0,98"></polyline>
+                      <polyline fill="none" stroke="#ff8f1f" stroke-width="3" points="0,54 40,68 80,50 120,46 160,38 200,30 240,62 280,44 300,34"></polyline>
+                    </svg>
+                  </div>
+                  <div class="sparkline-axis"><span>05-06</span><span>05-07</span><span>05-08</span><span>05-09</span><span>05-10</span><span>05-11</span><span>05-12</span></div>
+                </article>
+
+                <article class="trend-card">
+                  <div class="trend-top">
+                    <div class="trend-title">
+                      <strong>积分活跃趋势</strong>
+                      <div class="trend-metric"><b>68.3%</b><span>较上周 +5.6%</span></div>
+                    </div>
+                    <div class="trend-tabs"><span class="trend-tab active">近7日</span><span class="trend-tab">近30日</span></div>
+                  </div>
+                  <div class="sparkline">
+                    <svg viewBox="0 0 300 98" preserveAspectRatio="none">
+                      <polyline fill="rgba(255,143,31,0.10)" stroke="none" points="0,70 40,60 80,54 120,58 160,46 200,60 240,70 280,48 300,52 300,98 0,98"></polyline>
+                      <polyline fill="none" stroke="#ff8f1f" stroke-width="3" points="0,70 40,60 80,54 120,58 160,46 200,60 240,70 280,48 300,52"></polyline>
+                    </svg>
+                  </div>
+                  <div class="sparkline-axis"><span>05-06</span><span>05-07</span><span>05-08</span><span>05-09</span><span>05-10</span><span>05-11</span><span>05-12</span></div>
+                </article>
+              </section>
+
+              <section class="summary-grid">
+                <article class="summary-card">
+                  <div class="summary-top">
+                    <strong>犬只状态统计</strong>
+                  </div>
+                  <div class="donut-layout">
+                    <div class="donut dogs"></div>
+                    <div class="status-legend">
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#34c759;"></i>正常</span><b>8,642</b></div>
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#f7b955;"></i>高频</span><b>2,145</b></div>
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#7ca5c2;"></i>异常</span><b>1,235</b></div>
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#d8e1ec;"></i>未激活</span><b>434</b></div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="summary-card">
+                  <div class="summary-top">
+                    <strong>设备状态统计</strong>
+                  </div>
+                  <div class="donut-layout">
+                    <div class="donut devices"></div>
+                    <div class="status-legend">
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#57cc8a;"></i>在线</span><b>11,425</b></div>
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#ffb556;"></i>离线</span><b>812</b></div>
+                      <div class="status-line"><span><i class="legend-dot-mini" style="background:#ff835c;"></i>故障</span><b>156</b></div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="summary-card">
+                  <div class="summary-top">
+                    <strong>区域风险等级</strong>
+                  </div>
+                  <div class="risk-levels">
+                    <div class="risk-level high"><span>高风险区域</span><b>3</b><span>较昨日 -3</span></div>
+                    <div class="risk-level mid"><span>中风险区域</span><b>8</b><span>持平</span></div>
+                    <div class="risk-level low"><span>低风险区域</span><b>15</b><span>较昨日 +2</span></div>
+                  </div>
+                </article>
+
+                <article class="summary-card">
+                  <div class="summary-top">
+                    <strong>快捷操作</strong>
+                  </div>
+                  <div class="quick-actions">
+                    <div class="quick-action"><i>+</i><span>新增犬只</span></div>
+                    <div class="quick-action"><i>绑</i><span>设备绑定</span></div>
+                    <div class="quick-action"><i>报</i><span>事件上报</span></div>
+                    <div class="quick-action"><i>派</i><span>任务分派</span></div>
                   </div>
                 </article>
               </section>
@@ -3025,7 +3581,7 @@
     const drawerNoteText = document.getElementById("drawerNoteText");
     const drawerBody = document.getElementById("drawerBody");
     const closeDrawerBtn = document.getElementById("closeDrawerBtn");
-    const drawerSwitchBtn = document.getElementById("drawerSwitchBtn");
+    const drawerSwitchBtn = document.querySelector("#page-dashboard #drawerSwitchBtn") || document.getElementById("drawerSwitchBtn");
     const drawerResetBtn = document.getElementById("drawerResetBtn");
     const drawerActionBtn = document.getElementById("drawerActionBtn");
     const drawerShell = document.getElementById("drawerShell");
