@@ -602,186 +602,170 @@
               </section>
 
               <section class="points-workbench">
-                <div class="points-column">
-                  <article class="points-panel">
-                    <div class="points-panel-head">
+                <article class="points-panel">
+                  <div class="points-panel-head">
+                    <strong>积分规则</strong>
+                    <span class="status-tag good">3 条启用</span>
+                  </div>
+                  <div class="rule-list">
+                    <div class="rule-item">
                       <div>
-                        <strong>积分规则</strong>
-                        <span>一期仅展示规则名称、触发行为、分值、状态与适用范围。</span>
+                        <strong>文明养犬核验通过</strong>
+                        <p>城管扫码核验通过后发放；适用范围：全区犬主主手机号。</p>
                       </div>
-                      <span class="status-tag good">3 条启用</span>
+                      <div class="rule-points">+20</div>
                     </div>
-                    <div class="rule-list">
-                      <div class="rule-item">
-                        <div>
-                          <strong>文明养犬核验通过</strong>
-                          <p>城管扫码核验通过后发放；适用范围：全区犬主主手机号。</p>
-                        </div>
-                        <div class="rule-points">+20</div>
+                    <div class="rule-item">
+                      <div>
+                        <strong>免疫按期完成</strong>
+                        <p>免疫记录在有效期内完成同步；适用范围：犬只关联账户。</p>
                       </div>
-                      <div class="rule-item">
-                        <div>
-                          <strong>免疫按期完成</strong>
-                          <p>免疫记录在有效期内完成同步；适用范围：犬只关联账户。</p>
-                        </div>
-                        <div class="rule-points">+80</div>
-                      </div>
-                      <div class="rule-item">
-                        <div>
-                          <strong>投诉核实成立</strong>
-                          <p>扰民、未牵引等投诉复核成立后扣减；适用范围：重点区域。</p>
-                        </div>
-                        <div class="rule-points minus">-40</div>
-                      </div>
+                      <div class="rule-points">+80</div>
                     </div>
-                  </article>
+                    <div class="rule-item">
+                      <div>
+                        <strong>投诉核实成立</strong>
+                        <p>扰民、未牵引等投诉复核成立后扣减；适用范围：重点区域。</p>
+                      </div>
+                      <div class="rule-points minus">-40</div>
+                    </div>
+                  </div>
+                </article>
 
-                  <article class="points-panel">
-                    <div class="points-panel-head">
-                      <div>
-                        <strong>账户概览</strong>
-                        <span>以主手机号为积分归属对象，展示关联犬只与账户状态。</span>
-                      </div>
-                      <span class="status-tag warn">17 异常</span>
-                    </div>
-                    <table class="points-table">
-                      <thead>
-                        <tr>
-                          <th>主手机号</th>
-                          <th>犬只</th>
-                          <th>余额</th>
-                          <th>最近活跃</th>
-                          <th>状态</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>138****2048</td>
-                          <td>1</td>
-                          <td>2,860</td>
-                          <td>今日 10:24</td>
-                          <td><span class="status-tag good">正常</span></td>
-                        </tr>
-                        <tr>
-                          <td>186****3186</td>
-                          <td>1</td>
-                          <td>1,420</td>
-                          <td>今日 09:42</td>
-                          <td><span class="status-tag warn">待关注</span></td>
-                        </tr>
-                        <tr>
-                          <td>177****2761</td>
-                          <td>2</td>
-                          <td>960</td>
-                          <td>昨晚 21:18</td>
-                          <td><span class="status-tag risk">异常</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </article>
-                </div>
+                <article class="points-panel">
+                  <div class="points-panel-head">
+                    <strong>积分流水</strong>
+                    <span class="status-tag good">近 24 小时</span>
+                  </div>
+                  <table class="points-table">
+                    <thead>
+                      <tr>
+                        <th>时间</th>
+                        <th>主手机号</th>
+                        <th>关联行为</th>
+                        <th>变化</th>
+                        <th>来源</th>
+                        <th>备注</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>10:24</td>
+                        <td>138****2048</td>
+                        <td>扫码核验通过</td>
+                        <td><span class="points-delta">+20</span></td>
+                        <td>城管核验</td>
+                        <td>春熙路责任区</td>
+                      </tr>
+                      <tr>
+                        <td>10:12</td>
+                        <td>138****2048</td>
+                        <td>宠物服务核销</td>
+                        <td><span class="points-delta minus">-120</span></td>
+                        <td>服务商</td>
+                        <td>东湖服务点</td>
+                      </tr>
+                      <tr>
+                        <td>09:42</td>
+                        <td>186****3186</td>
+                        <td>免疫到期提醒</td>
+                        <td><span class="points-delta">+0</span></td>
+                        <td>系统提醒</td>
+                        <td>待完成免疫</td>
+                      </tr>
+                      <tr>
+                        <td>昨晚 21:18</td>
+                        <td>177****2761</td>
+                        <td>投诉核实成立</td>
+                        <td><span class="points-delta minus">-40</span></td>
+                        <td>事件复核</td>
+                        <td>夜间扰民</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </article>
 
-                <div class="points-column">
-                  <article class="points-panel">
-                    <div class="points-panel-head">
-                      <div>
-                        <strong>积分流水</strong>
-                        <span>按时间查看积分变化、来源类型与备注，便于抽样复核。</span>
-                      </div>
-                      <span class="status-tag good">近 24 小时</span>
-                    </div>
-                    <table class="points-table">
-                      <thead>
-                        <tr>
-                          <th>时间</th>
-                          <th>主手机号</th>
-                          <th>关联行为</th>
-                          <th>变化</th>
-                          <th>来源</th>
-                          <th>备注</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>10:24</td>
-                          <td>138****2048</td>
-                          <td>扫码核验通过</td>
-                          <td><span class="points-delta">+20</span></td>
-                          <td>城管核验</td>
-                          <td>春熙路责任区</td>
-                        </tr>
-                        <tr>
-                          <td>10:12</td>
-                          <td>138****2048</td>
-                          <td>宠物服务核销</td>
-                          <td><span class="points-delta minus">-120</span></td>
-                          <td>服务商</td>
-                          <td>东湖服务点</td>
-                        </tr>
-                        <tr>
-                          <td>09:42</td>
-                          <td>186****3186</td>
-                          <td>免疫到期提醒</td>
-                          <td><span class="points-delta">+0</span></td>
-                          <td>系统提醒</td>
-                          <td>待完成免疫</td>
-                        </tr>
-                        <tr>
-                          <td>昨晚 21:18</td>
-                          <td>177****2761</td>
-                          <td>投诉核实成立</td>
-                          <td><span class="points-delta minus">-40</span></td>
-                          <td>事件复核</td>
-                          <td>夜间扰民</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </article>
+                <article class="points-panel">
+                  <div class="points-panel-head">
+                    <strong>账户概览</strong>
+                    <span class="status-tag warn">17 异常</span>
+                  </div>
+                  <table class="points-table">
+                    <thead>
+                      <tr>
+                        <th>主手机号</th>
+                        <th>犬只</th>
+                        <th>余额</th>
+                        <th>最近活跃</th>
+                        <th>状态</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>138****2048</td>
+                        <td>1</td>
+                        <td>2,860</td>
+                        <td>今日 10:24</td>
+                        <td><span class="status-tag good">正常</span></td>
+                      </tr>
+                      <tr>
+                        <td>186****3186</td>
+                        <td>1</td>
+                        <td>1,420</td>
+                        <td>今日 09:42</td>
+                        <td><span class="status-tag warn">待关注</span></td>
+                      </tr>
+                      <tr>
+                        <td>177****2761</td>
+                        <td>2</td>
+                        <td>960</td>
+                        <td>昨晚 21:18</td>
+                        <td><span class="status-tag risk">异常</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </article>
 
-                  <article class="points-panel">
-                    <div class="points-panel-head">
-                      <div>
-                        <strong>治理效果</strong>
-                        <span>用参与率、核销活跃与正向行为趋势，辅助判断积分机制是否有效。</span>
+                <article class="points-panel">
+                  <div class="points-panel-head">
+                    <strong>治理效果</strong>
+                    <span class="status-tag good">本期观察</span>
+                  </div>
+                  <div class="effect-board">
+                    <div class="effect-chart">
+                      <div class="effect-row">
+                        <b>春熙路</b>
+                        <div class="effect-bar"><span style="width: 78%;"></span></div>
+                        <span>78%</span>
                       </div>
-                      <span class="status-tag good">本期观察</span>
-                    </div>
-                    <div class="effect-board">
-                      <div class="effect-chart">
-                        <div class="effect-row">
-                          <b>春熙路</b>
-                          <div class="effect-bar"><span style="width: 78%;"></span></div>
-                          <span>78%</span>
-                        </div>
-                        <div class="effect-row">
-                          <b>东湖</b>
-                          <div class="effect-bar"><span style="width: 64%;"></span></div>
-                          <span>64%</span>
-                        </div>
-                        <div class="effect-row">
-                          <b>合江亭</b>
-                          <div class="effect-bar"><span style="width: 52%;"></span></div>
-                          <span>52%</span>
-                        </div>
-                        <div class="effect-row">
-                          <b>牛王庙</b>
-                          <div class="effect-bar"><span style="width: 43%;"></span></div>
-                          <span>43%</span>
-                        </div>
+                      <div class="effect-row">
+                        <b>东湖</b>
+                        <div class="effect-bar"><span style="width: 64%;"></span></div>
+                        <span>64%</span>
                       </div>
-                      <div class="effect-notes">
-                        <div class="effect-note">
-                          <strong>正向行为提升</strong>
-                          <p>扫码核验、免疫完成与服务核销三类行为较上期均有增长。</p>
-                        </div>
-                        <div class="effect-note warn">
-                          <strong>低参与区域提示</strong>
-                          <p>牛王庙片区参与率低于 45%，建议结合地图工作台查看投诉与服务点覆盖。</p>
-                        </div>
+                      <div class="effect-row">
+                        <b>合江亭</b>
+                        <div class="effect-bar"><span style="width: 52%;"></span></div>
+                        <span>52%</span>
+                      </div>
+                      <div class="effect-row">
+                        <b>牛王庙</b>
+                        <div class="effect-bar"><span style="width: 43%;"></span></div>
+                        <span>43%</span>
                       </div>
                     </div>
-                  </article>
-                </div>
+                    <div class="effect-notes">
+                      <div class="effect-note">
+                        <strong>正向行为提升</strong>
+                        <p>扫码核验、免疫完成与服务核销三类行为较上期均有增长。</p>
+                      </div>
+                      <div class="effect-note warn">
+                        <strong>低参与区域提示</strong>
+                        <p>牛王庙片区参与率低于 45%，建议结合地图工作台查看投诉与服务点覆盖。</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
               </section>
             </section>
           </div>

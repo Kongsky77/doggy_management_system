@@ -2155,22 +2155,19 @@
 
     .points-workbench {
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      align-items: start;
-    }
-
-    .points-column {
-      display: grid;
-      gap: 12px;
-      min-width: 0;
+      align-items: stretch;
     }
 
     .points-panel {
       border: 1px solid var(--line-soft);
       background: var(--panel);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
       min-width: 0;
       overflow-x: auto;
+      overflow-y: hidden;
       border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
     }
@@ -2180,25 +2177,21 @@
       border-bottom: 1px solid var(--line-soft);
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
+      min-height: 52px;
     }
 
     .points-panel-head strong {
       display: block;
       font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .points-panel-head span {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.5;
+      margin-bottom: 0;
     }
 
     .rule-list {
       display: grid;
       gap: 0;
+      align-content: start;
     }
 
     .rule-item {
@@ -2241,6 +2234,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
+      align-self: start;
     }
 
     .points-table th,
@@ -2276,6 +2270,7 @@
       padding: 14px;
       display: grid;
       grid-template-columns: 1fr 1fr;
+      align-content: center;
       gap: 12px;
     }
 
