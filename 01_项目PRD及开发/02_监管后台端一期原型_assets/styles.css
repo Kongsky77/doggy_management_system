@@ -2110,67 +2110,10 @@
       white-space: nowrap;
     }
 
-    .archive-status-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .archive-status-card {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px;
-      border: 1px solid var(--line-soft);
-      background: #ffffff;
-      border-radius: 14px;
-    }
-
-    .archive-status-card i {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: var(--brand-soft);
-      color: var(--brand-deep);
-      font-style: normal;
-      font-weight: 800;
-      flex: 0 0 auto;
-    }
-
-    .archive-status-card span,
     .archive-shortcuts-panel p {
       color: var(--muted);
       font-size: 12px;
       line-height: 1.55;
-    }
-
-    .archive-status-card strong {
-      display: block;
-      margin-top: 4px;
-      font-size: 16px;
-    }
-
-    .archive-status-card.good i {
-      background: rgba(99, 193, 90, 0.14);
-      color: var(--success);
-    }
-
-    .archive-status-card.risk i {
-      background: rgba(242, 85, 77, 0.12);
-      color: var(--danger);
-    }
-
-    .archive-status-card.warn i {
-      background: rgba(255, 138, 0, 0.14);
-      color: var(--brand-deep);
-    }
-
-    .archive-status-card.info i {
-      background: rgba(111, 168, 255, 0.14);
-      color: var(--info);
     }
 
     .archive-focus-panel {
@@ -2614,7 +2557,6 @@
         grid-template-columns: 1fr;
       }
 
-      .archive-status-row,
       .archive-focus-panel {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -2677,7 +2619,6 @@
       .archive-object-card,
       .archive-object-facts,
       .archive-record-shell,
-      .archive-status-row,
       .archive-focus-panel,
       .points-toolbar,
       .points-kpi-grid,

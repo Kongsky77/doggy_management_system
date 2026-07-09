@@ -388,13 +388,6 @@
         ["最近状态", item.status]
       ];
 
-      const statusCards = [
-        ["登记状态", item.status === "风险" ? "需复核" : "已登记", item.status === "风险" ? "risk" : "good"],
-        [isDogArchive ? "狗牌类型" : "牌照状态", isDogArchive ? dogTagType : "已绑定", "good"],
-        ["归属状态", item.id.startsWith("dog") ? "犬只ID归属" : "主体归档", "info"],
-        ["风险状态", item.status, item.statusClass]
-      ];
-
       const records = item.records.map(([time, action, status]) => `
         <div class="record-row">
           <time>${time}</time>
@@ -409,16 +402,6 @@
           <span>${label}</span>
           <strong>${value}</strong>
         </div>
-      `).join("");
-
-      const statusMarkup = statusCards.map(([label, value, tone]) => `
-        <section class="archive-status-card ${tone}">
-          <i>${label.slice(0, 1)}</i>
-          <div>
-            <span>${label}</span>
-            <strong>${value}</strong>
-          </div>
-        </section>
       `).join("");
 
       const focusSections = isDogArchive
@@ -477,7 +460,6 @@
           </div>
         </section>
 
-        <section class="archive-status-row">${statusMarkup}</section>
         <section class="archive-focus-panel">${focusMarkup}</section>
 
         <section class="archive-record-shell">
