@@ -485,9 +485,8 @@
       archiveDetailStatus.textContent = item.status;
       archiveDetailStatus.className = `status-tag ${item.statusClass}`;
 
-      const cards = item.cards.map(([eyebrow, title, text]) => `
+      const cards = item.cards.map(([, title, text]) => `
         <section class="detail-card">
-          <small>${eyebrow}</small>
           <strong>${title}</strong>
           <p>${text}</p>
         </section>
