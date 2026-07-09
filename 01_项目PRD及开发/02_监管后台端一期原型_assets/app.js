@@ -146,8 +146,8 @@
             hero: "狗牌绑定来源：政府统一绑定。主号绑定来源：犬主人端绑定 / 认领。当前设备在线，定位状态稳定。",
             cards: [
               ["基础", "基础信息", "犬种：柯基<br>状态：正常<br>所属区域：春熙路街道"],
-              ["狗牌设备", "狗牌 / 设备", "狗牌：TAG-510248<br>设备在线：是<br>最近定位：今日 10:24"],
-              ["主手机号", "主手机号", "138****2048<br>绑定状态：已认领<br>积分归属：犬只ID / 狗牌编号"],
+              ["狗牌设备", "狗牌 / 设备", "狗牌类型：电子狗牌<br>狗牌编号：TAG-510248<br>设备在线：是<br>最近定位：今日 10:24"],
+              ["主手机号", "主手机号", "138****2048<br>绑定状态：已认领"],
               ["积分", "积分摘要", "当前积分：2,860<br>近 30 日新增：+320<br>最近核销：宠物服务"],
               ["定位", "定位状态", "最后点位：IFS 周边<br>定位可信度：高<br>异常：无"],
               ["异常", "异常记录", "近 30 日异常：0<br>投诉关联：0<br>待复查：无"]
@@ -171,8 +171,8 @@
             hero: "狗牌绑定来源：政府统一绑定。主号绑定来源：犬主人端绑定 / 认领。当前需关注免疫到期提醒。",
             cards: [
               ["基础", "基础信息", "犬种：柴犬<br>状态：待关注<br>所属区域：东湖街道"],
-              ["狗牌设备", "狗牌 / 设备", "狗牌：TAG-513186<br>设备在线：是<br>最近定位：今日 09:42"],
-              ["主手机号", "主手机号", "186****3186<br>绑定状态：已认领<br>积分归属：犬只ID / 狗牌编号"],
+              ["狗牌设备", "狗牌 / 设备", "狗牌类型：电子狗牌<br>狗牌编号：TAG-513186<br>设备在线：是<br>最近定位：今日 09:42"],
+              ["主手机号", "主手机号", "186****3186<br>绑定状态：已认领"],
               ["积分", "积分摘要", "当前积分：1,420<br>近 30 日新增：+80<br>最近核销：无"],
               ["定位", "定位状态", "最后点位：东湖公园<br>定位可信度：中<br>异常：免疫到期提醒"],
               ["异常", "异常记录", "近 30 日异常：1<br>投诉关联：0<br>待复查：免疫状态"]
@@ -196,8 +196,8 @@
             hero: "狗牌绑定来源：政府统一绑定。主号绑定来源：犬主人端绑定 / 认领。当前关联夜间投诉，需查看核验记录。",
             cards: [
               ["基础", "基础信息", "犬种：边牧<br>状态：风险<br>所属区域：合江亭片区"],
-              ["狗牌设备", "狗牌 / 设备", "狗牌：TAG-512761<br>设备在线：是<br>最近定位：昨晚 21:18"],
-              ["主手机号", "主手机号", "177****2761<br>绑定状态：已认领<br>积分归属：犬只ID / 狗牌编号"],
+              ["狗牌设备", "狗牌 / 设备", "狗牌类型：普通狗牌<br>狗牌编号：TAG-512761<br>定位来源：人工核验<br>最近定位：昨晚 21:18"],
+              ["主手机号", "主手机号", "177****2761<br>绑定状态：已认领"],
               ["积分", "积分摘要", "当前积分：860<br>近 30 日变化：-40<br>最近扣减：投诉核验"],
               ["定位", "定位状态", "最后点位：合江亭商圈<br>定位可信度：高<br>异常：夜间高频"],
               ["异常", "异常记录", "近 30 日异常：2<br>投诉关联：1<br>待复查：扰民线索"]
@@ -367,21 +367,34 @@
     function renderArchiveDetail(item) {
       const [displayName, displayCode = item.id] = item.name.split(" / ");
       const heroFacts = item.hero.split("。").filter(Boolean).slice(0, 4);
+      const cardText = (key) => item.cards.find(([cardKey, title]) => cardKey === key || title === key)?.[2] || "";
+      const fieldValue = (text, label) => {
+        const line = text.split("<br>").find((entry) => entry.startsWith(`${label}：`));
+        return line ? line.replace(`${label}：`, "") : "未记录";
+      };
+      const baseText = cardText("基础");
+      const tagText = cardText("狗牌设备");
+      const ownerText = cardText("主手机号");
+      const pointsText = cardText("积分");
+      const locationText = cardText("定位");
+      const riskText = cardText("异常");
+      const isDogArchive = item.id.startsWith("dog");
+      const dogTagType = fieldValue(tagText, "狗牌类型");
+      const dogTagOnline = dogTagType === "普通狗牌" ? "不适用" : fieldValue(tagText, "设备在线");
       const primaryFacts = [
         ["档案类型", item.subtitle.split("，")[0]],
         ["所属区域", item.subtitle.split("，")[1] || "锦江区"],
-        [item.scoreLabel, item.score],
+        [isDogArchive ? "主手机号" : item.scoreLabel, isDogArchive ? fieldValue(ownerText, "主手机号") : item.score],
         ["最近状态", item.status]
       ];
 
       const statusCards = [
         ["登记状态", item.status === "风险" ? "需复核" : "已登记", item.status === "风险" ? "risk" : "good"],
-        ["牌照状态", item.cards[1]?.[2]?.includes("设备在线：是") ? "已绑定" : "待确认", "good"],
+        [isDogArchive ? "狗牌类型" : "牌照状态", isDogArchive ? dogTagType : "已绑定", "good"],
         ["归属状态", item.id.startsWith("dog") ? "犬只ID归属" : "主体归档", "info"],
         ["风险状态", item.status, item.statusClass]
       ];
 
-      const businessCards = item.cards.slice(0, 4).map(([, title, text]) => [title, text]);
       const records = item.records.map(([time, action, status]) => `
         <div class="record-row">
           <time>${time}</time>
@@ -408,11 +421,31 @@
         </section>
       `).join("");
 
-      const businessMarkup = businessCards.map(([title, text]) => `
-        <section class="archive-business-card">
+      const focusSections = isDogArchive
+        ? [
+            ["标识绑定", [["犬种", fieldValue(baseText, "犬种")], ["主手机号", fieldValue(ownerText, "主手机号")], ["狗牌", `${dogTagType} / ${fieldValue(tagText, "狗牌编号")}`]]],
+            ["狗牌定位", [["在线状态", dogTagOnline], ["最近定位", fieldValue(tagText, "最近定位")], ["定位可信度", fieldValue(locationText, "定位可信度")]]],
+            ["积分摘要", [["当前积分", fieldValue(pointsText, "当前积分")], ["近 30 日", fieldValue(pointsText, "近 30 日新增") === "未记录" ? fieldValue(pointsText, "近 30 日变化") : fieldValue(pointsText, "近 30 日新增")], ["最近核销", fieldValue(pointsText, "最近核销")]], "highlight"],
+            ["异常关注", [["异常", fieldValue(locationText, "异常")], ["投诉关联", fieldValue(riskText, "投诉关联")], ["待复查", fieldValue(riskText, "待复查")]]]
+          ]
+        : item.cards.slice(0, 4).map(([, title, text], index) => [
+            title,
+            text.split("<br>").map((line) => {
+              const [label, ...rest] = line.split("：");
+              return [label, rest.join("：") || "未记录"];
+            }),
+            index === 2 ? "highlight" : ""
+          ]);
+
+      const focusMarkup = focusSections.map(([title, rows, tone]) => `
+        <section class="archive-focus-section ${tone || ""}">
           <strong>${title}</strong>
-          <p>${text}</p>
-          <button class="ghost-button" type="button">查看关联</button>
+          ${rows.map(([label, value]) => `
+            <div>
+              <span>${label}</span>
+              <b>${value}</b>
+            </div>
+          `).join("")}
         </section>
       `).join("");
 
@@ -445,7 +478,7 @@
         </section>
 
         <section class="archive-status-row">${statusMarkup}</section>
-        <section class="archive-business-row">${businessMarkup}</section>
+        <section class="archive-focus-panel">${focusMarkup}</section>
 
         <section class="archive-record-shell">
           <div class="archive-record-panel">

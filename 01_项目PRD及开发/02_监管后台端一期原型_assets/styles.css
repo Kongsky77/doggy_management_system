@@ -2110,8 +2110,7 @@
       white-space: nowrap;
     }
 
-    .archive-status-row,
-    .archive-business-row {
+    .archive-status-row {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
@@ -2142,7 +2141,6 @@
     }
 
     .archive-status-card span,
-    .archive-business-card p,
     .archive-shortcuts-panel p {
       color: var(--muted);
       font-size: 12px;
@@ -2175,29 +2173,59 @@
       color: var(--info);
     }
 
-    .archive-business-card {
-      min-height: 176px;
-      padding: 16px;
+    .archive-focus-panel {
+      min-height: 128px;
       display: grid;
-      align-content: space-between;
-      gap: 10px;
+      grid-template-columns: 1.1fr 1.1fr 1.2fr 1fr;
+      gap: 0;
       border: 1px solid var(--line-soft);
       background: #ffffff;
       border-radius: 16px;
+      overflow: hidden;
     }
 
-    .archive-business-card strong {
+    .archive-focus-section {
+      min-width: 0;
+      padding: 14px 16px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .archive-focus-section:last-child {
+      border-right: 0;
+    }
+
+    .archive-focus-section.highlight {
+      background: linear-gradient(180deg, #fff7ec 0%, #ffffff 100%);
+      box-shadow: inset 3px 0 0 var(--brand);
+    }
+
+    .archive-focus-section strong {
       font-size: 14px;
     }
 
-    .archive-business-card p {
-      margin: 0;
+    .archive-focus-section div {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 10px;
+      align-items: baseline;
     }
 
-    .archive-business-card button {
-      width: 126px;
-      height: 32px;
-      padding: 0 12px;
+    .archive-focus-section span {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .archive-focus-section b {
+      min-width: 0;
+      color: var(--ink);
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .archive-record-shell {
@@ -2587,7 +2615,7 @@
       }
 
       .archive-status-row,
-      .archive-business-row {
+      .archive-focus-panel {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -2650,11 +2678,20 @@
       .archive-object-facts,
       .archive-record-shell,
       .archive-status-row,
-      .archive-business-row,
+      .archive-focus-panel,
       .points-toolbar,
       .points-kpi-grid,
       .effect-board {
         grid-template-columns: 1fr;
+      }
+
+      .archive-focus-section {
+        border-right: 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .archive-focus-section:last-child {
+        border-bottom: 0;
       }
 
       .topbar {
