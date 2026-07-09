@@ -1999,8 +1999,9 @@
 
     .object-score small {
       color: var(--muted);
-      font: 700 10px/1 Consolas, monospace;
-      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0;
     }
 
     .object-score strong {
@@ -2027,8 +2028,9 @@
     .record-panel small {
       display: block;
       color: var(--muted);
-      font: 700 10px/1 Consolas, monospace;
-      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0;
       margin-bottom: 8px;
     }
 
@@ -2134,8 +2136,9 @@
 
     .points-kpi small {
       color: var(--muted);
-      font: 700 10px/1 Consolas, monospace;
-      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: 0;
     }
 
     .points-kpi strong {
