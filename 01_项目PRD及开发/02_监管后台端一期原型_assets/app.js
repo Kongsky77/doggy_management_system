@@ -15,9 +15,6 @@
     const archiveListTitle = document.getElementById("archiveListTitle");
     const archiveListDesc = document.getElementById("archiveListDesc");
     const archiveListCount = document.getElementById("archiveListCount");
-    const archiveDetailTitle = document.getElementById("archiveDetailTitle");
-    const archiveDetailSubtitle = document.getElementById("archiveDetailSubtitle");
-    const archiveDetailStatus = document.getElementById("archiveDetailStatus");
     const archiveDetailBody = document.getElementById("archiveDetailBody");
 
     const mapPointDetails = {
@@ -134,8 +131,8 @@
     const archiveData = {
       dogs: {
         title: "犬只列表",
-        desc: "默认承接犬只 ID、主手机号和地图点位进入。",
-        totalCount: "1259 条",
+        desc: "犬只列表 (12,846)",
+        totalCount: "12,846 条",
         items: [
           {
             id: "dog-2048",
@@ -150,7 +147,7 @@
             cards: [
               ["基础", "基础信息", "犬种：柯基<br>状态：正常<br>所属区域：春熙路街道"],
               ["狗牌设备", "狗牌 / 设备", "狗牌：TAG-510248<br>设备在线：是<br>最近定位：今日 10:24"],
-              ["主手机号", "主手机号", "138****2048<br>绑定状态：已认领<br>积分归属：主手机号"],
+              ["主手机号", "主手机号", "138****2048<br>绑定状态：已认领<br>积分归属：犬只ID / 狗牌编号"],
               ["积分", "积分摘要", "当前积分：2,860<br>近 30 日新增：+320<br>最近核销：宠物服务"],
               ["定位", "定位状态", "最后点位：IFS 周边<br>定位可信度：高<br>异常：无"],
               ["异常", "异常记录", "近 30 日异常：0<br>投诉关联：0<br>待复查：无"]
@@ -175,7 +172,7 @@
             cards: [
               ["基础", "基础信息", "犬种：柴犬<br>状态：待关注<br>所属区域：东湖街道"],
               ["狗牌设备", "狗牌 / 设备", "狗牌：TAG-513186<br>设备在线：是<br>最近定位：今日 09:42"],
-              ["主手机号", "主手机号", "186****3186<br>绑定状态：已认领<br>积分归属：主手机号"],
+              ["主手机号", "主手机号", "186****3186<br>绑定状态：已认领<br>积分归属：犬只ID / 狗牌编号"],
               ["积分", "积分摘要", "当前积分：1,420<br>近 30 日新增：+80<br>最近核销：无"],
               ["定位", "定位状态", "最后点位：东湖公园<br>定位可信度：中<br>异常：免疫到期提醒"],
               ["异常", "异常记录", "近 30 日异常：1<br>投诉关联：0<br>待复查：免疫状态"]
@@ -200,7 +197,7 @@
             cards: [
               ["基础", "基础信息", "犬种：边牧<br>状态：风险<br>所属区域：合江亭片区"],
               ["狗牌设备", "狗牌 / 设备", "狗牌：TAG-512761<br>设备在线：是<br>最近定位：昨晚 21:18"],
-              ["主手机号", "主手机号", "177****2761<br>绑定状态：已认领<br>积分归属：主手机号"],
+              ["主手机号", "主手机号", "177****2761<br>绑定状态：已认领<br>积分归属：犬只ID / 狗牌编号"],
               ["积分", "积分摘要", "当前积分：860<br>近 30 日变化：-40<br>最近扣减：投诉核验"],
               ["定位", "定位状态", "最后点位：合江亭商圈<br>定位可信度：高<br>异常：夜间高频"],
               ["异常", "异常记录", "近 30 日异常：2<br>投诉关联：1<br>待复查：扰民线索"]
@@ -216,7 +213,8 @@
       },
       officers: {
         title: "城管列表",
-        desc: "展示城管编号、所属辖区和近期任务量摘要。",
+        desc: "城管队员 (246)",
+        totalCount: "246 条",
         items: [
           {
             id: "officer-01",
@@ -272,7 +270,8 @@
       },
       services: {
         title: "服务商列表",
-        desc: "展示服务商类型、合作状态和最近核销时间。",
+        desc: "服务商 / 合作商 (86)",
+        totalCount: "86 条",
         items: [
           {
             id: "service-01",
@@ -366,48 +365,101 @@
     }
 
     function renderArchiveDetail(item) {
-      archiveDetailTitle.textContent = item.name;
-      archiveDetailSubtitle.textContent = item.subtitle;
-      archiveDetailStatus.textContent = item.status;
-      archiveDetailStatus.className = `status-tag ${item.statusClass}`;
+      const [displayName, displayCode = item.id] = item.name.split(" / ");
+      const heroFacts = item.hero.split("。").filter(Boolean).slice(0, 4);
+      const primaryFacts = [
+        ["档案类型", item.subtitle.split("，")[0]],
+        ["所属区域", item.subtitle.split("，")[1] || "锦江区"],
+        [item.scoreLabel, item.score],
+        ["最近状态", item.status]
+      ];
 
-      const cards = item.cards.map(([, title, text]) => `
-        <section class="detail-card">
-          <strong>${title}</strong>
-          <p>${text}</p>
-        </section>
-      `).join("");
+      const statusCards = [
+        ["登记状态", item.status === "风险" ? "需复核" : "已登记", item.status === "风险" ? "risk" : "good"],
+        ["牌照状态", item.cards[1]?.[2]?.includes("设备在线：是") ? "已绑定" : "待确认", "good"],
+        ["归属状态", item.id.startsWith("dog") ? "犬只ID归属" : "主体归档", "info"],
+        ["风险状态", item.status, item.statusClass]
+      ];
 
+      const businessCards = item.cards.slice(0, 4).map(([, title, text]) => [title, text]);
       const records = item.records.map(([time, action, status]) => `
         <div class="record-row">
           <time>${time}</time>
           <b>${action}</b>
           <span>${status}</span>
+          <a href="javascript:void(0)">详情</a>
         </div>
       `).join("");
 
-      archiveDetailBody.innerHTML = `
-        <section class="object-hero">
+      const primaryFactMarkup = primaryFacts.map(([label, value]) => `
+        <div>
+          <span>${label}</span>
+          <strong>${value}</strong>
+        </div>
+      `).join("");
+
+      const statusMarkup = statusCards.map(([label, value, tone]) => `
+        <section class="archive-status-card ${tone}">
+          <i>${label.slice(0, 1)}</i>
           <div>
-            <h2>${item.name}</h2>
-            <p>${item.hero}</p>
+            <span>${label}</span>
+            <strong>${value}</strong>
           </div>
-          <div class="object-score">
-            <small>${item.scoreLabel}</small>
-            <strong>${item.score}</strong>
+        </section>
+      `).join("");
+
+      const businessMarkup = businessCards.map(([title, text]) => `
+        <section class="archive-business-card">
+          <strong>${title}</strong>
+          <p>${text}</p>
+          <button class="ghost-button" type="button">查看关联</button>
+        </section>
+      `).join("");
+
+      const shortcutLabels = item.id.startsWith("dog")
+        ? ["查看地图位置", "查看积分账户", "查看核验记录", "查看异常记录", "定位周边事件"]
+        : item.id.startsWith("officer")
+          ? ["查看负责辖区", "查看任务记录", "查看核验记录", "定位在管区域", "查看协同事件"]
+          : ["查看服务点位", "查看核销流水", "查看覆盖区域", "查看合作状态", "跳转积分管理"];
+
+      const shortcuts = shortcutLabels.map((label) => `
+        <button type="button"><i></i>${label}</button>
+      `).join("");
+
+      archiveDetailBody.innerHTML = `
+        <section class="archive-object-card">
+          <div class="archive-object-avatar">${displayName.slice(0, 1)}</div>
+          <div class="archive-object-main">
+            <div class="archive-object-title">
+              <h2>${displayName}</h2>
+              <span>${displayCode}</span>
+              <mark class="status-tag ${item.statusClass}">${item.status}</mark>
+            </div>
+            <div class="archive-object-facts">${primaryFactMarkup}</div>
+          </div>
+          <div class="archive-object-actions">
+            <button class="brand-button" type="button">查看地图位置</button>
+            <button class="ghost-button" type="button">查看积分账户</button>
+            <button class="ghost-button" type="button">更多操作</button>
           </div>
         </section>
 
-        <section class="detail-grid">${cards}</section>
+        <section class="archive-status-row">${statusMarkup}</section>
+        <section class="archive-business-row">${businessMarkup}</section>
 
-        <section class="record-grid">
-          <div class="record-panel">
-            <small>近期记录</small>
+        <section class="archive-record-shell">
+          <div class="archive-record-panel">
+            <div class="archive-record-tabs">
+              <button class="active" type="button">核验记录</button>
+              <button type="button">行为记录</button>
+              <button type="button">异常记录</button>
+            </div>
             <div class="record-list">${records}</div>
           </div>
-          <div class="record-panel">
-            <small>关联说明</small>
-            <p>当前详情可从驾驶舱指标、地图点位或全局搜索进入。后续第 6 步会继续补齐跨页跳转和模拟数据联动。</p>
+          <div class="archive-shortcuts-panel">
+            <strong>快捷导航</strong>
+            <p>${heroFacts.join("。")}。</p>
+            <div>${shortcuts}</div>
           </div>
         </section>
       `;
@@ -430,6 +482,7 @@
       const selected = group.items.find((item) => item.id === itemId) || group.items[0];
       archiveList.innerHTML = group.items.map((item) => `
         <button class="archive-list-item ${item.id === selected.id ? "active" : ""}" type="button" data-archive-tab="${tabKey}" data-archive-id="${item.id}">
+          <i>${item.name.slice(0, 1)}</i>
           <div>
             <strong>${item.name}</strong>
             <small>${item.meta}</small>

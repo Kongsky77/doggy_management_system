@@ -512,20 +512,65 @@
               </section>
             </section>
 
-            <section class="page" id="page-archive">
-              <section class="archive-toolbar">
-                <div class="archive-search">
-                  <div class="filter-label">对象检索</div>
-                  <input class="archive-input" type="text" value="D-2048" aria-label="对象检索">
-                  <button class="filter-chip active" type="button">锦江区</button>
-                  <button class="filter-chip" type="button">正常</button>
-                  <button class="filter-chip" type="button">待关注</button>
-                </div>
-                <div class="archive-tabs" role="tablist" aria-label="对象类型">
-                  <button class="archive-tab active" type="button" data-archive-tab="dogs">犬只</button>
-                  <button class="archive-tab" type="button" data-archive-tab="officers">城管</button>
-                  <button class="archive-tab" type="button" data-archive-tab="services">服务商 / 合作商</button>
-                </div>
+            <section class="page archive-page" id="page-archive">
+              <section class="archive-filter-bar">
+                <label class="archive-filter-item archive-keyword">
+                  <span>关键词</span>
+                  <input class="archive-input" type="text" value="D-2048" aria-label="关键词">
+                </label>
+                <label class="archive-filter-item">
+                  <span>对象类型</span>
+                  <select aria-label="对象类型">
+                    <option>全部对象</option>
+                    <option>犬只档案</option>
+                    <option>城管队员</option>
+                    <option>服务商 / 合作商</option>
+                  </select>
+                </label>
+                <label class="archive-filter-item">
+                  <span>状态</span>
+                  <select aria-label="状态">
+                    <option>全部状态</option>
+                    <option>正常</option>
+                    <option>待关注</option>
+                    <option>风险</option>
+                  </select>
+                </label>
+                <label class="archive-filter-item">
+                  <span>区域</span>
+                  <select aria-label="区域">
+                    <option>锦江区全域</option>
+                    <option>春熙路街道</option>
+                    <option>东湖街道</option>
+                    <option>合江亭片区</option>
+                  </select>
+                </label>
+                <label class="archive-filter-item">
+                  <span>绑定状态</span>
+                  <select aria-label="绑定状态">
+                    <option>全部绑定</option>
+                    <option>已认领</option>
+                    <option>待认领</option>
+                    <option>设备离线</option>
+                  </select>
+                </label>
+                <label class="archive-filter-item">
+                  <span>风险等级</span>
+                  <select aria-label="风险等级">
+                    <option>全部风险</option>
+                    <option>高风险</option>
+                    <option>中风险</option>
+                    <option>低风险</option>
+                  </select>
+                </label>
+                <button class="ghost-button archive-more-filter" type="button">更多筛选</button>
+                <button class="ghost-button archive-reset" type="button">重置</button>
+              </section>
+
+              <section class="archive-type-tabs" role="tablist" aria-label="对象类型">
+                <button class="archive-tab active" type="button" data-archive-tab="dogs">犬只档案 <span>12,846</span></button>
+                <button class="archive-tab" type="button" data-archive-tab="officers">城管队员 <span>246</span></button>
+                <button class="archive-tab" type="button" data-archive-tab="services">服务商 / 合作商 <span>86</span></button>
               </section>
 
               <section class="archive-workbench">
@@ -533,22 +578,73 @@
                   <div class="archive-list-head">
                     <div>
                       <strong id="archiveListTitle">犬只列表</strong>
+                      <span id="archiveListDesc">按最近更新排序</span>
                     </div>
-                    <span class="status-tag good" id="archiveListCount">1259 条</span>
+                    <select aria-label="列表排序">
+                      <option>最近更新</option>
+                      <option>风险优先</option>
+                      <option>积分变化</option>
+                    </select>
                   </div>
                   <div class="archive-list" id="archiveList"></div>
+                  <div class="archive-pager">
+                    <span id="archiveListCount">12,846 条</span>
+                    <div>
+                      <button type="button">1</button>
+                      <button type="button">2</button>
+                      <button type="button">3</button>
+                    </div>
+                  </div>
                 </aside>
 
                 <article class="archive-detail-panel">
-                  <div class="archive-detail-head">
-                    <div>
-                      <strong id="archiveDetailTitle">豆豆 / D-2048</strong>
-                      <span id="archiveDetailSubtitle">锦江区春熙路街道，最近更新 10:24</span>
-                    </div>
-                    <span class="status-tag good" id="archiveDetailStatus">正常</span>
-                  </div>
                   <div class="archive-detail-body" id="archiveDetailBody"></div>
                 </article>
+              </section>
+
+              <section class="archive-bottom-stats" aria-label="对象档案统计">
+                <div class="archive-stat-item">
+                  <i>总</i>
+                  <span>当前结果数</span>
+                  <strong>12,846</strong>
+                  <small>锦江区在册对象</small>
+                </div>
+                <div class="archive-stat-item risk">
+                  <i>险</i>
+                  <span>高风险犬只</span>
+                  <strong>126</strong>
+                  <small>较昨日 +8</small>
+                </div>
+                <div class="archive-stat-item warn">
+                  <i>号</i>
+                  <span>主号未绑定</span>
+                  <strong>342</strong>
+                  <small>待犬主认领</small>
+                </div>
+                <div class="archive-stat-item info">
+                  <i>设</i>
+                  <span>设备离线</span>
+                  <strong>58</strong>
+                  <small>需重点复核</small>
+                </div>
+                <div class="archive-stat-item good">
+                  <i>核</i>
+                  <span>近 7 日已核验</span>
+                  <strong>3,284</strong>
+                  <small>覆盖 25.6%</small>
+                </div>
+                <div class="archive-stat-item">
+                  <i>服</i>
+                  <span>合作服务商</span>
+                  <strong>86</strong>
+                  <small>正常合作 79</small>
+                </div>
+                <div class="archive-stat-item">
+                  <i>更</i>
+                  <span>数据更新时间</span>
+                  <strong>10:24</strong>
+                  <small>今日同步</small>
+                </div>
               </section>
             </section>
 
