@@ -135,6 +135,7 @@
       dogs: {
         title: "犬只列表",
         desc: "默认承接犬只 ID、主手机号和地图点位进入。",
+        totalCount: "1259 条",
         items: [
           {
             id: "dog-2048",
@@ -421,8 +422,10 @@
       });
 
       archiveListTitle.textContent = group.title;
-      archiveListDesc.textContent = group.desc;
-      archiveListCount.textContent = `${group.items.length} 条`;
+      if (archiveListDesc) {
+        archiveListDesc.textContent = group.desc;
+      }
+      archiveListCount.textContent = group.totalCount || `${group.items.length} 条`;
 
       const selected = group.items.find((item) => item.id === itemId) || group.items[0];
       archiveList.innerHTML = group.items.map((item) => `
