@@ -1871,8 +1871,7 @@
     }
 
     .archive-list-panel,
-    .archive-detail-panel,
-    .archive-bottom-stats {
+    .archive-detail-panel {
       border: 1px solid var(--line-soft);
       background: #ffffff;
       min-width: 0;
@@ -2129,8 +2128,7 @@
       border-radius: 14px;
     }
 
-    .archive-status-card i,
-    .archive-stat-item i {
+    .archive-status-card i {
       width: 32px;
       height: 32px;
       display: grid;
@@ -2145,9 +2143,7 @@
 
     .archive-status-card span,
     .archive-business-card p,
-    .archive-shortcuts-panel p,
-    .archive-stat-item span,
-    .archive-stat-item small {
+    .archive-shortcuts-panel p {
       color: var(--muted);
       font-size: 12px;
       line-height: 1.55;
@@ -2159,26 +2155,22 @@
       font-size: 16px;
     }
 
-    .archive-status-card.good i,
-    .archive-stat-item.good i {
+    .archive-status-card.good i {
       background: rgba(99, 193, 90, 0.14);
       color: var(--success);
     }
 
-    .archive-status-card.risk i,
-    .archive-stat-item.risk i {
+    .archive-status-card.risk i {
       background: rgba(242, 85, 77, 0.12);
       color: var(--danger);
     }
 
-    .archive-status-card.warn i,
-    .archive-stat-item.warn i {
+    .archive-status-card.warn i {
       background: rgba(255, 138, 0, 0.14);
       color: var(--brand-deep);
     }
 
-    .archive-status-card.info i,
-    .archive-stat-item.info i {
+    .archive-status-card.info i {
       background: rgba(111, 168, 255, 0.14);
       color: var(--info);
     }
@@ -2320,36 +2312,6 @@
       border-radius: 5px;
       background: var(--brand);
       box-shadow: 0 0 0 4px var(--brand-soft);
-    }
-
-    .archive-bottom-stats {
-      min-height: 92px;
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      margin-top: 4px;
-    }
-
-    .archive-stat-item {
-      min-height: 92px;
-      padding: 14px 18px;
-      display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 4px 10px;
-      align-content: center;
-      border-right: 1px solid var(--line-soft);
-    }
-
-    .archive-stat-item:last-child {
-      border-right: 0;
-    }
-
-    .archive-stat-item i {
-      grid-row: span 3;
-    }
-
-    .archive-stat-item strong {
-      font-size: 16px;
-      color: var(--ink);
     }
 
     .points-toolbar {
@@ -2629,10 +2591,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .archive-bottom-stats {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
       .points-kpi-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -2693,7 +2651,6 @@
       .archive-record-shell,
       .archive-status-row,
       .archive-business-row,
-      .archive-bottom-stats,
       .points-toolbar,
       .points-kpi-grid,
       .effect-board {
@@ -2771,11 +2728,6 @@
         grid-template-columns: 1fr;
         gap: 4px;
         padding: 10px 0;
-      }
-
-      .archive-stat-item {
-        border-right: 0;
-        border-bottom: 1px solid var(--line-soft);
       }
 
     }
