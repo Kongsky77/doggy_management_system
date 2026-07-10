@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="监管后台端 2.0——面向领导的犬只治理单页地图决策原型">
+  <title>犬只治理监管地图｜监管后台端 2.0</title>
+  <link rel="stylesheet" href="02_监管后台端一期原型_v2.0_assets/styles.css">
+  <script defer src="02_监管后台端一期原型_v2.0_assets/app.js"></script>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1L6.5 8.5l4.1-1.4L12 3zM18.5 13l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6zM5.5 14l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2z"/></symbol>
+    <symbol id="i-export" viewBox="0 0 24 24"><path d="M12 3v12m0-12 4 4m-4-4L8 7M5 13v6h14v-6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9h-6v-6h-4v6H4v-9z"/></symbol>
+    <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5"/></symbol>
+    <symbol id="i-layer" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5z"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 1 8m-1-8V4m0 5h5"/></symbol>
+    <symbol id="i-dog" viewBox="0 0 24 24"><path d="M7 8 4 5v6l2 2v5h3v-3h6v3h3v-8l2-2-2-4-3 3H9L7 8z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.9 8 7 10 4.1-2 7-5.4 7-10V6l-7-3z"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9h16l-1-5H5L4 9zm1 0v11h14V9M9 20v-6h6v6"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="m12 3-5 7h3l-4 6h5v5h2v-5h5l-4-6h3l-5-7z"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m4 17 5-5 4 4 3-3 4 4"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6V3zM14 3v5h5M9 13h6M9 17h6"/></symbol>
+  </svg>
+
+  <main class="app-shell" id="app-shell">
+    <section class="map-stage" id="map-stage" aria-label="高新区犬只治理演示地图">
+      <svg id="map-art" class="map-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title map-desc">
+        <title id="map-title">高新区犬只治理演示地图</title>
+        <desc id="map-desc">浅色演示地图，展示街道犬只聚合、城管辖区、服务商、宠物友好乐园和犬只禁入区域。</desc>
+        <style>
+          .map-bg{fill:#eef2f7}.map-grid{fill:url(#minor-grid);opacity:.55}.district{fill:#f8fafc;stroke:#b9c6d6;stroke-width:3}.street-area{stroke:#d7e0ea;stroke-width:2}.street-a{fill:#f7f3ff}.street-b{fill:#f5f8fc}.street-c{fill:#fff8ef}.street-d{fill:#f1f8f7}.road-major{fill:none;stroke:#fff;stroke-width:16;stroke-linecap:round;opacity:.98}.road-line{fill:none;stroke:#cdd7e3;stroke-width:2;stroke-dasharray:10 10}.road-minor{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round;opacity:.95}.river{fill:none;stroke:#c5e2f6;stroke-width:34;stroke-linecap:round;opacity:.9}.river-edge{fill:none;stroke:#a9d3ef;stroke-width:2}.map-label{font:600 18px 'Microsoft YaHei UI',sans-serif;fill:#7d8996;letter-spacing:2px}.road-label{font:500 12px 'Microsoft YaHei UI',sans-serif;fill:#a0aab6}.water-label{font:500 12px 'Microsoft YaHei UI',sans-serif;fill:#72a5c8;letter-spacing:4px}.cluster-halo{fill:#7c3aed;opacity:.13}.cluster-core{fill:#7c3aed;stroke:#fff;stroke-width:4;filter:url(#shadow)}.cluster-name{font:600 13px 'Microsoft YaHei UI',sans-serif;fill:#fff;text-anchor:middle}.cluster-count{font:700 19px 'Microsoft YaHei UI',sans-serif;fill:#fff;text-anchor:middle}.cluster-unit{font:500 11px 'Microsoft YaHei UI',sans-serif;fill:#ede9fe}.map-object{cursor:pointer;outline:none}.map-object:hover .cluster-core,.map-object:focus .cluster-core{stroke:#ff8f1f;stroke-width:6}.jurisdiction-shape{fill:#3b82f6;fill-opacity:.08;stroke:#3b82f6;stroke-width:3;stroke-dasharray:12 8}.jurisdiction-tag{fill:#3b82f6}.area-tag-text{font:600 12px 'Microsoft YaHei UI',sans-serif;fill:#fff;text-anchor:middle}.restricted-shape{fill:#ef4444;fill-opacity:.12;stroke:#ef4444;stroke-width:3;stroke-dasharray:8 5}.friendly-shape{fill:#22c55e;fill-opacity:.13;stroke:#22c55e;stroke-width:3}.provider-pin{fill:#f59e0b;stroke:#fff;stroke-width:4;filter:url(#shadow)}.friendly-pin{fill:#22c55e;stroke:#fff;stroke-width:4;filter:url(#shadow)}.pin-glyph{font:700 18px 'Microsoft YaHei UI',sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}.dog-pin{fill:#7c3aed;stroke:#fff;stroke-width:4;filter:url(#shadow)}.dog-pin.stale{opacity:.65;stroke-dasharray:5 3}.dog-pin.expired{opacity:.35;stroke:#6b7280}.risk-ring{fill:none;stroke:#ef4444;stroke-width:5}.dog-glyph{font:700 15px 'Microsoft YaHei UI',sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}.phone-count{font:700 14px 'Microsoft YaHei UI',sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}.point-label-bg{fill:#fff;fill-opacity:.95;stroke:#e2e8f0}.point-label{font:600 12px 'Microsoft YaHei UI',sans-serif;fill:#475569;text-anchor:middle}.select-ring{fill:none;stroke:#ff8f1f;stroke-width:4;opacity:0}.is-selected .select-ring{opacity:1}.community-boundary{fill:#fff;fill-opacity:.17;stroke:#9ca3af;stroke-width:2;stroke-dasharray:7 7}
+        </style>
+        <defs>
+          <pattern id="minor-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#dfe6ee" stroke-width="1"/></pattern>
+          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#334155" flood-opacity=".2"/></filter>
+        </defs>
+        <rect class="map-bg" width="1600" height="900"/>
+        <rect class="map-grid" width="1600" height="900"/>
+        <path class="district" d="M128 87 429 47 714 89 944 54 1370 121 1505 340 1442 671 1201 821 822 853 521 791 189 714 86 421Z"/>
+        <path class="street-area street-b" d="M128 87 429 47 548 212 485 390 111 369 86 240Z"/>
+        <path class="street-area street-a" d="M548 212 714 89 944 54 1112 172 1015 418 703 455 485 390Z"/>
+        <path class="street-area street-c" d="M1112 172 1370 121 1505 340 1396 482 1015 418Z"/>
+        <path class="street-area street-d" d="M111 369 485 390 703 455 684 724 521 791 189 714 86 421Z"/>
+        <path class="street-area street-b" d="M703 455 1015 418 1396 482 1442 671 1201 821 822 853 684 724Z"/>
+
+        <path class="river" d="M-20 615 C250 480 360 610 572 526 S950 395 1112 503 1360 620 1620 470"/>
+        <path class="river-edge" d="M-20 597 C250 462 360 592 572 508 S950 377 1112 485 1360 602 1620 452"/>
+        <path class="river-edge" d="M-20 633 C250 498 360 628 572 544 S950 413 1112 521 1360 638 1620 488"/>
+        <path class="road-major" d="M65 270 C320 250 425 300 620 270 S970 160 1190 225 1430 290 1570 220"/>
+        <path class="road-line" d="M65 270 C320 250 425 300 620 270 S970 160 1190 225 1430 290 1570 220"/>
+        <path class="road-major" d="M304 35 C330 225 460 323 590 448 S800 690 883 900"/>
+        <path class="road-line" d="M304 35 C330 225 460 323 590 448 S800 690 883 900"/>
+        <path class="road-major" d="M1080 38 C1038 238 1105 320 1050 500 S1070 740 1245 900"/>
+        <path class="road-line" d="M1080 38 C1038 238 1105 320 1050 500 S1070 740 1245 900"/>
+        <path class="road-minor" d="M126 169 500 185 722 320 932 325 1308 392"/>
+        <path class="road-minor" d="M180 710 420 580 815 620 1118 700 1380 612"/>
+        <path class="road-minor" d="M722 93 710 255 792 449 760 720"/>
+        <path class="road-minor" d="M1260 150 1202 350 1235 560 1174 778"/>
+        <text class="road-label" x="520" y="247">天府大道</text>
+        <text class="road-label" x="1065" y="285" transform="rotate(78 1065 285)">益州大道</text>
+        <text class="road-label" x="420" y="610" transform="rotate(-22 420 610)">绕城高速</text>
+        <text class="water-label" x="795" y="503" transform="rotate(-10 795 503)">锦 城 湖 水 系</text>
+        <text class="map-label" x="263" y="166">肖家河街道</text>
+        <text class="map-label" x="741" y="156">桂溪街道</text>
+        <text class="map-label" x="1235" y="294">中和街道</text>
+        <text class="map-label" x="332" y="684">石羊街道</text>
+        <text class="map-label" x="1030" y="750">合作街道</text>
+
+        <g id="layer-jurisdiction" data-layer-group="jurisdiction">
+          <g class="map-object" tabindex="0" role="button" aria-label="查看锦城执法辖区详情" data-detail="jurisdiction" transform="translate(1 5)">
+            <path class="jurisdiction-shape" d="M625 177 963 128 1122 275 1010 461 736 438 590 316Z"/>
+            <rect class="jurisdiction-tag" x="874" y="182" width="112" height="31" rx="15"/>
+            <text class="area-tag-text" x="930" y="202">锦城辖区 · 46人</text>
+          </g>
+        </g>
+
+        <g id="layer-restricted" data-layer-group="restricted">
+          <g class="map-object" tabindex="0" role="button" aria-label="查看锦晖小学禁入区域详情" data-detail="restricted">
+            <path class="restricted-shape" d="M1005 348 1128 322 1193 382 1140 470 1018 454 980 399Z"/>
+            <rect x="1034" y="380" width="116" height="29" rx="14" fill="#ef4444"/>
+            <text class="area-tag-text" x="1092" y="399">禁入区域 · 学校</text>
+          </g>
+        </g>
+
+        <g id="layer-friendly" data-layer-group="friendly">
+          <g class="map-object" tabindex="0" role="button" aria-label="查看锦城湖宠物友好乐园详情" data-detail="friendly">
+            <path class="friendly-shape" d="M725 531 843 486 916 557 867 650 752 649 690 586Z"/>
+            <circle class="friendly-pin" cx="807" cy="557" r="18"/>
+            <text class="pin-glyph" x="807" y="557">♣</text>
+          </g>
+        </g>
+
+        <g id="layer-provider" data-layer-group="provider">
+          <g class="map-object" tabindex="0" role="button" aria-label="查看康桥宠物医院详情" data-detail="provider" transform="translate(944 520)">
+            <circle class="provider-pin" r="18"/><text class="pin-glyph" y="0">＋</text>
+          </g>
+          <g class="map-object" tabindex="0" role="button" aria-label="查看爪爪护理服务商详情" data-detail="provider" transform="translate(1260 562)">
+            <circle class="provider-pin" r="16"/><text class="pin-glyph" y="0">店</text>
+          </g>
+          <g class="map-object" tabindex="0" role="button" aria-label="查看旺家宠物商品服务商详情" data-detail="provider" transform="translate(444 456)">
+            <circle class="provider-pin" r="16"/><text class="pin-glyph" y="0">店</text>
+          </g>
+        </g>
+
+        <g id="district-clusters" data-level-group="district">
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入肖家河街道，892只犬" data-region="肖家河街道" data-count="892" data-viewbox="70 25 720 580" transform="translate(330 250)">
+            <circle class="cluster-halo" r="63"/><circle class="cluster-core" r="46"/>
+            <text class="cluster-name" y="-9">肖家河</text><text class="cluster-count" y="15">892<tspan class="cluster-unit">只</tspan></text>
+          </g>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入桂溪街道，1567只犬" data-region="桂溪街道" data-count="1567" data-viewbox="560 45 730 600" transform="translate(820 277)">
+            <circle class="cluster-halo" r="77"/><circle class="cluster-core" r="56"/>
+            <text class="cluster-name" y="-11">桂溪街道</text><text class="cluster-count" y="17">1,567<tspan class="cluster-unit">只</tspan></text>
+          </g>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入中和街道，734只犬" data-region="中和街道" data-count="734" data-viewbox="920 110 630 590" transform="translate(1290 367)">
+            <circle class="cluster-halo" r="59"/><circle class="cluster-core" r="44"/>
+            <text class="cluster-name" y="-8">中和</text><text class="cluster-count" y="15">734<tspan class="cluster-unit">只</tspan></text>
+          </g>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入石羊街道，681只犬" data-region="石羊街道" data-count="681" data-viewbox="80 300 740 580" transform="translate(438 584)">
+            <circle class="cluster-halo" r="58"/><circle class="cluster-core" r="43"/>
+            <text class="cluster-name" y="-8">石羊</text><text class="cluster-count" y="15">681<tspan class="cluster-unit">只</tspan></text>
+          </g>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入合作街道，412只犬" data-region="合作街道" data-count="412" data-viewbox="700 320 750 560" transform="translate(1110 682)">
+            <circle class="cluster-halo" r="52"/><circle class="cluster-core" r="39"/>
+            <text class="cluster-name" y="-8">合作</text><text class="cluster-count" y="14">412<tspan class="cluster-unit">只</tspan></text>
+          </g>
+        </g>
+
+        <g id="street-clusters" data-level-group="street" style="display:none">
+          <path class="community-boundary" d="M645 148 806 103 925 191 878 333 715 350 608 260Z"/>
+          <path class="community-boundary" d="M878 333 1014 214 1138 304 1108 446 982 483Z"/>
+          <path class="community-boundary" d="M715 350 878 333 982 483 858 590 687 521Z"/>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入交子公园社区，386只犬" data-region="交子公园社区" data-count="386" data-viewbox="650 175 520 430" transform="translate(824 285)">
+            <circle class="cluster-halo" r="55"/><circle class="cluster-core" r="41"/>
+            <text class="cluster-name" y="-8">交子公园</text><text class="cluster-count" y="15">386<tspan class="cluster-unit">只</tspan></text>
+          </g>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入锦城社区，302只犬" data-region="锦城社区" data-count="302" data-viewbox="820 230 480 410" transform="translate(1030 367)">
+            <circle class="cluster-halo" r="52"/><circle class="cluster-core" r="39"/>
+            <text class="cluster-name" y="-8">锦城社区</text><text class="cluster-count" y="14">302<tspan class="cluster-unit">只</tspan></text>
+          </g>
+          <g class="map-object cluster" tabindex="0" role="button" aria-label="进入益州社区，251只犬" data-region="益州社区" data-count="251" data-viewbox="580 300 480 420" transform="translate(806 480)">
+            <circle class="cluster-halo" r="49"/><circle class="cluster-core" r="37"/>
+            <text class="cluster-name" y="-8">益州社区</text><text class="cluster-count" y="14">251<tspan class="cluster-unit">只</tspan></text>
+          </g>
+        </g>
+
+        <g id="community-points" data-level-group="community" data-layer-group="dog" style="display:none">
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看电子狗牌犬只年糕详情" data-detail="dog-electronic" data-source="electronic" data-freshness="active" transform="translate(782 307)">
+            <circle class="select-ring" r="25"/><circle class="dog-pin" r="16"/><text class="dog-glyph" y="0">⚡</text>
+          </g>
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看普通狗牌犬只桃子详情" data-detail="dog-phone" data-source="phone" data-freshness="stale" transform="translate(896 371)">
+            <circle class="select-ring" r="25"/><circle class="dog-pin stale" r="16"/><text class="dog-glyph" y="0">•</text>
+          </g>
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看高风险犬只豆包详情" data-detail="dog-risk" data-source="electronic" data-freshness="active" transform="translate(1053 397)">
+            <circle class="select-ring" r="27"/><circle class="risk-ring" r="22"/><circle class="dog-pin" r="15"/><text class="dog-glyph" y="0">⚡</text>
+          </g>
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看失效定位犬只可乐详情" data-detail="dog-expired" data-source="phone" data-freshness="expired" transform="translate(998 491)">
+            <circle class="select-ring" r="25"/><circle class="dog-pin expired" r="16"/><text class="dog-glyph" y="0">•</text>
+          </g>
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看多犬共用手机定位，关联3只犬" data-detail="multi-dog" data-source="phone" data-freshness="active" transform="translate(842 462)">
+            <circle class="select-ring" r="27"/><circle class="dog-pin" r="19"/><text class="phone-count" y="0">3</text>
+          </g>
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看电子狗牌犬只摩卡详情" data-detail="dog-electronic" data-source="electronic" data-freshness="active" transform="translate(738 421)">
+            <circle class="select-ring" r="25"/><circle class="dog-pin" r="16"/><text class="dog-glyph" y="0">⚡</text>
+          </g>
+          <g class="map-object dog-object" tabindex="0" role="button" aria-label="查看普通狗牌犬只团子详情" data-detail="dog-phone" data-source="phone" data-freshness="active" transform="translate(934 281)">
+            <circle class="select-ring" r="25"/><circle class="dog-pin" r="16"/><text class="dog-glyph" y="0">•</text>
+          </g>
+        </g>
+      </svg>
+      <div class="map-grain" aria-hidden="true"></div>
+      <div class="demo-badge"><svg class="icon"><use href="#i-info"/></svg>演示地图 · 非真实地理数据</div>
+      <div class="map-empty" id="map-empty" hidden>
+        <span class="empty-icon"><svg class="icon"><use href="#i-filter"/></svg></span>
+        <strong>当前条件下暂无数据</strong>
+        <span>调整定位来源或时效后再查看</span>
+        <button type="button" class="text-button" data-action="reset">重置筛选</button>
+      </div>
+    </section>
+
+    <header class="toolbar panel" aria-label="产品工具栏">
+      <div class="brand-block">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <div><strong>犬只治理监管地图</strong><small>监管后台端 2.0</small></div>
+      </div>
+      <span class="toolbar-divider" aria-hidden="true"></span>
+      <nav class="breadcrumb" aria-label="当前地图层级">
+        <button type="button" class="crumb is-current" data-level-index="0">高新区</button>
+        <span class="crumb-separator" hidden><svg class="icon"><use href="#i-chevron"/></svg></span>
+        <button type="button" class="crumb" data-level-index="1" hidden></button>
+        <span class="crumb-separator" hidden><svg class="icon"><use href="#i-chevron"/></svg></span>
+        <button type="button" class="crumb" data-level-index="2" hidden></button>
+      </nav>
+      <div class="data-time"><span class="live-dot"></span><span>数据更新</span><strong>14:32</strong></div>
+      <div class="toolbar-actions">
+        <button type="button" class="button primary" data-action="ai"><svg class="icon"><use href="#i-spark"/></svg>AI 分析</button>
+        <div class="export-wrap">
+          <button type="button" class="button secondary" id="export-trigger" aria-expanded="false"><svg class="icon"><use href="#i-export"/></svg>导出</button>
+          <div class="export-menu panel" id="export-menu" hidden>
+            <button type="button" data-export="image"><span class="menu-icon"><svg class="icon"><use href="#i-image"/></svg></span><span><strong>当前地图图片</strong><small>包含图例、筛选与数据时间</small></span></button>
+            <button type="button" data-export="pdf"><span class="menu-icon"><svg class="icon"><use href="#i-file"/></svg></span><span><strong>PDF 决策快照</strong><small>当前地图状态与 AI 结论</small></span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="kpi-row" aria-label="高新区全局指标">
+      <article class="kpi-card panel"><span class="kpi-icon dog"><svg class="icon"><use href="#i-dog"/></svg></span><div><span>在册犬只数</span><strong>4,286</strong><small>高新区全局口径 · 14:32</small></div></article>
+      <article class="kpi-card panel"><span class="kpi-icon active"><span class="pulse-dot"></span></span><div><span>高新区活跃犬只数</span><strong>3,108</strong><small>高新区全局口径 · 0–5 分钟</small></div></article>
+      <article class="kpi-card panel"><span class="kpi-icon task"><svg class="icon"><use href="#i-shield"/></svg></span><div><span>当前城管巡查任务数</span><strong>37</strong><small>高新区全局口径 · 未完成</small></div></article>
+      <article class="kpi-card panel"><span class="kpi-icon risk">!</span><div><span>高风险事件数 <em>需关注</em></span><strong>6</strong><small>高新区全局口径 · 闯入禁区</small></div></article>
+    </section>
+
+    <section class="filter-bar panel" aria-label="地图筛选">
+      <div class="filter-title"><svg class="icon"><use href="#i-filter"/></svg><span>筛选</span></div>
+      <label class="select-control"><span>区域</span><select id="region-filter"><option value="all">高新区全部</option><option value="桂溪街道">桂溪街道</option><option value="肖家河街道">肖家河街道</option><option value="中和街道">中和街道</option><option value="石羊街道">石羊街道</option></select></label>
+      <label class="select-control"><span>定位来源</span><select id="source-filter"><option value="all">全部</option><option value="electronic">电子狗牌</option><option value="phone">手机定位</option></select></label>
+      <label class="select-control"><span>定位时效</span><select id="freshness-filter"><option value="all">全部</option><option value="active">活跃定位</option><option value="stale">较久未更新</option><option value="expired">定位失效</option></select></label>
+      <span class="filter-separator" aria-hidden="true"></span>
+      <div class="layer-control">
+        <span>图层</span>
+        <button type="button" class="layer-chip dog is-on" data-layer="dog" aria-pressed="true"><svg class="icon"><use href="#i-dog"/></svg>犬只</button>
+        <button type="button" class="layer-chip jurisdiction is-on" data-layer="jurisdiction" aria-pressed="true"><svg class="icon"><use href="#i-shield"/></svg>辖区</button>
+        <button type="button" class="layer-chip provider is-on" data-layer="provider" aria-pressed="true"><svg class="icon"><use href="#i-store"/></svg>服务商</button>
+        <button type="button" class="layer-chip friendly is-on" data-layer="friendly" aria-pressed="true"><svg class="icon"><use href="#i-tree"/></svg>乐园</button>
+        <button type="button" class="layer-chip restricted is-on" data-layer="restricted" aria-pressed="true"><svg class="icon"><use href="#i-ban"/></svg>禁区</button>
+      </div>
+      <button type="button" class="icon-button reset-button" data-action="reset" aria-label="重置筛选" title="重置筛选"><svg class="icon"><use href="#i-reset"/></svg></button>
+    </section>
+
+    <section class="legend panel" id="legend" aria-label="地图图例">
+      <div class="legend-head"><strong>地图图例</strong><span id="visible-summary">街道聚合</span></div>
+      <div class="legend-grid">
+        <span data-legend="dog"><i class="legend-mark dog">⚡</i>犬只 / 电子狗牌</span>
+        <span data-legend="dog"><i class="legend-mark dog plain"></i>普通狗牌</span>
+        <span data-legend="jurisdiction"><i class="legend-line blue"></i>城管辖区</span>
+        <span data-legend="provider"><i class="legend-mark yellow">＋</i>服务商</span>
+        <span data-legend="friendly"><i class="legend-area green"></i>友好乐园</span>
+        <span data-legend="restricted"><i class="legend-area red"></i>禁入区域</span>
+      </div>
+      <div class="freshness-key"><span><i class="status active"></i>活跃 0–5 分钟</span><span><i class="status stale"></i>较久 5–15 分钟</span><span><i class="status expired"></i>失效 &gt;15 分钟</span></div>
+    </section>
+
+    <aside class="ai-summary panel" aria-label="AI 辅助摘要">
+      <span class="ai-badge"><svg class="icon"><use href="#i-spark"/></svg>AI 辅助摘要</span>
+      <p id="ai-summary-text">犬只密度主要集中在桂溪街道，锦晖小学禁入区域检测到 2 只闯入犬只，建议优先核查周边巡查力量。</p>
+      <div><span><svg class="icon"><use href="#i-clock"/></svg>基于 14:32 地图数据</span><button type="button" data-action="ai">查看分析<svg class="icon"><use href="#i-chevron"/></svg></button></div>
+    </aside>
+
+    <div class="map-controls panel" aria-label="地图控件">
+      <button type="button" data-map-control="zoom-in" aria-label="放大地图" title="放大"><svg class="icon"><use href="#i-plus"/></svg></button>
+      <button type="button" data-map-control="zoom-out" aria-label="缩小地图" title="缩小"><svg class="icon"><use href="#i-minus"/></svg></button>
+      <span></span>
+      <button type="button" data-map-control="home" aria-label="返回高新区总览" title="返回总览"><svg class="icon"><use href="#i-home"/></svg></button>
+      <button type="button" data-map-control="fullscreen" aria-label="全屏查看地图" title="全屏"><svg class="icon"><use href="#i-fullscreen"/></svg></button>
+    </div>
+
+    <button type="button" class="detail-handle panel" id="detail-handle" aria-expanded="false" aria-controls="detail-panel">
+      <svg class="icon"><use href="#i-layer"/></svg><span>详情</span><svg class="icon chevron"><use href="#i-back"/></svg>
+    </button>
+
+    <aside class="detail-panel panel" id="detail-panel" aria-hidden="true" aria-labelledby="detail-title">
+      <header class="detail-header">
+        <div><span class="eyebrow" id="detail-eyebrow">区域总览</span><h2 id="detail-title" tabindex="-1">高新区</h2><p id="detail-subtitle">高新区 · 全局总览</p></div>
+        <button type="button" class="icon-button" data-action="close-detail" aria-label="收起详情"><svg class="icon"><use href="#i-close"/></svg></button>
+      </header>
+      <div class="detail-scroll" id="detail-content"></div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden><svg class="icon"><use href="#i-check"/></svg><span></span></div>
+    <div class="print-report" id="print-report" aria-hidden="true"></div>
+  </main>
+
+  <noscript>此原型需要启用 JavaScript 以演示地图下钻、筛选、详情、AI 与导出交互。</noscript>
+</body>
+</html>
