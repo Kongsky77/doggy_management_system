@@ -19,7 +19,7 @@
   --detail-width: 420px;
   font-family: "Noto Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
   color: var(--text);
-  background: #eef2f7;
+  background: #f7f9fc;
   font-synthesis: none;
 }
 
@@ -36,7 +36,7 @@ body {
 body {
   min-width: 1440px;
   min-height: 720px;
-  background: #eef2f7;
+  background: #f7f9fc;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -97,7 +97,7 @@ select { -webkit-tap-highlight-color: transparent; }
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #eef2f7;
+  background: #f7f9fc;
 }
 
 .map-stage::after {
@@ -117,20 +117,10 @@ select { -webkit-tap-highlight-color: transparent; }
 
 .map-art.is-transitioning { filter: saturate(.94); }
 
-.map-grain {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: .22;
-  background-image: radial-gradient(circle at center, rgba(255,255,255,.8) 0 1px, transparent 1.5px);
-  background-size: 8px 8px;
-  mix-blend-mode: soft-light;
-}
-
 .demo-badge {
   position: absolute;
   right: 78px;
-  top: 92px;
+  top: 134px;
   z-index: 4;
   display: flex;
   align-items: center;
@@ -510,6 +500,32 @@ select { -webkit-tap-highlight-color: transparent; }
 .map-controls button .icon { width: 17px; height: 17px; }
 .map-controls > span { height: 1px; margin: 2px 4px; background: var(--border); }
 .app-shell.detail-open .map-controls { right: calc(var(--safe) + var(--detail-width) + 12px); }
+
+.level-back-button {
+  position: absolute;
+  z-index: 105;
+  top: 92px;
+  right: var(--safe);
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  border: 1px solid rgba(203, 213, 225, .88);
+  border-radius: 9px;
+  color: #596579;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 5px 14px rgba(51,65,85,.07);
+  backdrop-filter: blur(8px);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: right .2s ease, color .15s ease, border-color .15s ease, background .15s ease;
+}
+.level-back-button[hidden] { display: none; }
+.level-back-button:hover { color: var(--brand-deep); border-color: #f3c18f; background: rgba(255,250,245,.96); }
+.level-back-button .icon { width: 14px; height: 14px; }
+.app-shell.detail-open .level-back-button { right: calc(var(--safe) + var(--detail-width) + 12px); }
 .app-shell.detail-open .ai-summary { transform: translateX(-52%); }
 
 .detail-handle {
@@ -714,7 +730,8 @@ noscript { position: fixed; z-index: 999; inset: 0; display: grid; place-items: 
   .legend { width: 265px; }
   .ai-summary { width: 500px; min-width: 500px; transform: translateX(-46%); }
   .app-shell.detail-open .ai-summary { transform: translateX(-56%); }
-  .demo-badge { right: 68px; top: 88px; }
+  .level-back-button { top: 88px; }
+  .demo-badge { right: 68px; top: 128px; }
 }
 
 @media (max-height: 820px) {

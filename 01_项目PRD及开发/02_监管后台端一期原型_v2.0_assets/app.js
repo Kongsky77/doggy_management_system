@@ -6,6 +6,7 @@
   const mapArt = document.getElementById("map-art");
   const detailPanel = document.getElementById("detail-panel");
   const detailHandle = document.getElementById("detail-handle");
+  const levelBackButton = document.getElementById("level-back-button");
   const detailTitle = document.getElementById("detail-title");
   const detailEyebrow = document.getElementById("detail-eyebrow");
   const detailSubtitle = document.getElementById("detail-subtitle");
@@ -391,6 +392,12 @@
       }
     });
     separators.forEach((separator, index) => { separator.hidden = !state.path[index + 1]; });
+    const parentArea = state.path[state.path.length - 2];
+    levelBackButton.hidden = state.level === 0;
+    if (parentArea) {
+      levelBackButton.querySelector("span").textContent = `返回${parentArea}`;
+      levelBackButton.setAttribute("aria-label", `返回上一级：${parentArea}`);
+    }
   }
 
   function setLevelGroups() {
@@ -402,12 +409,21 @@
     visibleSummary.textContent = state.level === 0 ? "街道聚合" : state.level === 1 ? "社区聚合" : "单犬点位";
   }
 
+  function updateMarkerScale(viewBoxWidth) {
+    const scale = Math.max(.24, Math.min(1.15, viewBoxWidth / LEVEL_VIEWBOXES[0][2]));
+    document.querySelectorAll("[data-scale-lock]").forEach(marker => {
+      if (!marker.dataset.baseTransform) marker.dataset.baseTransform = marker.getAttribute("transform") || "";
+      marker.setAttribute("transform", `${marker.dataset.baseTransform} scale(${scale})`.trim());
+    });
+  }
+
   function animateViewBox(target, duration = 280) {
     const start = state.viewBox.slice();
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion || duration === 0) {
       state.viewBox = target.slice();
       mapArt.setAttribute("viewBox", target.join(" "));
+      updateMarkerScale(target[2]);
       return;
     }
     const startAt = performance.now();
@@ -417,6 +433,7 @@
       const eased = 1 - Math.pow(1 - progress, 3);
       const next = start.map((value, index) => value + (target[index] - value) * eased);
       mapArt.setAttribute("viewBox", next.join(" "));
+      updateMarkerScale(next[2]);
       if (progress < 1) requestAnimationFrame(frame);
       else {
         state.viewBox = target.slice();
@@ -638,6 +655,7 @@
     if (action === "ai") openDetail("ai", event.target.closest("button"));
     if (action === "close-detail") closeDetail();
     if (action === "reset") resetAll();
+    if (action === "back-level" && state.level > 0) goToLevel(state.level - 1, state.level - 1 > 0);
 
     const layerButton = event.target.closest("[data-layer]");
     if (layerButton) toggleLayer(layerButton);
@@ -720,5 +738,6 @@
 
   updateBreadcrumb();
   setLevelGroups();
+  updateMarkerScale(state.viewBox[2]);
   applyDogFilters();
 })();
