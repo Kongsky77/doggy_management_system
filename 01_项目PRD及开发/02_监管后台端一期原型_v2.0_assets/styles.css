@@ -274,7 +274,7 @@ select { -webkit-tap-highlight-color: transparent; }
 .data-time strong { color: #475569; font-size: 12px; }
 .live-dot { width: 7px; height: 7px; background: #22c55e; border: 2px solid #dcfce7; border-radius: 50%; box-sizing: content-box; }
 
-.toolbar-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.toolbar-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
 
 .button {
   height: 40px;
@@ -367,23 +367,22 @@ select { -webkit-tap-highlight-color: transparent; }
 .kpi-card em { padding: 2px 4px; color: var(--restricted); background: #fef2f2; border-radius: 4px; font-size: 8px; font-style: normal; vertical-align: 1px; }
 
 .filter-bar {
-  position: absolute;
-  z-index: 100;
-  top: 188px;
-  left: var(--safe);
-  min-height: 52px;
-  max-width: calc(100vw - 510px);
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 42px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px 6px 11px;
+  gap: 6px;
+  padding-left: 12px;
+  overflow: hidden;
+  border-left: 1px solid var(--border);
 }
 
 .filter-title { display: flex; align-items: center; gap: 5px; margin-right: 2px; color: #475569; font-size: 12px; font-weight: 600; }
 .filter-title .icon { width: 15px; height: 15px; color: var(--brand-deep); }
 
 .select-control {
-  height: 38px;
+  height: 36px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -393,7 +392,7 @@ select { -webkit-tap-highlight-color: transparent; }
   background: #fff;
 }
 .select-control > span { color: var(--text-muted); font-size: 10px; white-space: nowrap; }
-.select-control select { height: 34px; max-width: 112px; padding: 0 25px 0 2px; border: 0; color: #374151; background: transparent; font-size: 12px; font-weight: 600; cursor: pointer; outline: none; }
+.select-control select { height: 32px; max-width: 108px; padding: 0 23px 0 2px; border: 0; color: #374151; background: transparent; font-size: 11px; font-weight: 600; cursor: pointer; outline: none; }
 
 .filter-separator { width: 1px; height: 26px; margin: 0 1px; background: var(--border); }
 .layer-control { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
@@ -419,6 +418,15 @@ select { -webkit-tap-highlight-color: transparent; }
 .layer-chip.provider.is-on { color: #b76e00; border-color: #fde3a8; background: #fffdf7; }
 .layer-chip.friendly.is-on { color: #15803d; border-color: #bbf7d0; background: #f7fff9; }
 .layer-chip.restricted.is-on { color: #dc2626; border-color: #fecaca; background: #fffafa; }
+
+.app-shell.detail-open .brand-block { min-width: 230px; }
+.app-shell.detail-open .breadcrumb { min-width: 180px; max-width: 220px; }
+.app-shell.detail-open .filter-title span,
+.app-shell.detail-open .select-control > span,
+.app-shell.detail-open .layer-control > span { display: none; }
+.app-shell.detail-open .select-control { padding-left: 5px; }
+.app-shell.detail-open .select-control select { max-width: 88px; }
+.app-shell.detail-open .layer-chip { width: 30px; padding: 0; justify-content: center; font-size: 0; }
 
 .icon-button {
   width: 36px;
@@ -679,10 +687,12 @@ noscript { position: fixed; z-index: 999; inset: 0; display: grid; place-items: 
 
 @media (max-width: 1599px) {
   :root { --safe: 16px; --detail-width: 380px; }
-  .toolbar { gap: 11px; }
-  .brand-block { min-width: 245px; }
+  .toolbar { gap: 8px; }
+  .brand-block { min-width: 210px; }
   .brand-block strong { font-size: 16px; }
-  .breadcrumb { min-width: 195px; max-width: 280px; }
+  .brand-block small { display: none; }
+  .breadcrumb { min-width: 160px; max-width: 180px; }
+  .crumb { max-width: 92px; font-size: 11px; }
   .data-time > span:not(.live-dot) { display: none; }
   .kpi-row { top: 88px; grid-template-columns: repeat(4, 154px); gap: 8px; }
   .kpi-card { height: 80px; padding: 10px; gap: 9px; }
@@ -690,12 +700,17 @@ noscript { position: fixed; z-index: 999; inset: 0; display: grid; place-items: 
   .kpi-card strong { font-size: 21px; }
   .kpi-card span:not(.kpi-icon):not(.pulse-dot) { font-size: 10.5px; }
   .kpi-card small { font-size: 8.3px; }
-  .filter-bar { top: 178px; max-width: calc(100vw - 420px); gap: 5px; }
+  .filter-bar { gap: 4px; padding-left: 7px; }
   .filter-title span { display: none; }
-  .select-control { padding-left: 7px; }
-  .select-control select { max-width: 96px; font-size: 11px; }
-  .layer-chip { padding: 0 6px; font-size: 10px; }
+  .select-control > span { display: none; }
+  .select-control { padding-left: 4px; }
+  .select-control select { max-width: 88px; font-size: 10.5px; }
+  .layer-chip { width: 28px; padding: 0; justify-content: center; font-size: 0; }
   .layer-control > span { display: none; }
+  .toolbar-actions .button { padding: 0 11px; }
+  .app-shell.detail-open .breadcrumb,
+  .app-shell.detail-open .data-time { display: none; }
+  .app-shell.detail-open .brand-block { min-width: 200px; }
   .legend { width: 265px; }
   .ai-summary { width: 500px; min-width: 500px; transform: translateX(-46%); }
   .app-shell.detail-open .ai-summary { transform: translateX(-56%); }

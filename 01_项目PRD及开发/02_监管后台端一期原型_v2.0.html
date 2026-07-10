@@ -203,6 +203,22 @@
         <button type="button" class="crumb" data-level-index="2" hidden></button>
       </nav>
       <div class="data-time"><span class="live-dot"></span><span>数据更新</span><strong>14:32</strong></div>
+      <section class="filter-bar" aria-label="地图筛选">
+        <div class="filter-title"><svg class="icon"><use href="#i-filter"/></svg><span>筛选</span></div>
+        <label class="select-control"><span>区域</span><select id="region-filter"><option value="all">高新区全部</option><option value="桂溪街道">桂溪街道</option><option value="肖家河街道">肖家河街道</option><option value="中和街道">中和街道</option><option value="石羊街道">石羊街道</option></select></label>
+        <label class="select-control"><span>定位来源</span><select id="source-filter"><option value="all">全部</option><option value="electronic">电子狗牌</option><option value="phone">手机定位</option></select></label>
+        <label class="select-control"><span>定位时效</span><select id="freshness-filter"><option value="all">全部</option><option value="active">活跃定位</option><option value="stale">较久未更新</option><option value="expired">定位失效</option></select></label>
+        <span class="filter-separator" aria-hidden="true"></span>
+        <div class="layer-control">
+          <span>图层</span>
+          <button type="button" class="layer-chip dog is-on" data-layer="dog" aria-pressed="true" title="犬只图层"><svg class="icon"><use href="#i-dog"/></svg>犬只</button>
+          <button type="button" class="layer-chip jurisdiction is-on" data-layer="jurisdiction" aria-pressed="true" title="城管辖区图层"><svg class="icon"><use href="#i-shield"/></svg>辖区</button>
+          <button type="button" class="layer-chip provider is-on" data-layer="provider" aria-pressed="true" title="服务商图层"><svg class="icon"><use href="#i-store"/></svg>服务商</button>
+          <button type="button" class="layer-chip friendly is-on" data-layer="friendly" aria-pressed="true" title="宠物友好乐园图层"><svg class="icon"><use href="#i-tree"/></svg>乐园</button>
+          <button type="button" class="layer-chip restricted is-on" data-layer="restricted" aria-pressed="true" title="犬只禁入区域图层"><svg class="icon"><use href="#i-ban"/></svg>禁区</button>
+        </div>
+        <button type="button" class="icon-button reset-button" data-action="reset" aria-label="重置筛选" title="重置筛选"><svg class="icon"><use href="#i-reset"/></svg></button>
+      </section>
       <div class="toolbar-actions">
         <button type="button" class="button primary" data-action="ai"><svg class="icon"><use href="#i-spark"/></svg>AI 分析</button>
         <div class="export-wrap">
@@ -220,23 +236,6 @@
       <article class="kpi-card panel"><span class="kpi-icon active"><span class="pulse-dot"></span></span><div><span>高新区活跃犬只数</span><strong>3,108</strong><small>高新区全局口径 · 0–5 分钟</small></div></article>
       <article class="kpi-card panel"><span class="kpi-icon task"><svg class="icon"><use href="#i-shield"/></svg></span><div><span>当前城管巡查任务数</span><strong>37</strong><small>高新区全局口径 · 未完成</small></div></article>
       <article class="kpi-card panel"><span class="kpi-icon risk">!</span><div><span>高风险事件数 <em>需关注</em></span><strong>6</strong><small>高新区全局口径 · 闯入禁区</small></div></article>
-    </section>
-
-    <section class="filter-bar panel" aria-label="地图筛选">
-      <div class="filter-title"><svg class="icon"><use href="#i-filter"/></svg><span>筛选</span></div>
-      <label class="select-control"><span>区域</span><select id="region-filter"><option value="all">高新区全部</option><option value="桂溪街道">桂溪街道</option><option value="肖家河街道">肖家河街道</option><option value="中和街道">中和街道</option><option value="石羊街道">石羊街道</option></select></label>
-      <label class="select-control"><span>定位来源</span><select id="source-filter"><option value="all">全部</option><option value="electronic">电子狗牌</option><option value="phone">手机定位</option></select></label>
-      <label class="select-control"><span>定位时效</span><select id="freshness-filter"><option value="all">全部</option><option value="active">活跃定位</option><option value="stale">较久未更新</option><option value="expired">定位失效</option></select></label>
-      <span class="filter-separator" aria-hidden="true"></span>
-      <div class="layer-control">
-        <span>图层</span>
-        <button type="button" class="layer-chip dog is-on" data-layer="dog" aria-pressed="true"><svg class="icon"><use href="#i-dog"/></svg>犬只</button>
-        <button type="button" class="layer-chip jurisdiction is-on" data-layer="jurisdiction" aria-pressed="true"><svg class="icon"><use href="#i-shield"/></svg>辖区</button>
-        <button type="button" class="layer-chip provider is-on" data-layer="provider" aria-pressed="true"><svg class="icon"><use href="#i-store"/></svg>服务商</button>
-        <button type="button" class="layer-chip friendly is-on" data-layer="friendly" aria-pressed="true"><svg class="icon"><use href="#i-tree"/></svg>乐园</button>
-        <button type="button" class="layer-chip restricted is-on" data-layer="restricted" aria-pressed="true"><svg class="icon"><use href="#i-ban"/></svg>禁区</button>
-      </div>
-      <button type="button" class="icon-button reset-button" data-action="reset" aria-label="重置筛选" title="重置筛选"><svg class="icon"><use href="#i-reset"/></svg></button>
     </section>
 
     <section class="legend panel" id="legend" aria-label="地图图例">
