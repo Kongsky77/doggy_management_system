@@ -28,6 +28,26 @@
       box-sizing: border-box;
     }
 
+    .legacy-prototype-notice {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      z-index: 9999;
+      max-width: calc(100vw - 48px);
+      padding: 9px 16px;
+      border: 1px solid #f2c46d;
+      border-radius: 999px;
+      color: #7a4a00;
+      background: rgba(255, 248, 225, 0.96);
+      box-shadow: 0 8px 24px rgba(122, 74, 0, 0.16);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+      text-align: center;
+      transform: translateX(-50%);
+      backdrop-filter: blur(10px);
+    }
+
     html, body {
       margin: 0;
       min-height: 100%;
