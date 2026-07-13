@@ -164,7 +164,7 @@
   }
   function exportPdf() {
     const layers = Object.entries(state.layers).filter(([,on]) => on).map(([key]) => ({dog:"犬只",provider:"服务商",friendly:"友好乐园",restricted:"禁入区域"})[key]).join("、") || "无";
-    printReport.innerHTML = `<h1>高新区犬只治理决策快照</h1><p>生成时间：${formatTime()}　当前区域：${state.region === "all" ? "高新区" : state.region}</p><section class="print-kpis"><div class="print-kpi"><span>在册犬只数</span><strong>4,286</strong></div><div class="print-kpi"><span>活跃犬只数</span><strong>3,108</strong></div><div class="print-kpi"><span>高风险事件数</span><strong>6</strong></div></section><h2>当前地图状态</h2><p>图层：${layers}；定位时效：${freshnessFilter.options[freshnessFilter.selectedIndex].text}；犬只定位来源：仅电子狗牌。</p><h2>AI 辅助摘要</h2><p>${$("#ai-summary-text").textContent}</p><p class="print-note">本报告为演示数据生成的辅助决策快照。</p>`;
+    printReport.innerHTML = `<h1>高新区犬只治理决策快照</h1><p>生成时间：${formatTime()}　当前区域：${state.region === "all" ? "高新区" : state.region}</p><h2>当前地图状态</h2><p>图层：${layers}；定位时效：${freshnessFilter.options[freshnessFilter.selectedIndex].text}；犬只定位来源：仅电子狗牌。</p><h2>当前区域摘要</h2><p>区域指标与对象信息以当前右侧详情为准。</p><h2>AI 辅助摘要</h2><p>${$("#ai-summary-text").textContent}</p><p class="print-note">本报告为演示数据生成的辅助决策快照。</p>`;
     window.print();
   }
 
@@ -183,8 +183,6 @@
     const control = event.target.closest("[data-map-control]")?.dataset.mapControl;
     if (control === "zoom-in") zoom(.72);
     if (control === "zoom-out") zoom(1.35);
-    if (control === "home") { state.region = "all"; regionFilter.value = "all"; setViewBox(regions.all.box); }
-    if (control === "fullscreen") { const stage = $("#map-stage"); if (!document.fullscreenElement) stage.requestFullscreen?.(); else document.exitFullscreen?.(); }
     if (event.target.closest("#detail-handle")) showRegion();
     if (event.target.closest("#layer-trigger")) {
       layerMenu.hidden = !layerMenu.hidden;
