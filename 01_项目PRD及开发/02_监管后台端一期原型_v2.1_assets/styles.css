@@ -6,6 +6,9 @@
   --provider: #f59e0b;
   --friendly: #22c55e;
   --restricted: #ef4444;
+  --heat-low: #22c55e;
+  --heat-mid: #facc15;
+  --heat-high: #ef4444;
   --text: #1f2937;
   --text-secondary: #6b7280;
   --text-muted: #9ca3af;
@@ -467,7 +470,7 @@ select { -webkit-tap-highlight-color: transparent; }
 .legend-mark { width: 17px; height: 17px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; color: #fff; font-size: 9px; font-style: normal; font-weight: 700; box-shadow: 0 1px 4px rgba(51,65,85,.16); }
 .legend-mark.dog { position: relative; color: #6d28d9; border: 1.5px solid var(--dog); background: #f5f0ff; font-size: 8px; }
 .legend-mark.dog::after { content: "⚡"; position: absolute; top: -5px; right: -5px; width: 9px; height: 9px; display: grid; place-items: center; color: #fff; background: var(--brand); border: 1px solid #fff; border-radius: 50%; font-size: 5px; line-height: 1; }
-.legend-mark.dog.heat { border: 0; background: linear-gradient(135deg,#a78bfa 8%,#f97316 55%,#ef4444 92%); box-shadow: 0 0 8px rgba(249,115,22,.34); }
+.legend-mark.dog.heat { border: 0; background: linear-gradient(135deg,var(--heat-low) 8%,var(--heat-mid) 52%,var(--heat-high) 92%); box-shadow: 0 0 8px rgba(250,204,21,.34); }
 .legend-mark.dog.heat::after { display: none; }
 .legend-mark.yellow { background: var(--provider); }
 .legend-area { width: 19px; height: 12px; border-radius: 4px; }
@@ -480,7 +483,7 @@ select { -webkit-tap-highlight-color: transparent; }
 .map-heat-key[hidden] { display: none; }
 .map-heat-key > span { margin-right: auto; color: var(--text-secondary); font-weight: 600; }
 .map-heat-key i,.map-heat-key em,.map-heat-key strong { width: 14px; height: 8px; border-radius: 999px; }
-.map-heat-key i { background: #a78bfa; }.map-heat-key em { background: #f97316; }.map-heat-key strong { background: #ef4444; }
+.map-heat-key i { background: var(--heat-low); }.map-heat-key em { background: var(--heat-mid); }.map-heat-key strong { background: var(--heat-high); }
 .map-heat-key b { font-weight: 400; }
 
 .heatmap-summary { position: fixed; z-index: 34; left: 18px; top: 88px; width: 278px; padding: 11px 13px; border-left: 3px solid #f97316; pointer-events: none; }
