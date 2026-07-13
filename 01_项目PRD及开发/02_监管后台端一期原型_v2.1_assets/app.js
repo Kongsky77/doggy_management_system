@@ -15,6 +15,8 @@
   const freshnessFilter = $("#freshness-filter");
   const exportMenu = $("#export-menu");
   const exportTrigger = $("#export-trigger");
+  const layerMenu = $("#layer-menu");
+  const layerTrigger = $("#layer-trigger");
   const toast = $("#toast");
   const printReport = $("#print-report");
 
@@ -139,7 +141,7 @@
     state.region = "all"; state.freshness = "all"; Object.keys(state.layers).forEach(key => state.layers[key] = true);
     regionFilter.value = "all"; freshnessFilter.value = "all";
     $$(".layer-chip").forEach(chip => { chip.classList.add("is-on"); chip.setAttribute("aria-pressed", "true"); });
-    setViewBox(regions.all.box); applyFilters(); closeDetail(); notify("已恢复高新区全量电子狗牌犬只点位");
+    setViewBox(regions.all.box); applyFilters(); closeDetail(); layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); notify("已恢复高新区全量电子狗牌犬只点位");
   }
   function exportPdf() {
     const layers = Object.entries(state.layers).filter(([,on]) => on).map(([key]) => ({dog:"犬只",provider:"服务商",friendly:"友好乐园",restricted:"禁入区域"})[key]).join("、") || "无";
@@ -164,6 +166,15 @@
     if (control === "home") { state.region = "all"; regionFilter.value = "all"; setViewBox(regions.all.box); }
     if (control === "fullscreen") { const stage = $("#map-stage"); if (!document.fullscreenElement) stage.requestFullscreen?.(); else document.exitFullscreen?.(); }
     if (event.target.closest("#detail-handle")) showRegion();
+    if (event.target.closest("#layer-trigger")) {
+      layerMenu.hidden = !layerMenu.hidden;
+      layerTrigger.setAttribute("aria-expanded", String(!layerMenu.hidden));
+      exportMenu.hidden = true;
+      exportTrigger.setAttribute("aria-expanded", "false");
+    } else if (!event.target.closest(".layer-menu-wrap")) {
+      layerMenu.hidden = true;
+      layerTrigger.setAttribute("aria-expanded", "false");
+    }
     if (event.target.closest("#export-trigger")) { exportMenu.hidden = !exportMenu.hidden; exportTrigger.setAttribute("aria-expanded", String(!exportMenu.hidden)); }
     const exportType = event.target.closest("[data-export]")?.dataset.export;
     if (exportType === "pdf") exportPdf();
@@ -172,7 +183,7 @@
   });
   document.addEventListener("keydown", event => {
     if ((event.key === "Enter" || event.key === " ") && event.target.matches(".map-object")) { event.preventDefault(); event.target.click(); }
-    if (event.key === "Escape") { closeDetail(); exportMenu.hidden = true; }
+    if (event.key === "Escape") { closeDetail(); exportMenu.hidden = true; layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); }
   });
   regionFilter.addEventListener("change", () => { state.region = regionFilter.value; setViewBox(regions[state.region].box); showRegion(); });
   freshnessFilter.addEventListener("change", () => { state.freshness = freshnessFilter.value; applyFilters(); });

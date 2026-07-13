@@ -19,6 +19,7 @@
     <symbol id="i-home" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9h-6v-6h-4v6H4v-9z"/></symbol>
     <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5"/></symbol>
     <symbol id="i-layer" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M11 8h6M11 12h6M11 16h4"/></symbol>
     <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5z"/></symbol>
     <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 1 8m-1-8V4m0 5h5"/></symbol>
     <symbol id="i-dog" viewBox="0 0 24 24"><path d="M7 8 4 5v6l2 2v5h3v-3h6v3h3v-8l2-2-2-4-3 3H9L7 8z"/></symbol>
@@ -158,17 +159,21 @@
         <div class="filter-title"><svg class="icon"><use href="#i-filter"/></svg><span>筛选</span></div>
         <label class="select-control"><span>区域</span><select id="region-filter"><option value="all">高新区全部</option><option value="桂溪街道">桂溪街道</option><option value="肖家河街道">肖家河街道</option><option value="中和街道">中和街道</option><option value="石羊街道">石羊街道</option></select></label>
         <label class="select-control"><span>定位时效</span><select id="freshness-filter"><option value="all">全部</option><option value="active">活跃定位</option><option value="stale">较久未更新</option><option value="expired">定位失效</option></select></label>
-        <span class="filter-separator" aria-hidden="true"></span>
-        <div class="layer-control">
-          <span>图层</span>
-          <button type="button" class="layer-chip dog is-on" data-layer="dog" aria-pressed="true" title="犬只图层"><svg class="icon"><use href="#i-dog"/></svg>犬只</button>
-          <button type="button" class="layer-chip provider is-on" data-layer="provider" aria-pressed="true" title="服务商图层"><svg class="icon"><use href="#i-store"/></svg>服务商</button>
-          <button type="button" class="layer-chip friendly is-on" data-layer="friendly" aria-pressed="true" title="宠物友好乐园图层"><svg class="icon"><use href="#i-tree"/></svg>乐园</button>
-          <button type="button" class="layer-chip restricted is-on" data-layer="restricted" aria-pressed="true" title="犬只禁入区域图层"><svg class="icon"><use href="#i-ban"/></svg>禁区</button>
-        </div>
         <button type="button" class="icon-button reset-button" data-action="reset" aria-label="重置筛选" title="重置筛选"><svg class="icon"><use href="#i-reset"/></svg></button>
       </section>
       <div class="toolbar-actions">
+        <div class="layer-menu-wrap">
+          <button type="button" class="button secondary layer-trigger" id="layer-trigger" aria-expanded="false" aria-controls="layer-menu"><svg class="icon"><use href="#i-layer"/></svg>图层</button>
+          <div class="layer-menu panel" id="layer-menu" hidden>
+            <div class="layer-menu-head"><strong>地图图层</strong><small>选择地图中显示的对象</small></div>
+            <div class="layer-control">
+              <button type="button" class="layer-chip dog is-on" data-layer="dog" aria-pressed="true"><svg class="icon"><use href="#i-dog"/></svg><span>犬只</span><i></i></button>
+              <button type="button" class="layer-chip provider is-on" data-layer="provider" aria-pressed="true"><svg class="icon"><use href="#i-store"/></svg><span>服务商</span><i></i></button>
+              <button type="button" class="layer-chip friendly is-on" data-layer="friendly" aria-pressed="true"><svg class="icon"><use href="#i-tree"/></svg><span>友好乐园</span><i></i></button>
+              <button type="button" class="layer-chip restricted is-on" data-layer="restricted" aria-pressed="true"><svg class="icon"><use href="#i-ban"/></svg><span>禁入区域</span><i></i></button>
+            </div>
+          </div>
+        </div>
         <button type="button" class="button primary" data-action="ai"><svg class="icon"><use href="#i-spark"/></svg>AI 分析</button>
         <div class="export-wrap">
           <button type="button" class="button secondary" id="export-trigger" aria-expanded="false"><svg class="icon"><use href="#i-export"/></svg>导出</button>
@@ -212,7 +217,7 @@
     </div>
 
     <button type="button" class="detail-handle panel" id="detail-handle" aria-expanded="false" aria-controls="detail-panel">
-      <svg class="icon"><use href="#i-layer"/></svg><span>详情</span><svg class="icon chevron"><use href="#i-back"/></svg>
+      <svg class="icon"><use href="#i-panel"/></svg><span>详情</span><svg class="icon chevron"><use href="#i-back"/></svg>
     </button>
 
     <aside class="detail-panel panel" id="detail-panel" aria-hidden="true" aria-labelledby="detail-title">
