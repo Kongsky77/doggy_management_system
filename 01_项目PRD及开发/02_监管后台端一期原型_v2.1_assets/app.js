@@ -13,7 +13,9 @@
   const detailEyebrow = $("#detail-eyebrow");
   const detailSubtitle = $("#detail-subtitle");
   const regionFilter = $("#region-filter");
-  const freshnessFilter = $("#freshness-filter");
+  const timeViewFilter = $("#time-view-filter");
+  const heatmapLayer = $("#heatmap-layer");
+  const heatmapSummary = $("#heatmap-summary");
   const exportMenu = $("#export-menu");
   const exportTrigger = $("#export-trigger");
   const layerMenu = $("#layer-menu");
@@ -57,7 +59,15 @@
     campaign: { name: "文明养犬宣传日", status: "已结束", statusClass: "done", time: "7 月 6 日 09:30–11:30", place: "交子公园北广场", description: "围绕依法登记、佩戴狗牌、牵绳出行和便溺清理开展现场宣传与咨询。", notice: "活动资料可在后续文明养犬主题活动中继续领取。" },
     market: { name: "宠物友好生活市集", status: "即将开始", statusClass: "soon", time: "7 月 27 日 10:00–18:00", place: "高新南区城市广场", description: "集合宠物用品展示、基础护理体验、文明养犬互动和犬主交流区域的开放式主题市集。", notice: "人流较大，请根据犬只状态决定是否携犬入场，并始终使用牵引绳。" }
   };
-  const state = { box: [...regions.all.box], region: "all", freshness: "all", layers: { dog: true, provider: true, friendly: true, restricted: true } };
+  const heatmapProfiles = {
+    all: { period: "最近 7 天 · 全部时段", peak: "桂溪街道", finding: "与锦城湖周边为全天遛狗高峰区", points: [[770,330,170,.92],[870,560,150,.82],[1220,330,132,.68],[410,570,120,.58],[1090,675,108,.48]] },
+    morning: { period: "最近 7 天 · 早间 06:00–10:00", peak: "桂溪街道", finding: "天府大道西侧为早间遛狗高峰区", points: [[720,305,158,.94],[920,350,126,.76],[1260,330,110,.62],[380,565,94,.45]] },
+    noon: { period: "最近 7 天 · 午间 10:00–14:00", peak: "锦城湖周边", finding: "为午间遛狗高峰区", points: [[835,555,144,.91],[1010,470,110,.68],[510,440,92,.48],[1230,560,80,.38]] },
+    afternoon: { period: "最近 7 天 · 下午 14:00–18:00", peak: "石羊街道", finding: "北部居住片区为下午遛狗高峰区", points: [[445,590,152,.9],[720,610,122,.7],[1040,600,106,.56],[1320,390,88,.4]] },
+    evening: { period: "最近 7 天 · 晚间 18:00–22:00", peak: "桂溪街道", finding: "与锦城湖沿线为晚间遛狗最高峰区", points: [[820,420,190,1],[920,580,164,.9],[1220,350,132,.72],[430,570,120,.62],[1090,700,108,.5]] },
+    night: { period: "最近 7 天 · 深夜 22:00–次日 06:00", peak: "中和街道", finding: "中部生活区为深夜相对高峰区", points: [[1230,365,128,.88],[1040,430,104,.68],[760,300,90,.48],[470,590,72,.32]] }
+  };
+  const state = { box: [...regions.all.box], region: "all", timeView: "realtime", layers: { dog: true, provider: true, friendly: true, restricted: true } };
   const formatTime = () => `2026-07-13 ${new Date().toTimeString().slice(0, 5)}`;
   const icon = name => `<svg class="icon"><use href="#i-${name}"/></svg>`;
 
@@ -90,8 +100,8 @@
       <div class="metric"><span>服务商</span><strong>${data.providers}<small>家</small></strong></div></div></section>
       <section class="detail-section"><h3 class="section-title">当前地图口径</h3><dl class="detail-list">
       <div class="detail-row"><dt>犬只定位</dt><dd>仅电子狗牌</dd></div>
-      <div class="detail-row"><dt>点位展示方式</dt><dd>全部独立显示</dd></div>
-      <div class="detail-row"><dt>定位时效</dt><dd>${freshnessFilter.options[freshnessFilter.selectedIndex].text}</dd></div></dl>${updateTime()}</section>`;
+      <div class="detail-row"><dt>地图展示方式</dt><dd>${state.timeView === "realtime" ? "实时单犬点位" : "遛狗高峰热力图"}</dd></div>
+      <div class="detail-row"><dt>时间视图</dt><dd>${timeViewFilter.options[timeViewFilter.selectedIndex].text}</dd></div></dl>${updateTime()}</section>`;
     openDetail();
   }
   function showDog(key, node) {
@@ -159,14 +169,32 @@
     $(".activity-dialog [data-action='close-activity']", activityModal)?.focus();
   }
   function closeActivity() { activityModal.hidden = true; }
-  function visibleDogs() { return $$(".dog-object").filter(node => node.style.display !== "none" && state.layers.dog).length; }
+  function visibleDogs() { return state.timeView === "realtime" ? $$(".dog-object").filter(node => node.style.display !== "none" && state.layers.dog).length : 0; }
+  function renderHeatmap() {
+    if (state.timeView === "realtime") return;
+    const profile = heatmapProfiles[state.timeView];
+    heatmapLayer.innerHTML = profile.points.map(([x,y,r,opacity]) => `<g class="heat-spot" transform="translate(${x} ${y})" opacity="${opacity}"><circle class="heat-halo" r="${r}"/><circle class="heat-core" r="${Math.round(r * .62)}"/></g>`).join("");
+    $("#heatmap-period").textContent = profile.period;
+    $("#heatmap-peak").textContent = profile.peak;
+    $("#heatmap-finding").textContent = profile.finding;
+  }
   function applyFilters() {
-    $$(".dog-object").forEach(node => node.style.display = state.layers.dog && (state.freshness === "all" || node.dataset.freshness === state.freshness) ? "" : "none");
+    const realtime = state.timeView === "realtime";
+    $$(".dog-object").forEach(node => node.style.display = state.layers.dog && realtime ? "" : "none");
+    if (!realtime) renderHeatmap();
+    heatmapLayer.toggleAttribute("hidden", realtime || !state.layers.dog);
+    heatmapSummary.hidden = realtime || !state.layers.dog;
     Object.entries(state.layers).forEach(([layer, on]) => {
       $$(`[data-layer-group="${layer}"]`).forEach(node => { if (layer !== "dog") node.style.display = on ? "" : "none"; });
       $$(`[data-legend="${layer}"]`).forEach(node => node.classList.toggle("is-off", !on));
     });
-    $("#visible-summary").textContent = state.layers.dog ? `${visibleDogs()} 个犬只点位` : "犬只图层已关闭";
+    $("#freshness-key").hidden = !realtime;
+    $("#map-heat-key").hidden = realtime;
+    $("#dog-legend-mark").classList.toggle("heat", !realtime);
+    $("#dog-legend-mark").textContent = realtime ? "犬" : "";
+    $("#dog-legend-text").textContent = realtime ? "头像 / ⚡电子狗牌" : "遛狗热力密度";
+    $("#visible-summary").textContent = !state.layers.dog ? "犬只图层已关闭" : realtime ? `${visibleDogs()} 个犬只点位` : "最近 7 天热力分布";
+    $("#ai-summary-text").textContent = realtime ? "犬只点位主要集中在桂溪街道，锦晖小学禁入区域检测到 2 只闯入犬只，建议优先核查风险犬只状态。" : `${heatmapProfiles[state.timeView].period.replace("最近 7 天 · ", "")}，${heatmapProfiles[state.timeView].peak}${heatmapProfiles[state.timeView].finding}，建议结合服务设施覆盖情况关注高峰承载。`;
   }
   function setViewBox(box) {
     state.box = clampBox(box.map(Number));
@@ -202,14 +230,14 @@
   }
   function notify(message) { $("span", toast).textContent = message; toast.hidden = false; clearTimeout(notify.timer); notify.timer = setTimeout(() => toast.hidden = true, 2400); }
   function reset() {
-    state.region = "all"; state.freshness = "all"; Object.keys(state.layers).forEach(key => state.layers[key] = true);
-    regionFilter.value = "all"; freshnessFilter.value = "all";
+    state.region = "all"; state.timeView = "realtime"; Object.keys(state.layers).forEach(key => state.layers[key] = true);
+    regionFilter.value = "all"; timeViewFilter.value = "realtime";
     $$(".layer-chip").forEach(chip => { chip.classList.add("is-on"); chip.setAttribute("aria-pressed", "true"); });
     setViewBox(regions.all.box); applyFilters(); closeDetail(); closeActivity(); layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); activityMenu.hidden = true; activityTrigger.setAttribute("aria-expanded", "false"); notify("已恢复高新区全量电子狗牌犬只点位");
   }
   function exportPdf() {
     const layers = Object.entries(state.layers).filter(([,on]) => on).map(([key]) => ({dog:"犬只",provider:"服务商",friendly:"友好乐园",restricted:"禁入区域"})[key]).join("、") || "无";
-    printReport.innerHTML = `<h1>高新区犬只治理决策快照</h1><p>生成时间：${formatTime()}　当前区域：${state.region === "all" ? "高新区" : state.region}</p><h2>当前地图状态</h2><p>图层：${layers}；定位时效：${freshnessFilter.options[freshnessFilter.selectedIndex].text}；犬只定位来源：仅电子狗牌。</p><h2>当前区域摘要</h2><p>区域指标与对象信息以当前右侧详情为准。</p><h2>AI 辅助摘要</h2><p>${$("#ai-summary-text").textContent}</p><p class="print-note">本报告为演示数据生成的辅助决策快照。</p>`;
+    printReport.innerHTML = `<h1>高新区犬只治理决策快照</h1><p>生成时间：${formatTime()}　当前区域：${state.region === "all" ? "高新区" : state.region}</p><h2>当前地图状态</h2><p>图层：${layers}；时间视图：${timeViewFilter.options[timeViewFilter.selectedIndex].text}；${state.timeView === "realtime" ? "犬只定位来源：仅电子狗牌。" : "热力统计口径：最近 7 天相同时段汇总。"}</p><h2>当前区域摘要</h2><p>区域指标与对象信息以当前右侧详情为准。</p><h2>AI 辅助摘要</h2><p>${$("#ai-summary-text").textContent}</p><p class="print-note">本报告为演示数据生成的辅助决策快照。</p>`;
     window.print();
   }
 
@@ -265,7 +293,12 @@
     if (event.key === "Escape") { closeDetail(); closeActivity(); exportMenu.hidden = true; layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); activityMenu.hidden = true; activityTrigger.setAttribute("aria-expanded", "false"); }
   });
   regionFilter.addEventListener("change", () => { state.region = regionFilter.value; setViewBox(regions[state.region].box); showRegion(); });
-  freshnessFilter.addEventListener("change", () => { state.freshness = freshnessFilter.value; applyFilters(); });
+  timeViewFilter.addEventListener("change", () => {
+    state.timeView = timeViewFilter.value;
+    applyFilters();
+    if (app.classList.contains("detail-open")) showRegion();
+    notify(state.timeView === "realtime" ? "已切换至实时单犬位置" : `已切换至${timeViewFilter.options[timeViewFilter.selectedIndex].text}热力图`);
+  });
   mapArt.addEventListener("wheel", zoomAtPointer, { passive: false });
   mapArt.addEventListener("pointerdown", event => {
     if (event.button !== 0) return;

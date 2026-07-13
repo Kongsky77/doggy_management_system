@@ -38,7 +38,7 @@
     <section class="map-stage" id="map-stage" aria-label="高新区犬只治理演示地图">
       <svg id="map-art" class="map-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title map-desc">
         <title id="map-title">高新区犬只治理演示地图</title>
-        <desc id="map-desc">浅色演示地图，直接展示高新区全部电子狗牌犬只点位、服务商、宠物友好乐园和犬只禁入区域。</desc>
+        <desc id="map-desc">浅色演示地图，可在高新区实时电子狗牌犬只点位与最近七天遛狗时段热力图之间切换，并叠加服务商、宠物友好乐园和犬只禁入区域。</desc>
         <style>
           .map-bg{fill:#f7f9fc}.map-grid{fill:url(#minor-grid);opacity:.16}
           .district{fill:#fcfdfe;stroke:#d7e0e9;stroke-width:1.4}.street-area{stroke:#e2e8ef;stroke-width:1}.street-a{fill:#faf9fc}.street-b{fill:#f9fafc}.street-c{fill:#fcfbf8}.street-d{fill:#f8fbfa}
@@ -55,6 +55,8 @@
         </style>
         <defs>
           <pattern id="minor-grid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="#e8edf3" stroke-width="1"/></pattern>
+          <radialGradient id="heat-gradient"><stop offset="0" stop-color="#ef4444" stop-opacity=".94"/><stop offset=".28" stop-color="#f97316" stop-opacity=".72"/><stop offset=".6" stop-color="#8b5cf6" stop-opacity=".42"/><stop offset="1" stop-color="#7c3aed" stop-opacity="0"/></radialGradient>
+          <filter id="heat-blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="10"/></filter>
         </defs>
         <rect class="map-bg" width="1600" height="900"/>
         <rect class="map-grid" width="1600" height="900"/>
@@ -87,6 +89,8 @@
         <text class="map-label" x="1235" y="294">中和街道</text>
         <text class="map-label" x="332" y="684">石羊街道</text>
         <text class="map-label" x="1030" y="750">合作街道</text>
+
+        <g id="heatmap-layer" aria-label="遛狗高峰热力分布" pointer-events="none" hidden></g>
 
         <g id="layer-restricted" data-layer-group="restricted">
           <g class="map-object" tabindex="0" role="button" aria-label="查看锦晖小学禁入区域详情" data-detail="restricted">
@@ -135,7 +139,7 @@
       <div class="map-empty" id="map-empty" hidden>
         <span class="empty-icon"><svg class="icon"><use href="#i-filter"/></svg></span>
         <strong>当前条件下暂无数据</strong>
-        <span>调整定位来源或时效后再查看</span>
+        <span>调整区域、时间视图或图层后再查看</span>
         <button type="button" class="text-button" data-action="reset">重置筛选</button>
       </div>
     </section>
@@ -157,10 +161,10 @@
       <section class="filter-bar" aria-label="地图筛选">
         <div class="filter-title"><svg class="icon"><use href="#i-filter"/></svg><span>筛选</span></div>
         <label class="select-control"><span>区域</span><select id="region-filter"><option value="all">高新区全部</option><option value="桂溪街道">桂溪街道</option><option value="肖家河街道">肖家河街道</option><option value="中和街道">中和街道</option><option value="石羊街道">石羊街道</option></select></label>
-        <label class="select-control"><span>定位时效</span><select id="freshness-filter"><option value="all">全部</option><option value="active">活跃定位</option><option value="stale">较久未更新</option><option value="expired">定位失效</option></select></label>
         <button type="button" class="icon-button reset-button" data-action="reset" aria-label="重置筛选" title="重置筛选"><svg class="icon"><use href="#i-reset"/></svg></button>
       </section>
       <div class="toolbar-actions">
+        <label class="time-view-control"><svg class="icon"><use href="#i-clock"/></svg><span>时间视图</span><select id="time-view-filter" aria-label="时间视图"><option value="realtime">实时时间</option><option value="all">全部时段</option><option value="morning">早间 06:00–10:00</option><option value="noon">午间 10:00–14:00</option><option value="afternoon">下午 14:00–18:00</option><option value="evening">晚间 18:00–22:00</option><option value="night">深夜 22:00–次日 06:00</option></select></label>
         <div class="activity-wrap">
           <button type="button" class="button secondary" id="activity-trigger" aria-expanded="false" aria-controls="activity-menu"><svg class="icon"><use href="#i-calendar"/></svg>活动列表</button>
           <div class="activity-menu panel" id="activity-menu" hidden>
@@ -179,15 +183,21 @@
       </div>
     </header>
 
+    <section class="heatmap-summary panel" id="heatmap-summary" aria-live="polite" hidden>
+      <span><svg class="icon"><use href="#i-clock"/></svg><strong id="heatmap-period">最近 7 天 · 全部时段</strong></span>
+      <p><strong id="heatmap-peak">桂溪街道</strong><span id="heatmap-finding">为当前时段遛狗高峰区</span></p>
+    </section>
+
     <section class="legend panel" id="legend" aria-label="地图图例">
       <div class="legend-head"><strong>地图图例</strong><span id="visible-summary">全部犬只点位</span></div>
       <div class="legend-grid">
-        <span data-legend="dog"><i class="legend-mark dog">犬</i>头像 / ⚡电子狗牌</span>
+        <span data-legend="dog"><i class="legend-mark dog" id="dog-legend-mark">犬</i><b id="dog-legend-text">头像 / ⚡电子狗牌</b></span>
         <span data-legend="provider"><i class="legend-mark yellow">＋</i>服务商</span>
         <span data-legend="friendly"><i class="legend-area green"></i>友好乐园</span>
         <span data-legend="restricted"><i class="legend-area red"></i>禁入区域</span>
       </div>
-      <div class="freshness-key"><span><i class="status active"></i>活跃 0–5 分钟</span><span><i class="status stale"></i>较久 5–15 分钟</span><span><i class="status expired"></i>失效 &gt;15 分钟</span></div>
+      <div class="freshness-key" id="freshness-key"><span><i class="status active"></i>活跃 0–5 分钟</span><span><i class="status stale"></i>较久 5–15 分钟</span><span><i class="status expired"></i>失效 &gt;15 分钟</span></div>
+      <div class="map-heat-key" id="map-heat-key" hidden><span>热力密度</span><i></i><b>低</b><em></em><b>中</b><strong></strong><b>高</b></div>
     </section>
 
     <aside class="ai-summary panel" aria-label="AI 辅助摘要">
