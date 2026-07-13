@@ -5,6 +5,7 @@
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const app = $("#app-shell");
   const mapArt = $("#map-art");
+  const mapStage = $("#map-stage");
   const detailPanel = $("#detail-panel");
   const detailHandle = $("#detail-handle");
   const detailContent = $("#detail-content");
@@ -22,10 +23,10 @@
 
   const regions = {
     all: { name: "高新区", box: [0, 0, 1600, 900], registered: "4,286", active: "3,108", risk: "6", providers: "28" },
-    "桂溪街道": { box: [520, 40, 720, 520], registered: "1,567", active: "1,218", risk: "3", providers: "11" },
-    "肖家河街道": { box: [60, 25, 700, 520], registered: "892", active: "641", risk: "1", providers: "6" },
-    "中和街道": { box: [900, 90, 650, 520], registered: "734", active: "542", risk: "1", providers: "5" },
-    "石羊街道": { box: [60, 330, 720, 520], registered: "681", active: "487", risk: "1", providers: "6" }
+    "桂溪街道": { box: [520, 40, 720, 405], registered: "1,567", active: "1,218", risk: "3", providers: "11" },
+    "肖家河街道": { box: [60, 25, 700, 393.75], registered: "892", active: "641", risk: "1", providers: "6" },
+    "中和街道": { box: [900, 90, 650, 365.625], registered: "734", active: "542", risk: "1", providers: "5" },
+    "石羊街道": { box: [60, 330, 720, 405], registered: "681", active: "487", risk: "1", providers: "6" }
   };
   const names = {
     niangao: ["年糕", "PD-CD-240018", "ED-510109-0188", "2 岁", "母", "比熊", "1 分钟前", "活跃定位", "138******09", "无", "🐶"],
@@ -123,7 +124,7 @@
     $("#visible-summary").textContent = state.layers.dog ? `${visibleDogs()} 个犬只点位` : "犬只图层已关闭";
   }
   function setViewBox(box) {
-    state.box = box.map(Number);
+    state.box = clampBox(box.map(Number));
     mapArt.setAttribute("viewBox", state.box.join(" "));
     const scale = state.box[2] / 1600;
     $$("[data-scale-lock]").forEach(node => {
@@ -132,9 +133,27 @@
       if (match) node.setAttribute("transform", `translate(${match[1]} ${match[2]}) scale(${scale})`);
     });
   }
+  function clampBox(box) {
+    const width = Math.min(1600, Math.max(360, box[2]));
+    const height = width * 9 / 16;
+    return [Math.max(0, Math.min(1600 - width, box[0])), Math.max(0, Math.min(900 - height, box[1])), width, height];
+  }
   function zoom(factor) {
     const [x,y,w,h] = state.box, nw = Math.min(1600, Math.max(360, w * factor)), nh = nw * 9 / 16;
-    setViewBox([Math.max(0, Math.min(1600 - nw, x + (w - nw) / 2)), Math.max(0, Math.min(900 - nh, y + (h - nh) / 2)), nw, nh]);
+    setViewBox(clampBox([x + (w - nw) / 2, y + (h - nh) / 2, nw, nh]));
+  }
+  function zoomAtPointer(event) {
+    event.preventDefault();
+    const rect = mapArt.getBoundingClientRect();
+    const [x,y,w,h] = state.box;
+    const ratioX = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    const ratioY = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+    const factor = event.deltaY < 0 ? .86 : 1.16;
+    const nw = Math.min(1600, Math.max(360, w * factor));
+    const nh = nw * 9 / 16;
+    const anchorX = x + ratioX * w;
+    const anchorY = y + ratioY * h;
+    setViewBox(clampBox([anchorX - ratioX * nw, anchorY - ratioY * nh, nw, nh]));
   }
   function notify(message) { $("span", toast).textContent = message; toast.hidden = false; clearTimeout(notify.timer); notify.timer = setTimeout(() => toast.hidden = true, 2400); }
   function reset() {
@@ -150,6 +169,7 @@
   }
 
   document.addEventListener("click", event => {
+    if (state.suppressClick) { state.suppressClick = false; return; }
     const dog = event.target.closest("[data-dog]");
     if (dog) return showDog(dog.dataset.dog, dog);
     const object = event.target.closest("[data-detail]");
@@ -187,5 +207,31 @@
   });
   regionFilter.addEventListener("change", () => { state.region = regionFilter.value; setViewBox(regions[state.region].box); showRegion(); });
   freshnessFilter.addEventListener("change", () => { state.freshness = freshnessFilter.value; applyFilters(); });
+  mapArt.addEventListener("wheel", zoomAtPointer, { passive: false });
+  mapArt.addEventListener("pointerdown", event => {
+    if (event.button !== 0) return;
+    state.drag = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, origin: [...state.box], moved: false };
+    mapArt.setPointerCapture?.(event.pointerId);
+    mapStage.classList.add("is-dragging");
+  });
+  mapArt.addEventListener("pointermove", event => {
+    if (!state.drag || state.drag.pointerId !== event.pointerId) return;
+    const dx = event.clientX - state.drag.startX;
+    const dy = event.clientY - state.drag.startY;
+    if (!state.drag.moved && Math.hypot(dx, dy) < 4) return;
+    state.drag.moved = true;
+    const rect = mapArt.getBoundingClientRect();
+    const [x,y,w,h] = state.drag.origin;
+    setViewBox(clampBox([x - dx / rect.width * w, y - dy / rect.height * h, w, h]));
+  });
+  function endDrag(event) {
+    if (!state.drag || state.drag.pointerId !== event.pointerId) return;
+    state.suppressClick = event.type === "pointerup" && state.drag.moved;
+    state.drag = null;
+    mapStage.classList.remove("is-dragging");
+    mapArt.releasePointerCapture?.(event.pointerId);
+  }
+  mapArt.addEventListener("pointerup", endDrag);
+  mapArt.addEventListener("pointercancel", endDrag);
   setViewBox(regions.all.box); applyFilters();
 }());

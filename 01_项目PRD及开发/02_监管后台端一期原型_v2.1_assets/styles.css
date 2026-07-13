@@ -111,8 +111,13 @@ select { -webkit-tap-highlight-color: transparent; }
   display: block;
   width: 100%;
   height: 100%;
+  cursor: grab;
+  touch-action: none;
   transform-origin: center;
+  user-select: none;
 }
+.map-stage.is-dragging .map-art { cursor: grabbing; }
+.map-stage.is-dragging .map-object { cursor: grabbing; }
 
 .map-art.is-transitioning { filter: saturate(.94); }
 
