@@ -26,6 +26,7 @@
     <symbol id="i-tree" viewBox="0 0 24 24"><path d="m12 3-5 7h3l-4 6h5v5h2v-5h5l-4-6h3l-5-7z"/></symbol>
     <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M7 14h3M14 14h3M7 18h3"/></symbol>
     <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
@@ -160,6 +161,13 @@
         <button type="button" class="icon-button reset-button" data-action="reset" aria-label="重置筛选" title="重置筛选"><svg class="icon"><use href="#i-reset"/></svg></button>
       </section>
       <div class="toolbar-actions">
+        <div class="activity-wrap">
+          <button type="button" class="button secondary" id="activity-trigger" aria-expanded="false" aria-controls="activity-menu"><svg class="icon"><use href="#i-calendar"/></svg>活动列表</button>
+          <div class="activity-menu panel" id="activity-menu" hidden>
+            <div class="activity-menu-head"><div><strong>近期活动</strong><small>默认展示 3 条，滚动查看更多</small></div><span>共 5 场</span></div>
+            <div class="activity-list" id="activity-list"></div>
+          </div>
+        </div>
         <button type="button" class="button primary" data-action="ai"><svg class="icon"><use href="#i-spark"/></svg>AI 分析</button>
         <div class="export-wrap">
           <button type="button" class="button secondary" id="export-trigger" aria-expanded="false"><svg class="icon"><use href="#i-export"/></svg>导出</button>
@@ -217,6 +225,14 @@
       </header>
       <div class="detail-scroll" id="detail-content"></div>
     </aside>
+
+    <div class="activity-modal" id="activity-modal" hidden>
+      <button type="button" class="activity-modal-backdrop" data-action="close-activity" aria-label="关闭活动详情"></button>
+      <section class="activity-dialog panel" role="dialog" aria-modal="true" aria-labelledby="activity-dialog-title">
+        <header><div><span>活动详情</span><h2 id="activity-dialog-title">活动名称</h2></div><button type="button" class="icon-button" data-action="close-activity" aria-label="关闭活动详情"><svg class="icon"><use href="#i-close"/></svg></button></header>
+        <div id="activity-dialog-content"></div>
+      </section>
+    </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite" hidden><svg class="icon"><use href="#i-check"/></svg><span></span></div>
     <div class="print-report" id="print-report" aria-hidden="true"></div>

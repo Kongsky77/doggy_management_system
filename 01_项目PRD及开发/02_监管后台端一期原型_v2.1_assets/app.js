@@ -18,6 +18,12 @@
   const exportTrigger = $("#export-trigger");
   const layerMenu = $("#layer-menu");
   const layerTrigger = $("#layer-trigger");
+  const activityMenu = $("#activity-menu");
+  const activityTrigger = $("#activity-trigger");
+  const activityList = $("#activity-list");
+  const activityModal = $("#activity-modal");
+  const activityDialogTitle = $("#activity-dialog-title");
+  const activityDialogContent = $("#activity-dialog-content");
   const toast = $("#toast");
   const printReport = $("#print-report");
 
@@ -43,6 +49,13 @@
     naigai: ["奶盖", "PD-CD-240129", "ED-510109-1293", "2 岁", "母", "边牧", "1 分钟前", "活跃定位", "178******47", "闯入禁入区域", "🐕"],
     qixi: ["七喜", "PD-CD-240137", "ED-510109-1378", "6 岁", "公", "法斗", "8 分钟前", "较久未更新", "158******36", "无", "🐶"],
     doufu: ["豆乳", "PD-CD-240145", "ED-510109-1452", "1 岁", "母", "比格", "3 分钟前", "活跃定位", "137******71", "无", "🐕"]
+  };
+  const activities = {
+    walk: { name: "周末文明遛犬课堂", status: "报名中", statusClass: "open", time: "7 月 18 日 10:00–11:30", place: "锦城湖东区草坪", description: "面向犬主讲解牵引绳规范、公共区域礼仪、犬只应激识别和突发情况处理，并安排现场示范与问答。", notice: "建议提前 15 分钟到场；携犬参加需佩戴狗牌、使用牵引绳并自备清洁用品。" },
+    clinic: { name: "夏季宠物义诊与疫苗咨询", status: "进行中", statusClass: "live", time: "7 月 13 日 14:00–17:00", place: "康桥宠物医院锦城店", description: "提供基础健康问诊、疫苗接种周期咨询、夏季常见疾病预防讲解和体况初步评估。", notice: "义诊不替代正式诊断；如犬只存在明显不适，请直接进入医院诊疗流程。" },
+    care: { name: "宠物基础护理公开课", status: "报名中", statusClass: "open", time: "7 月 20 日 15:00–16:30", place: "爪爪护理中心中和店", description: "由护理人员演示梳毛、清洁、指甲修剪和耳部日常检查方法，帮助犬主建立基础护理习惯。", notice: "现场席位有限，携犬参与需提前预约；攻击性或明显应激犬只不建议进入课堂。" },
+    campaign: { name: "文明养犬宣传日", status: "已结束", statusClass: "done", time: "7 月 6 日 09:30–11:30", place: "交子公园北广场", description: "围绕依法登记、佩戴狗牌、牵绳出行和便溺清理开展现场宣传与咨询。", notice: "活动资料可在后续文明养犬主题活动中继续领取。" },
+    market: { name: "宠物友好生活市集", status: "即将开始", statusClass: "soon", time: "7 月 27 日 10:00–18:00", place: "高新南区城市广场", description: "集合宠物用品展示、基础护理体验、文明养犬互动和犬主交流区域的开放式主题市集。", notice: "人流较大，请根据犬只状态决定是否携犬入场，并始终使用牵引绳。" }
   };
   const state = { box: [...regions.all.box], region: "all", freshness: "all", layers: { dog: true, provider: true, friendly: true, restricted: true } };
   const formatTime = () => `2026-07-13 ${new Date().toTimeString().slice(0, 5)}`;
@@ -105,15 +118,47 @@
       restricted: ["禁入区域详情", "锦晖小学禁入区域", "犬只禁入区域", [["区域类型", "学校"], ["所属街道 · 社区", "桂溪街道 · 锦城社区"], ["当前区域内犬只", "2 只"], ["当前接近区域犬只", "5 只"]]]
     }[type];
     setHeader(contents[0], contents[1], contents[2]);
-    detailContent.innerHTML = `<section class="detail-section"><dl class="detail-list">${contents[3].map(([a,b]) => `<div class="detail-row"><dt>${a}</dt><dd>${b}</dd></div>`).join("")}</dl>${updateTime()}</section>${type === "friendly" ? `<section class="detail-section"><h3 class="section-title">当前举办活动</h3><div class="ai-callout"><span>周末文明遛犬课堂</span><p>7 月 18 日 10:00–11:30 · 乐园东区</p></div></section>` : ""}`;
+    detailContent.innerHTML = `<section class="detail-section"><dl class="detail-list">${contents[3].map(([a,b]) => `<div class="detail-row"><dt>${a}</dt><dd>${b}</dd></div>`).join("")}</dl>${updateTime()}</section>`;
     openDetail();
   }
   function showAI() {
     setHeader("AI 辅助决策", "高新区犬只治理分析", "基于当前地图筛选状态");
+    const hourLabels = Array.from({length:24}, (_,hour) => `<span>${[0,6,12,18].includes(hour) ? hour : ""}</span>`).join("");
+    const heatRows = ["周一","周二","周三","周四","周五","周六","周日"].map((day,dayIndex) => {
+      const cells = Array.from({length:24}, (_,hour) => {
+        const peak = (hour >= 7 && hour <= 9 ? 2 : 0) + (hour >= 18 && hour <= 21 ? 3 : 0);
+        const level = Math.min(4, (dayIndex * 2 + hour + peak) % 3 + peak);
+        return `<i style="--level:${level}" title="${day} ${hour}:00 活跃等级 ${level}"></i>`;
+      }).join("");
+      return `<div class="heatmap-row"><span>${day.slice(1)}</span>${cells}</div>`;
+    }).join("");
+    const bars = [["00–04",18],["04–08",42],["08–12",67],["12–16",38],["16–20",92],["20–24",71]].map(([label,value]) => `<div class="bar-column"><strong>${value}</strong><i style="--height:${value}%"></i><span>${label}</span></div>`).join("");
+    const risks = [1,3,2,5,4,6,3];
+    const points = risks.map((value,index) => `${18 + index * 48},${96 - value * 12}`).join(" ");
+    const dots = risks.map((value,index) => `<circle class="line-dot" cx="${18 + index * 48}" cy="${96 - value * 12}" r="3"/>`).join("");
+    const labels = ["7/7","7/8","7/9","7/10","7/11","7/12","7/13"].map((label,index) => `<text class="line-label" x="${18 + index * 48}" y="118">${label}</text>`).join("");
     detailContent.innerHTML = `<section class="detail-section"><div class="ai-callout"><span>${icon("spark")}重点结论</span><p>当前电子狗牌犬只点位主要集中在桂溪街道；锦晖小学禁入区域内检测到 2 只犬只，建议优先核查犬只状态并关注持续停留情况。</p></div></section>
-      <section class="detail-section"><h3 class="section-title">辅助判断依据</h3><dl class="detail-list"><div class="detail-row"><dt>当前区域</dt><dd>${state.region === "all" ? "高新区" : state.region}</dd></div><div class="detail-row"><dt>可见犬只点</dt><dd>${visibleDogs()} 个演示点</dd></div><div class="detail-row"><dt>定位来源</dt><dd>电子狗牌</dd></div><div class="detail-row"><dt>高风险规则</dt><dd>闯入禁入区域</dd></div></dl>${updateTime()}<p class="detail-time">AI 仅提供辅助判断，不自动执行处置。</p></section>`;
+      <section class="detail-section"><h3 class="section-title">时段与风险分析</h3>
+        <div class="ai-chart"><div class="ai-chart-head"><strong>犬只活跃时段热力图</strong><span>最近 7 天 · 星期 × 小时</span></div><div class="heatmap-hours">${hourLabels}</div>${heatRows}<div class="chart-legend"><span>低</span><i style="--alpha:.16"></i><i style="--alpha:.34"></i><i style="--alpha:.52"></i><i style="--alpha:.76"></i><span>高</span></div></div>
+        <div class="ai-chart"><div class="ai-chart-head"><strong>今日遛狗时间段</strong><span>活跃犬只数量</span></div><div class="bar-chart">${bars}</div></div>
+        <div class="ai-chart"><div class="ai-chart-head"><strong>风险事件趋势</strong><span>最近 7 天 · 闯入禁入区域</span></div><svg class="line-chart" viewBox="0 0 330 126" role="img" aria-label="最近七天风险事件趋势折线图"><path class="line-grid" d="M18 24H306M18 48H306M18 72H306M18 96H306"/><polygon class="line-area" points="18,96 ${points} 306,96"/><polyline class="line-path" points="${points}"/>${dots}${labels}</svg></div>
+        ${updateTime()}<p class="detail-time">AI 仅提供辅助判断，不自动执行处置。</p></section>`;
     openDetail();
   }
+  function renderActivities() {
+    activityList.innerHTML = Object.entries(activities).map(([key,item]) => `<article class="activity-item"><div class="activity-item-main"><div class="activity-item-title"><strong title="${item.name}">${item.name}</strong><span class="activity-status ${item.statusClass}">${item.status}</span></div><div class="activity-meta"><span title="${item.time}">${icon("clock")}${item.time}</span><span title="${item.place}">地点：${item.place}</span></div></div><button type="button" class="text-button" data-activity-detail="${key}" aria-label="查看${item.name}详情">查看详情</button></article>`).join("");
+  }
+  function showActivity(key) {
+    const item = activities[key];
+    if (!item) return;
+    activityDialogTitle.textContent = item.name;
+    activityDialogContent.innerHTML = `<div class="activity-detail-grid"><div class="activity-detail-cell"><span>活动状态</span><strong><span class="activity-status ${item.statusClass}">${item.status}</span></strong></div><div class="activity-detail-cell"><span>活动时间</span><strong>${item.time}</strong></div><div class="activity-detail-cell" style="grid-column:1/-1"><span>举办地点</span><strong>${item.place}</strong></div></div><div class="activity-description"><h3>活动说明</h3><p>${item.description}</p></div><div class="activity-description"><h3>参与提示</h3><p>${item.notice}</p></div>`;
+    activityModal.hidden = false;
+    activityMenu.hidden = true;
+    activityTrigger.setAttribute("aria-expanded", "false");
+    $(".activity-dialog [data-action='close-activity']", activityModal)?.focus();
+  }
+  function closeActivity() { activityModal.hidden = true; }
   function visibleDogs() { return $$(".dog-object").filter(node => node.style.display !== "none" && state.layers.dog).length; }
   function applyFilters() {
     $$(".dog-object").forEach(node => node.style.display = state.layers.dog && (state.freshness === "all" || node.dataset.freshness === state.freshness) ? "" : "none");
@@ -160,7 +205,7 @@
     state.region = "all"; state.freshness = "all"; Object.keys(state.layers).forEach(key => state.layers[key] = true);
     regionFilter.value = "all"; freshnessFilter.value = "all";
     $$(".layer-chip").forEach(chip => { chip.classList.add("is-on"); chip.setAttribute("aria-pressed", "true"); });
-    setViewBox(regions.all.box); applyFilters(); closeDetail(); layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); notify("已恢复高新区全量电子狗牌犬只点位");
+    setViewBox(regions.all.box); applyFilters(); closeDetail(); closeActivity(); layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); activityMenu.hidden = true; activityTrigger.setAttribute("aria-expanded", "false"); notify("已恢复高新区全量电子狗牌犬只点位");
   }
   function exportPdf() {
     const layers = Object.entries(state.layers).filter(([,on]) => on).map(([key]) => ({dog:"犬只",provider:"服务商",friendly:"友好乐园",restricted:"禁入区域"})[key]).join("、") || "无";
@@ -174,8 +219,11 @@
     if (dog) return showDog(dog.dataset.dog, dog);
     const object = event.target.closest("[data-detail]");
     if (object) return showObject(object.dataset.detail);
+    const activityDetail = event.target.closest("[data-activity-detail]");
+    if (activityDetail) return showActivity(activityDetail.dataset.activityDetail);
     const action = event.target.closest("[data-action]")?.dataset.action;
     if (action === "close-detail") closeDetail();
+    if (action === "close-activity") closeActivity();
     if (action === "reset") reset();
     if (action === "ai") showAI();
     const chip = event.target.closest("[data-layer]");
@@ -187,11 +235,24 @@
     if (event.target.closest("#layer-trigger")) {
       layerMenu.hidden = !layerMenu.hidden;
       layerTrigger.setAttribute("aria-expanded", String(!layerMenu.hidden));
+      activityMenu.hidden = true;
+      activityTrigger.setAttribute("aria-expanded", "false");
       exportMenu.hidden = true;
       exportTrigger.setAttribute("aria-expanded", "false");
     } else if (!event.target.closest(".layer-menu-wrap")) {
       layerMenu.hidden = true;
       layerTrigger.setAttribute("aria-expanded", "false");
+    }
+    if (event.target.closest("#activity-trigger")) {
+      activityMenu.hidden = !activityMenu.hidden;
+      activityTrigger.setAttribute("aria-expanded", String(!activityMenu.hidden));
+      layerMenu.hidden = true;
+      layerTrigger.setAttribute("aria-expanded", "false");
+      exportMenu.hidden = true;
+      exportTrigger.setAttribute("aria-expanded", "false");
+    } else if (!event.target.closest(".activity-wrap")) {
+      activityMenu.hidden = true;
+      activityTrigger.setAttribute("aria-expanded", "false");
     }
     if (event.target.closest("#export-trigger")) { exportMenu.hidden = !exportMenu.hidden; exportTrigger.setAttribute("aria-expanded", String(!exportMenu.hidden)); }
     const exportType = event.target.closest("[data-export]")?.dataset.export;
@@ -201,7 +262,7 @@
   });
   document.addEventListener("keydown", event => {
     if ((event.key === "Enter" || event.key === " ") && event.target.matches(".map-object")) { event.preventDefault(); event.target.click(); }
-    if (event.key === "Escape") { closeDetail(); exportMenu.hidden = true; layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); }
+    if (event.key === "Escape") { closeDetail(); closeActivity(); exportMenu.hidden = true; layerMenu.hidden = true; layerTrigger.setAttribute("aria-expanded", "false"); activityMenu.hidden = true; activityTrigger.setAttribute("aria-expanded", "false"); }
   });
   regionFilter.addEventListener("change", () => { state.region = regionFilter.value; setViewBox(regions[state.region].box); showRegion(); });
   freshnessFilter.addEventListener("change", () => { state.freshness = freshnessFilter.value; applyFilters(); });
@@ -233,5 +294,5 @@
   }
   mapArt.addEventListener("pointerup", endDrag);
   mapArt.addEventListener("pointercancel", endDrag);
-  setViewBox(regions.all.box); applyFilters();
+  renderActivities(); setViewBox(regions.all.box); applyFilters();
 }());
