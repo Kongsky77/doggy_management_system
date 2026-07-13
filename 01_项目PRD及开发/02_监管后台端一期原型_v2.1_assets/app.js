@@ -211,15 +211,17 @@
   mapArt.addEventListener("pointerdown", event => {
     if (event.button !== 0) return;
     state.drag = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, origin: [...state.box], moved: false };
-    mapArt.setPointerCapture?.(event.pointerId);
-    mapStage.classList.add("is-dragging");
   });
   mapArt.addEventListener("pointermove", event => {
     if (!state.drag || state.drag.pointerId !== event.pointerId) return;
     const dx = event.clientX - state.drag.startX;
     const dy = event.clientY - state.drag.startY;
     if (!state.drag.moved && Math.hypot(dx, dy) < 4) return;
-    state.drag.moved = true;
+    if (!state.drag.moved) {
+      state.drag.moved = true;
+      mapArt.setPointerCapture?.(event.pointerId);
+      mapStage.classList.add("is-dragging");
+    }
     const rect = mapArt.getBoundingClientRect();
     const [x,y,w,h] = state.drag.origin;
     setViewBox(clampBox([x - dx / rect.width * w, y - dy / rect.height * h, w, h]));
@@ -229,7 +231,7 @@
     state.suppressClick = event.type === "pointerup" && state.drag.moved;
     state.drag = null;
     mapStage.classList.remove("is-dragging");
-    mapArt.releasePointerCapture?.(event.pointerId);
+    if (mapArt.hasPointerCapture?.(event.pointerId)) mapArt.releasePointerCapture(event.pointerId);
   }
   mapArt.addEventListener("pointerup", endDrag);
   mapArt.addEventListener("pointercancel", endDrag);
