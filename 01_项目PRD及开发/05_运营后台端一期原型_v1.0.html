@@ -38,20 +38,20 @@
       </section>
 
       <section class="page" id="page-archive">
-        <div class="page-head"><div><p class="eyebrow">跨端主数据</p><h1>对象档案</h1><p>统一维护业务对象与地图区域；积分仅展示摘要。</p></div><button class="btn primary" id="newObject">＋ 新增对象</button></div>
+        <div class="page-head"><div><h1>对象档案</h1></div><button class="btn primary" id="newObject">＋ 新增对象</button></div>
         <section class="workspace panel"><div class="tabs" id="archiveTabs"><button class="tab active" data-type="dogs">犬只与犬主人 <span>8,462</span></button><button class="tab" data-type="officers">城管队员 <span>246</span></button><button class="tab" data-type="services">服务商 <span>86</span></button><button class="tab" data-type="areas">地图区域 <span>54</span></button></div><div class="filter-row"><label class="search"><span>⌕</span><input id="archiveSearch" placeholder="搜索名称、编号、手机号或地址"></label><select id="archiveStatus"><option value="all">全部状态</option><option value="active">有效 / 已上线</option><option value="deleted">已删除 / 已下线</option></select><button class="btn secondary small" id="archiveReset">重置</button></div><div class="table-wrap"><table><thead id="archiveHead"></thead><tbody id="archiveBody"></tbody></table></div><div class="table-foot"><span id="archiveCount"></span><span>点击任一记录查看详情</span></div></section>
         <button class="history-fab" data-history="archive"><span>◷</span> 操作历史</button>
       </section>
 
       <section class="page" id="page-points">
-        <div class="page-head"><div><p class="eyebrow">唯一积分操作入口</p><h1>积分管理</h1><p>制定规则、查询不可修改的流水，并优化积分发放与核销比例。</p></div><button class="btn primary" id="adjustPoints">＋ 人工调整积分</button></div>
+        <div class="page-head"><div><h1>积分管理</h1></div><button class="btn primary" id="adjustPoints">＋ 人工调整积分</button></div>
         <section class="points-summary"><article><small>本周期发放</small><strong>28,640</strong><span class="up">↑ 6.8%</span></article><article><small>本周期核销</small><strong>21,320</strong><span class="up">↑ 12.6%</span></article><article><small>积分使用率</small><strong>74.4%</strong><span>核销 ÷ 发放</span></article><article><small>待处理调整</small><strong class="warning-text">3</strong><span>需要原因复核</span></article></section>
         <section class="workspace panel"><div class="tabs" id="pointsTabs"><button class="tab active" data-point-tab="rules">积分规则 <span>8</span></button><button class="tab" data-point-tab="records">积分流水 <span>12,684</span></button><button class="tab" data-point-tab="analysis">经营分析</button></div><div id="pointsContent"></div></section>
         <button class="history-fab" data-history="points"><span>◷</span> 操作历史</button>
       </section>
 
       <section class="page" id="page-activities">
-        <div class="page-head"><div><p class="eyebrow">运营活动源头</p><h1>活动管理</h1><p>创建、发布与下线活动；监管端仅读取已上线活动。</p></div><button class="btn primary" id="newActivity">＋ 新建活动</button></div>
+        <div class="page-head"><div><h1>活动管理</h1></div><button class="btn primary" id="newActivity">＋ 新建活动</button></div>
         <section class="workspace panel"><div class="filter-row"><label class="search"><span>⌕</span><input id="activitySearch" placeholder="搜索活动名称或举办地点"></label><select id="activityStatus"><option value="all">全部状态</option><option value="live">已上线</option><option value="draft">草稿</option><option value="offline">已下线 / 已结束</option></select><button class="btn secondary small" id="activityReset">重置</button></div><div class="table-wrap"><table><thead><tr><th>活动名称</th><th>状态</th><th>活动时间</th><th>举办地点</th><th>关联对象</th><th>更新时间</th><th></th></tr></thead><tbody id="activityBody"></tbody></table></div><div class="table-foot"><span>共 6 条活动</span><span>草稿与下线活动不向其他端默认展示</span></div></section>
       </section>
     </main>
