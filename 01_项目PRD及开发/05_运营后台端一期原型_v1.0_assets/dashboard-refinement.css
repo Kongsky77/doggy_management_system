@@ -39,6 +39,13 @@
 .line-chart { margin-top: 0; background: none; }
 .line-chart svg { height: 150px; }
 
+/* 积分 KPI 作为同一组运营概览呈现，不以颜色制造额外优先级。 */
+.points-summary article,
+.points-summary article:first-child,
+.points-summary article:nth-child(2),
+.points-summary article:nth-child(3),
+.points-summary article:nth-child(4) { border-top: 1px solid var(--border); }
+
 @media (max-width: 1500px) {
   .pulse-strip .pulse-grid article { padding: 8px 12px; }
 }
