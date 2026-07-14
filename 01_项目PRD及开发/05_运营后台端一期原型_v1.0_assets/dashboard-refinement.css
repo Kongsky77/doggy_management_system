@@ -38,6 +38,8 @@
 .chart-points.grant circle { fill: #fff; stroke: var(--brand); stroke-width: 2; }
 .line-chart { margin-top: 0; background: none; }
 .line-chart svg { height: 150px; }
+.analysis-line-chart { height: 180px; }
+.analysis-line-chart svg { height: 180px; }
 
 /* 积分 KPI 作为同一组运营概览呈现，不以颜色制造额外优先级。 */
 .points-summary article,
