@@ -1,0 +1,44 @@
+/* D052 驾驶舱：一级导航已表达页名，内容区直接进入数据。 */
+#page-dashboard { padding-top: 20px; }
+
+.pulse-strip {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.pulse-strip .pulse-grid { margin: 0; }
+.pulse-strip .pulse-grid article { padding: 8px 18px; }
+
+.chart-panel { min-height: 338px; }
+.chart-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.chart-caption b { font-weight: 400; color: #9ca3af; }
+.chart-legend { display: flex; gap: 14px; }
+.chart-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.chart-legend i { display: inline-block; width: 18px; border-top: 2px solid; }
+
+.chart-canvas { height: 150px; }
+.chart-canvas svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.chart-grid path { fill: none; stroke: #edf0ed; stroke-width: 1; }
+.chart-y text, .chart-x text { fill: #9ca3af; font-size: 11px; }
+.chart-bars rect { fill: var(--brand); }
+.chart-bars rect:nth-child(2n) { fill: #ffad5d; }
+.series { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.series.grant { stroke: var(--brand); }
+.series.redeem { stroke: var(--info); stroke-dasharray: 5 4; }
+.chart-points.grant circle { fill: #fff; stroke: var(--brand); stroke-width: 2; }
+.line-chart { margin-top: 0; background: none; }
+.line-chart svg { height: 150px; }
+
+@media (max-width: 1500px) {
+  .pulse-strip .pulse-grid article { padding: 8px 12px; }
+}
