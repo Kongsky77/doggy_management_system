@@ -11,10 +11,13 @@ document.querySelectorAll('.dashboard-insight-grid .rank-list').forEach((list, l
   list.querySelectorAll('li').forEach((row, rowIndex) => {
     const [count, delta] = insightRankData[listIndex][rowIndex];
     const proportion = row.querySelector('.rank-value').textContent;
-    row.querySelector('.rank-value').innerHTML = `<b>${count}</b><small>${proportion}</small>`;
+    row.querySelector('.rank-value').textContent = count;
+    const shareNode = document.createElement('span');
+    shareNode.className = 'rank-share';
+    shareNode.textContent = proportion;
     const deltaNode = document.createElement('em');
     deltaNode.className = `rank-delta ${delta.startsWith('+') ? 'up' : 'down'}`;
     deltaNode.textContent = delta;
-    row.append(deltaNode);
+    row.append(shareNode, deltaNode);
   });
 });

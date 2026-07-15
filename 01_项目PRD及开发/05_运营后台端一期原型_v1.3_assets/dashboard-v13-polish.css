@@ -10,10 +10,11 @@
 .heat-cell { border: 1px solid rgba(255, 255, 255, .52); }
 .heat-cell.peak { box-shadow: 0 0 0 3px rgba(239, 68, 68, .15), 0 3px 8px rgba(239, 68, 68, .15); }
 .heat-summary { padding-top: 8px; border-top: 1px solid #eef1ee; }
-.rank-list li { grid-template-columns: 18px minmax(66px, 1fr) minmax(42px, .64fr) 52px 34px; }
-.rank-value { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.05; }
-.rank-value b { color: var(--text); font-size: 10px; font-variant-numeric: tabular-nums; }
-.rank-value small { color: var(--muted); font-size: 9px; }
+.rank-list li { grid-template-columns: 18px minmax(58px, 1fr) 34px minmax(34px, .6fr) 36px 34px; }
+.rank-value { order: 3; text-align: right; color: var(--text); font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.rank-bar { order: 4; }
+.rank-share { order: 5; text-align: right; color: var(--muted); font-size: 9px; font-variant-numeric: tabular-nums; }
+.rank-delta { order: 6; }
 .rank-delta { font-size: 10px; font-style: normal; font-variant-numeric: tabular-nums; text-align: right; }
 .rank-delta.up { color: var(--success); }
 .rank-delta.down { color: var(--danger); }
