@@ -43,3 +43,19 @@
 .dashboard-insight-grid .rank-delta { font-size: 11px; }
 .dashboard-insight-grid .rank-share { font-size: 10px; }
 .dashboard-insight-grid .rank-foot { margin-top: 10px; padding-top: 10px; }
+
+/* D067：两张榜单以 Top5 填满可用卡片高度，避免信息漂浮在顶部。 */
+.dashboard-insight-grid .insight-panel:not(:first-child) {
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-insight-grid .insight-panel:not(:first-child) .rank-list {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  flex: 1;
+  min-height: 0;
+}
+.dashboard-insight-grid .insight-panel:not(:first-child) .rank-list li {
+  min-height: 0;
+  padding: 0;
+}
