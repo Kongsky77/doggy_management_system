@@ -27,3 +27,4 @@
 .pulse-strip .pulse-grid article { min-height: 52px; padding: 2px 12px; }
 .pulse-strip .pulse-grid strong { font-size: 18px; }
 .pulse-strip .pulse-grid p { margin-top: 0; font-size: 10px; }
+.panel-title p { display: none; }
