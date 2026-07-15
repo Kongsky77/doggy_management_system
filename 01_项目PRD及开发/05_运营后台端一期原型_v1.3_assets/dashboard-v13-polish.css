@@ -28,3 +28,18 @@
 .pulse-strip .pulse-grid strong { font-size: 18px; }
 .pulse-strip .pulse-grid p { margin-top: 0; font-size: 10px; }
 .panel-title p { display: none; }
+
+/* D066：Top5 释放的空间用于扫读，不再继续压缩排行榜行距。 */
+.dashboard-insight-grid .rank-list li {
+  grid-template-columns: 20px minmax(62px, 1fr) 38px minmax(40px, .7fr) 38px 36px;
+  gap: 8px;
+  min-height: 36px;
+  padding: 7px 0;
+  font-size: 11px;
+}
+.dashboard-insight-grid .rank-no { width: 19px; height: 19px; font-size: 10px; }
+.dashboard-insight-grid .rank-bar { height: 7px; }
+.dashboard-insight-grid .rank-value,
+.dashboard-insight-grid .rank-delta { font-size: 11px; }
+.dashboard-insight-grid .rank-share { font-size: 10px; }
+.dashboard-insight-grid .rank-foot { margin-top: 10px; padding-top: 10px; }
