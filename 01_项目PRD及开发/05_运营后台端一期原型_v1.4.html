@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>犬只运营管理后台 · 一期原型</title>
-  <link rel="stylesheet" href="05_运营后台端一期原型_v1.3_assets/styles.css">
-  <link rel="stylesheet" href="05_运营后台端一期原型_v1.3_assets/dashboard-refinement.css">
-  <link rel="stylesheet" href="05_运营后台端一期原型_v1.3_assets/dashboard-insights.css">
-  <link rel="stylesheet" href="05_运营后台端一期原型_v1.3_assets/dashboard-layout-reference.css">
-  <link rel="stylesheet" href="05_运营后台端一期原型_v1.3_assets/dashboard-v13-polish.css">
+  <link rel="stylesheet" href="05_运营后台端一期原型_v1.4_assets/styles.css">
+  <link rel="stylesheet" href="05_运营后台端一期原型_v1.4_assets/dashboard-refinement.css">
+  <link rel="stylesheet" href="05_运营后台端一期原型_v1.4_assets/dashboard-insights.css">
+  <link rel="stylesheet" href="05_运营后台端一期原型_v1.4_assets/dashboard-layout-reference.css">
+  <link rel="stylesheet" href="05_运营后台端一期原型_v1.4_assets/dashboard-v13-polish.css">
+  <link rel="stylesheet" href="05_运营后台端一期原型_v1.4_assets/operations-extension.css">
 </head>
 <body>
   <div class="app-shell">
@@ -59,8 +60,8 @@
       </section>
 
       <section class="page" id="page-activities">
-        <div class="page-head"><div><h1>活动管理</h1></div><button class="btn primary" id="newActivity">＋ 新建活动</button></div>
-        <section class="workspace panel"><div class="filter-row"><label class="search"><span>⌕</span><input id="activitySearch" placeholder="搜索活动名称或举办地点"></label><select id="activityStatus"><option value="all">全部状态</option><option value="live">已上线</option><option value="draft">草稿</option><option value="offline">已下线 / 已结束</option></select><button class="btn secondary small" id="activityReset">重置</button></div><div class="table-wrap"><table><thead><tr><th>活动名称</th><th>状态</th><th>活动时间</th><th>举办地点</th><th>关联对象</th><th>更新时间</th><th></th></tr></thead><tbody id="activityBody"></tbody></table></div><div class="table-foot"><span>共 6 条活动</span><span>草稿与下线活动不向其他端默认展示</span></div></section>
+        <div class="page-head"><div><h1>活动管理</h1></div><div class="activity-actions"><button class="btn primary" id="newActivity">＋ 新建活动</button><button class="btn primary hidden" id="newSurvey">＋ 新建问卷</button></div></div>
+        <section class="workspace panel"><div class="tabs" id="activityTabs"><button class="tab active" data-activity-tab="activities">活动管理 <span>6</span></button><button class="tab" data-activity-tab="surveys">问卷管理 <span>3</span></button></div><div id="activityContent"><div class="filter-row"><label class="search"><span>⌕</span><input id="activitySearch" placeholder="搜索活动名称或举办地点"></label><select id="activityStatus"><option value="all">全部状态</option><option value="live">已上线</option><option value="draft">草稿</option><option value="offline">已下线 / 已结束</option></select><button class="btn secondary small" id="activityReset">重置</button></div><div class="table-wrap"><table><thead><tr><th>活动名称</th><th>状态</th><th>活动时间</th><th>举办地点</th><th>关联对象</th><th>更新时间</th><th></th></tr></thead><tbody id="activityBody"></tbody></table></div><div class="table-foot"><span>共 6 条活动</span><span>草稿与下线活动不向其他端默认展示</span></div></div></section>
       </section>
     </main>
   </div>
@@ -70,10 +71,12 @@
   <div class="scrim" id="scrim"></div>
   <div class="modal" id="formModal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><div><p id="modalKicker">新增记录</p><h2 id="modalTitle"></h2></div><button class="icon-btn" data-close="formModal">×</button></div><form id="modalForm" class="form-grid"></form><div class="modal-foot"><button class="btn secondary" data-close="formModal" type="button">取消</button><button class="btn primary" id="modalSave" type="submit" form="modalForm">保存</button></div></div></div>
   <div class="toast" id="toast"></div>
-  <script src="05_运营后台端一期原型_v1.3_assets/app.js"></script>
-  <script src="05_运营后台端一期原型_v1.3_assets/analysis-refinement.js"></script>
-  <script src="05_运营后台端一期原型_v1.3_assets/archive-refinement.js"></script>
-  <script src="05_运营后台端一期原型_v1.3_assets/dashboard-insights.js"></script>
-  <script src="05_运营后台端一期原型_v1.3_assets/dashboard-v13-polish.js"></script>
+  <div class="quick-actions" id="quickActions"><div class="quick-menu" id="quickMenu" aria-hidden="true"><button data-quick-action="new-object">＋ 新增对象</button><button data-quick-action="adjust-points">◉ 调整积分</button><button data-quick-action="new-activity">＋ 新建活动</button><button data-quick-action="export">⇩ 导出当前数据</button></div><button class="quick-fab" id="quickFab" aria-label="快捷操作" aria-expanded="false">＋</button></div>
+  <script src="05_运营后台端一期原型_v1.4_assets/app.js"></script>
+  <script src="05_运营后台端一期原型_v1.4_assets/analysis-refinement.js"></script>
+  <script src="05_运营后台端一期原型_v1.4_assets/archive-refinement.js"></script>
+  <script src="05_运营后台端一期原型_v1.4_assets/dashboard-insights.js"></script>
+  <script src="05_运营后台端一期原型_v1.4_assets/dashboard-v13-polish.js"></script>
+  <script src="05_运营后台端一期原型_v1.4_assets/operations-extension.js"></script>
 </body>
 </html>
