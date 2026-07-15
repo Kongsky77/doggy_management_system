@@ -59,3 +59,25 @@
   min-height: 0;
   padding: 0;
 }
+
+/* D068：将 AI 产出的关注项并入底部分析区，为图表卡片释放横向空间。 */
+.dashboard-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas: "devices points activity";
+}
+.dashboard-grid > .activity-mini { grid-area: activity; }
+.ai-analysis-panel { min-height: 186px; height: 186px; }
+.ai-analysis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.ai-column + .ai-column { border-left: 1px solid var(--border); padding-left: 24px; }
+.ai-column h3 { margin: 0 0 8px; font-size: 13px; }
+.ai-advice-list,
+.ai-risk-list { list-style: none; margin: 0; padding: 0; }
+.ai-advice-list { display: grid; gap: 10px; }
+.ai-advice-list li { display: grid; gap: 2px; }
+.ai-advice-list b,
+.ai-risk-list b { display: block; font-size: 12px; line-height: 1.4; }
+.ai-advice-list span,
+.ai-risk-list small { color: var(--muted); font-size: 11px; line-height: 1.35; }
+.ai-risk-list { display: grid; gap: 8px; }
+.ai-risk-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+.ai-risk-list .risk-icon { width: 22px; height: 22px; font-size: 12px; }
