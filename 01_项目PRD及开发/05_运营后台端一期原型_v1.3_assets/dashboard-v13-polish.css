@@ -81,3 +81,17 @@
 .ai-risk-list { display: grid; gap: 8px; }
 .ai-risk-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 8px; }
 .ai-risk-list .risk-icon { width: 22px; height: 22px; font-size: 12px; }
+.risk-link {
+  border: 0;
+  padding: 3px 0;
+  background: transparent;
+  color: var(--brand-deep);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.risk-link span { display: inline-block; margin-left: 2px; transition: transform .16s ease; }
+.risk-link:hover { color: var(--brand); }
+.risk-link:hover span { transform: translateX(3px); }
