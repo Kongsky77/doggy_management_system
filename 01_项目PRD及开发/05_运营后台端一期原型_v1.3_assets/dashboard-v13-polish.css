@@ -21,3 +21,9 @@
 .rank-foot { display: flex; justify-content: space-between; gap: 6px; }
 .rank-foot span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .rank-foot b { white-space: nowrap; }
+.dashboard-insight-grid { grid-template-columns: 1.45fr 1fr 1fr; }
+.dashboard-insight-grid .insight-panel:first-child { grid-column: auto; }
+.pulse-strip { height: 78px; }
+.pulse-strip .pulse-grid article { min-height: 52px; padding: 2px 12px; }
+.pulse-strip .pulse-grid strong { font-size: 18px; }
+.pulse-strip .pulse-grid p { margin-top: 0; font-size: 10px; }
