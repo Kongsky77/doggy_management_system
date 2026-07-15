@@ -1,0 +1,22 @@
+/* D061：在 D060 固定尺寸内提高洞察模块的数据可读性。 */
+.dashboard-insight-grid .insight-panel { position: relative; }
+.heatmap {
+  background-color: #f4f7f4;
+  background-image: linear-gradient(112deg, transparent 49%, rgba(123, 151, 131, .14) 50%, transparent 51%), linear-gradient(28deg, transparent 48%, rgba(123, 151, 131, .12) 49%, transparent 50%), linear-gradient(90deg, rgba(255, 255, 255, .5) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, .5) 1px, transparent 1px);
+  background-size: 180px 120px, 160px 100px, 38px 38px, 38px 38px;
+}
+.heatmap:before { background: rgba(255, 255, 255, .56); box-shadow: 0 0 0 1px rgba(123, 151, 131, .11); }
+.heatmap:after { background: rgba(255, 255, 255, .46); box-shadow: 0 0 0 1px rgba(123, 151, 131, .1); }
+.heat-cell { border: 1px solid rgba(255, 255, 255, .52); }
+.heat-cell.peak { box-shadow: 0 0 0 3px rgba(239, 68, 68, .15), 0 3px 8px rgba(239, 68, 68, .15); }
+.heat-summary { padding-top: 8px; border-top: 1px solid #eef1ee; }
+.rank-list li { grid-template-columns: 18px minmax(66px, 1fr) minmax(42px, .64fr) 52px 34px; }
+.rank-value { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.05; }
+.rank-value b { color: var(--text); font-size: 10px; font-variant-numeric: tabular-nums; }
+.rank-value small { color: var(--muted); font-size: 9px; }
+.rank-delta { font-size: 10px; font-style: normal; font-variant-numeric: tabular-nums; text-align: right; }
+.rank-delta.up { color: var(--success); }
+.rank-delta.down { color: var(--danger); }
+.rank-foot { display: flex; justify-content: space-between; gap: 6px; }
+.rank-foot span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rank-foot b { white-space: nowrap; }
